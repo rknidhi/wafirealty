@@ -21,6 +21,7 @@ Route::get('/', function () {
 });
 Route::group(['prefix' => 'admin'], function(){
     //Blog Routs
+    Route::get('generatetocken',[BlogController::class,'GenerateTocken']);
     Route::get('blog/list',[BlogController::class,'BlogList']);
     Route::get('blog/edit/{id}',[BlogController::class,'EditBlog']);
     Route::get('blog/add',[BlogController::class,'AddBlog']);

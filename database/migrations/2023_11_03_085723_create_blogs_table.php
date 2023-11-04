@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('title',2000);
-            $table->string('add_by',255);
-            $table->string('description',2000);
+            $table->string('title',2000)->nullable();
+            $table->string('add_by',255)->nullable();
+            $table->string('description',2000)->nullable();
             
         });
     }

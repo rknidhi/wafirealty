@@ -1,12 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Blog;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
+    public function GenerateTocken()
+{
+    return csrf_token(); 
+}
     public function BlogList()
     {
         $blogs = Blog::all()->toArray();
@@ -32,10 +35,11 @@ class BlogController extends Controller
 
     public function CreateBlog(Request $request)
     {
-        $validated = $request->validate([
-            'title'=>'requred|max:255',
-            'description'=>'required',
-        ]);
+        
+        // $validated = $request->validate([
+        //     'title'=>'requred|max:255',
+        //     'description'=>'required',
+        // ]);
         $BlogData = new Blog;
         if(isset($request->id) && $request->id!='') 
         {

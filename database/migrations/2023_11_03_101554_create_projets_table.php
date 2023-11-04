@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('projets', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('location',255);
-            $table->enum('type',['Independent Floors','Retail Shops','Lockable Office Space','Studio Apartment','Office','Premium Residential Apartments']);
-            $table->string('builder',255);
-            $table->string('project_name',255);
-            $table->string('price',255);
+            $table->string('location',255)->nullable();
+            $table->enum('type',['Independent Floors','Retail Shops','Lockable Office Space','Studio Apartment','Office','Premium Residential Apartments'])->nullable();
+            $table->string('builder',255)->nullable();
+            $table->string('project_name',255)->nullable();
+            $table->string('price',255)->nullable();
             
         });
     }
