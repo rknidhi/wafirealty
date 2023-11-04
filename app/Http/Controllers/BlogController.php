@@ -23,7 +23,7 @@ class BlogController extends Controller
     public function EditBlog(Request $request)
     {
         $blogs = Blog::find($request->id)->toArray();
-        if(!empty($blog))
+        if(!empty($blogs))
         {
             return view('blog/add',['blogs'=>$blogs]);
         }
@@ -36,8 +36,8 @@ class BlogController extends Controller
     public function CreateBlog(Request $request)
     {
         
-        // $validated = $request->validate([
-        //     'title'=>'requred|max:255',
+        // $request->validate([
+        //     'title'=>'requred',
         //     'description'=>'required',
         // ]);
         $BlogData = new Blog;
@@ -48,6 +48,9 @@ class BlogController extends Controller
         $BlogData->title = $request->title;
         $BlogData->add_by = $request->add_by;
         $BlogData->description = $request->description;
+        // $BlogData->created_at = $request->date;
+        $BlogData->metatitle = $request->metatitle;
+        $BlogData->metadescription = $request->metadescription;
         if($request->file('blog_image')!=null)
         {
             $name = time().rand(1,50).'.'.$request->file('blog_image')->extension();

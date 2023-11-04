@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('title',2000)->nullable();
             $table->string('add_by',255)->nullable();
             $table->string('description',2000)->nullable();
+            $table->string('metatitle',2000)->nullable();
+            $table->string('metadescription',2000)->nullable();
             
         });
     }

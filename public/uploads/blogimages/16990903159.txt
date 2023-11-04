@@ -1,0 +1,284 @@
+PHP UPGRADE SUMMARY
+===================
+
+• CI-version must be updated to 3.1.12/3.1.13. Current version is 3.1.11
+• PHP Supported 8.0 and 8.1 in CI Version 3.1.12/3.1.13
+• MySQL 8 version can work on PHP 8.0/8.1(MySQL 5.7 goes end of life in October 2023).
+• Migration from CI3 to CI4 will require redevelopment/rewrite of the entire project.
+
+
+Deprecated functions used in the project
+========================================
+
+1.	libxml_disable_entity_loader()
+2.	pg_errormessage()
+3.	usort()
+4.	imagepolygon() and imagefilledpolygon()
+	Note: Only num_points(third parameter) parameter is deprecated.
+
+5.	mhash_keygen_s2k()
+	Note:- Use the hash_*() functions instead.
+
+6.	mysqli::get_client_info() and mysqli_get_client_info()
+	Note:- Call mysqli_get_client_info() without any arguments to obtain the version information of the client library.
+
+7.	key()
+8.	current()
+9.	next()
+10.	prev()
+11.	reset()
+12.	end() 
+	Note :- The functions 7-12. It's useges on object is diprecated. If we want to use, convert the object to an array using get_mangled_object_vars()
+13.	assert()
+
+Below functions are defined in .js file as a function name and called dynamically
+
+14.	pg_numrows()
+15.	pg_numfields()
+16.	pg_cmdtuples()
+17.	pg_fieldname()
+18.	pg_fieldsize()
+19.	pg_fieldtype()
+20.	pg_fieldnum()
+21.	pg_fieldprtlen()
+22.	pg_fieldisnull()
+23.	pg_freeresult()
+24.	pg_getlastoid()
+25.	pg_locreate()
+26.	pg_lounlink()
+27.	pg_loopen()
+28.	pg_loclose()
+29.	pg_loread()
+30.	pg_lowrite()
+31.	pg_loreadall()
+32.	pg_loimport()
+33.	pg_loexport()		
+
+
+Impact on external modules
+=========================
+1.	strftime()
+2.	version_compare()
+3.	htmlspecialchars(), htmlentities(), htmlspecialchars_decode(), html_entity_decode(), and 
+	get_html_translation_table()
+	Note :- ENT_COMPAT(default) replaced with ENT_QUOTES | ENT_SUBSTITUTE (UTF-8 will be replaced by a 
+	Unicode substitution character, instead of resulting in an empty string.)
+
+
+/libraries/dompdf
+/libraries/lib_nusoap
+/helpers/pdfbuilder
+
+
+INI settings
+============
+
+1.	auto_detect_line_endings
+	Note :- Handle it by using linebreak manually. (Manual finding is required);
+
+Filter
+=======
+The FILTER_SANITIZE_STRING and FILTER_SANITIZE_STRIPPED filters are deprecated.
+Note :- There is no alternative, so we should create won logic/function to replace it. 
+
+Immact on external modules
+=========================
+
+1.	dfpapiv202211
+2.	firebase
+3.	qr-proofing
+4.	rest
+5.	one2edit
+6.	sitetheme_new
+
+
+Backward Incompatible Changes from PHP 7.4.x to PHP 8.1.x
+=========================================================
+
+Need more focused about below used in current project
+
+1.	each()
+2.	array_key_exists() // Note :- We cann't use it with objects.
+3.	Access to the $GLOBALS array is now subject to a number of restrictions. (access to the entire $GLOBALS
+ 	  array is no longer supported)
+4.	The @ operator will no longer silence fatal errors (E_ERROR, E_CORE_ERROR, E_COMPILE_ERROR,
+  	E_USER_ERROR, E_RECOVERABLE_ERROR, E_PARSE)
+    Solution :- Set ini_set('display_errors', 'Off'); in php.ini.
+5.	curly braces for offset access has been removed. (@ Array)
+6.	Called assert() inside a namespace is no longer allowed, and issues E_COMPILE_ERROR.
+7.	An optional parameter specified before required parameters is now always treated as required, even when called using named
+    arguments.
+8.	get_magic_quotes_gpc(). (Removed). Used in helpers/restscript/Rest.inc.php (Need to update)
+9.	get_magic_quotes_runtime(). (Removed). Used in project (In some helper/library files)
+10.	The HTTP stream wrapper as used by functions like file_get_contents() now advertises HTTP/1.1 rather
+	  than HTTP/1.0 by default. This does not change the behavior of the client, but may cause servers to respond differently. To retain the old behavior, set the 'protocol_version' stream context option
+
+
+MySQL Details
+=============
+
+Server version: 5.7.42 (Running project)
+Server version: 8.0.34
+
+
+Resouce Link
+============
+
+1.	https://www.php.net/manual/en/migration80.incompatible.php
+2.	https://www.php.net/manual/en/migration81.incompatible.php
+3.	https://github.com/php/php-src/blob/PHP-8.1/UPGRADING	
+
+========================
+Deprecated Functionality
+========================
+
+- Core:
+  . Implementing the Serializable interface without also implementing
+    __serialize() and __unserialize() has been deprecated. You should either
+    implement the new methods (if you only support PHP 7.4 and higher) or
+    implement both (if you support older PHP versions as well).
+
+  . Implicit conversion of floats to integers that result in loss of precision,
+    e.g. a truncation from 1.9 to 1, is deprecated. This affects array keys,
+    int parameter and return types, and operators working on integers.
+
+  . Calling a static method or accessing a static property directly on a trait
+    is deprecated. Static methods and properties should only be accessed on a
+    class using the trait.
+
+  . Returning a non-array from __sleep will raise a warning
+  . Returning by reference from a void function is deprecated.
+
+  . Automatic conversion of "false" into an empty array on write operands is
+    deprecated.
+
+- Ctype:
+  . Passing a non-string value to ctype_*() functions is deprecated. A future
+    version of PHP will make ctype_*() accept a string argument, which means
+    that either only strings will be accepted (strict_types=1) or inputs may be
+    converted to string (strict_types=0). In particular, using ctype_*($cp) to
+    check whether an ASCII codepoint given as integer satisfies a given ctype
+    predicate will no longer be supported. Instead ctype_*(chr($cp)) should be
+    used.
+
+- Date:
+  . The date_sunrise() and date_sunset() functions have been deprecated in
+    favor of date_sun_info().
+
+  . The strftime() and gmstrftime() functions have been deprecated in favor of
+    date()/DateTime::format() (for locale-independent formatting) or
+    IntlDateFormatter::format() (for locale-dependent formatting).
+
+- Filter:
+  . The FILTER_SANITIZE_STRING and FILTER_SANITIZE_STRIPPED filters have been
+    deprecated.
+
+  . The filter.default ini setting is deprecated.
+
+- GD:
+  . The $num_points parameter of image(open|filled)polygon has been deprecated.
+
+- Hash:
+  . The mhash(), mhash_keygen_s2k(), mhash_count(), mhash_get_block_size() and
+    mhash_get_hash_name() functions are deprecated. Use the hash_*() APIs
+    instead.
+
+- IMAP:
+  . The NIL constant has been deprecated. Use 0 instead.
+
+- Intl:
+  . Calling IntlCalendar::roll() with bool argument is deprecated. Pass 1 and -1
+    instead of true and false respectively.
+
+- Mbstring:
+  . Calling mb_check_encoding() without an argument is deprecated.
+
+- MySQLi:
+  . The mysqli_driver::$driver_version property has been deprecated. The driver
+    version is meaningless as it hasn't been updated in more than a decade. Use
+    PHP_VERSION_ID instead.
+
+  . Calling mysqli::get_client_info in OO style or passing $mysqli argument to
+    mysqli_get_client_info() function has been deprecated. Use
+    mysqli_get_client_info() without any arguments to obtain the client
+    library version information.
+
+  . The mysqli::init() method has been deprecated. Replace calls to
+    parent::init() with parent::__construct().
+
+- OCI8:
+  . The INI directive oci8.old_oci_close_semantics has been deprecated.
+
+- ODBC:
+  . odbc_result_all() has been deprecated.
+
+- PDO:
+  . The PDO::FETCH_SERIALIZE mode has been deprecated.
+
+- PgSQL:
+  . Not passing the connection argument to PgSQL functions and using the
+    default connection is deprecated.
+
+- SOAP:
+  . The ssl_method option for the SoapClient constructor has been deprecated in
+    favor of ssl stream context options. The direct equivalent would be
+    crypto_method, but min_proto_version/max_proto_version are recommended
+    instead.
+
+- Standard:
+  . Calling key(), current(), next(), prev(), reset(), or end() on objects
+    is deprecated. Instead cast the object to array first, or make use of
+    ArrayIterator.
+
+  . The strptime() function has been deprecated. Use date_parse_from_format()
+    instead (for locale-independent parsing) or IntlDateFormatter::parse() (for
+    locale-dependent parsing).
+
+  . The auto_detect_line_endings ini setting has been deprecated. If necessary,
+    handle "\r" line breaks manually instead.
+
+  . The FILE_BINARY and FILE_TEXT constants are deprecated. They already had
+    no effect previously.
+
+=================
+Changed Functions
+=================
+
+- Core:
+  . Properties order used in foreach, var_dump(), serialize(), object comparison
+    etc. was changed. Now properties are naturally ordered according to their
+    declaration and inheritance. Properties declared in a base class are going
+    to be before the child properties. This order is consistent with internal
+    layout of properties in zend_object structure and repeats the order in
+    default_properties_table[] and properties_info_table[]. The old order was
+    not documented and was caused by class inheritance implementation details.
+
+- Filter:
+  . The FILTER_FLAG_ALLOW_OCTAL flag of the FILTER_VALIDATE_INT filter now accept
+    octal string with the leading octal prefix ("0o"/"0O")
+
+- GMP:
+  . All GMP function now accept octal string with the leading octal prefix ("0o"/"0O")
+    RFC: https://wiki.php.net/rfc/explicit_octal_notation
+
+- MBString
+  . mb_check_encoding() now checks input encoding more strictly.
+  . mb_detect_encoding() now checks input encoding more strictly
+    when strict detection is enabled.
+  . mb_convert_encoding() checks the input encoding more strictly
+    if multiple encodings are passed to from_encoding
+    and the mbstring.strict_detection INI directive is set to 1.
+    This change only affects the encoding selection,
+    not the result of the conversion.
+
+- PDO ODBC:
+  . PDO::getAttributes() with PDO::ATTR_SERVER_INFO and PDO::ATTR_SERVER_VERSION
+    now return values instead of throwing PDOException.
+
+- Reflection:
+  . ReflectionProperty::setAccessible() and ReflectionMethod::setAccessible()
+    no longer have an effect. Properties and methods are always considered
+    accessible through reflection.
+
+- Standard:
+  . syslog() is now binary safe.
