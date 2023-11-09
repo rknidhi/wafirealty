@@ -115,7 +115,12 @@
 	<!--app JS-->
 	<script src="{{URL::asset('assets/js/app.js')}}"></script>
 	<script src="{{URL::asset('assets/js/custom.js')}}"></script>
-	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<!-- Scripts -->
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.0/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+	 -->
 <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 	<!-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script> -->
   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
@@ -131,6 +136,14 @@
 		dateFormat: 'dd-mm-yy'
 	});
   } );
+  $(document).ready(function(){
+	$(".select2").select2({theme: 'bootstrap-5'});
+  })
   </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+
 </body>
 </html>

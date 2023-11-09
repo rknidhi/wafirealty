@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 use App\Models\Blog;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+use Illuminate\Validation\Rules\File;
+use DataTables;
 class BlogController extends Controller
 {
     public function GenerateTocken()
@@ -12,8 +15,18 @@ class BlogController extends Controller
 }
     public function BlogList()
     {
-        $blogs = Blog::all()->toArray();
-        return view('blog/list',['blogs'=>$blogs]);
+        if(\request()->ajax()){
+            $data = Blog::latest()->get();
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $actionBtn = '<a href="/blog/edit?id='.$row['id'].'" class="edit btn btn-success btn-sm">Edit</a> <a href="/blog/delete?id='.$row['id'].'" class="delete btn btn-danger btn-sm">Delete</a>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+        return view('blog/list');
     }
     public function AddBlog()
     {
@@ -35,15 +48,29 @@ class BlogController extends Controller
 
     public function CreateBlog(Request $request)
     {
-        
-        // $request->validate([
-        //     'title'=>'requred',
-        //     'description'=>'required',
-        // ]);
+        $validated = Validator::make($request->all(),[
+            'title'=>'required',
+            'description'=>'required',
+        ])->validate();
+        Validator::validate($request->file(), [
+            'blog_image' => [
+                'required',
+                File::image()
+                    ->min(100)
+                    ->max(10 * 1024)
+                    ->dimensions(Rule::dimensions()->maxWidth(1000)->maxHeight(500)),
+            ],
+        ]);
         $BlogData = new Blog;
+        date_default_timezone_set('Asia/Kolkata');
         if(isset($request->id) && $request->id!='') 
         {
             $BlogData = Blog::find($request->id);
+            $BlogData->updated_at = date("Y-m-d H:i:s");
+        }
+        else
+        {
+            $BlogData->created_at = date("Y-m-d H:i:s");
         }
         $BlogData->title = $request->title;
         $BlogData->add_by = $request->add_by;

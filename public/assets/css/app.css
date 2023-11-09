@@ -8,7 +8,7 @@ body {
 }
 
 a {
-	text-decoration: none
+	text-decoration: none !important;
 }
 
 .wrapper {
@@ -2641,4 +2641,13 @@ input.search-control-2::placeholder {
 	.chat-top-header-menu {
 		display: none
 	}
+}
+.dataTables_filter {
+	width: 50%;
+	float: right;
+	text-align: right;
+ }
+.pagination {
+	text-align: left;
+    float: right;
 }

@@ -168,6 +168,7 @@ function deleteproductDetail(id)
             })
           }
     }
+}
 function getAllNewTickets(type)
 {
     $.ajax({

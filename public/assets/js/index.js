@@ -207,37 +207,46 @@ jQuery('#geographic-map-2').vectorMap(
 // chart 4
 
 var ctx = document.getElementById("chart4").getContext('2d');
-
+      var tp = $("#tp").text();
+      var ts = $("#ts").text();
+      var rtm = $("#rtm").text();
+      var ucp = $("#ucp").text();
   var gradientStroke1 = ctx.createLinearGradient(0, 0, 0, 300);
-      gradientStroke1.addColorStop(0, '#ee0979');
-      gradientStroke1.addColorStop(1, '#ff6a00');
-    
-  var gradientStroke2 = ctx.createLinearGradient(0, 0, 0, 300);
-      gradientStroke2.addColorStop(0, '#283c86');
-      gradientStroke2.addColorStop(1, '#39bd3c');
+      gradientStroke1.addColorStop(0, '#17ead9');
+      gradientStroke1.addColorStop(1, '#6078ea');
 
+  var gradientStroke2 = ctx.createLinearGradient(0, 0, 0, 300);
+      gradientStroke2.addColorStop(0, '#f54ea2');
+      gradientStroke2.addColorStop(1, '#ff7676');
+    
   var gradientStroke3 = ctx.createLinearGradient(0, 0, 0, 300);
-      gradientStroke3.addColorStop(0, '#7f00ff');
-      gradientStroke3.addColorStop(1, '#e100ff');
+      gradientStroke3.addColorStop(0, '#00b09b');
+      gradientStroke3.addColorStop(1, '#96c93d');
+
+  var gradientStroke4 = ctx.createLinearGradient(0, 0, 0, 300);
+      gradientStroke4.addColorStop(0, '#ffdf40');
+      gradientStroke4.addColorStop(1, '#ff8359');
 
       var myChart = new Chart(ctx, {
         type: 'pie',
         data: {
-          labels: ["Completed", "Pending", "Process"],
+          labels: ["Total Project","Total Sale", "Ready To Move", "Under Cunstruction"],
           datasets: [{
             backgroundColor: [
               gradientStroke1,
               gradientStroke2,
-              gradientStroke3
+              gradientStroke3,
+              gradientStroke4
             ],
 
              hoverBackgroundColor: [
               gradientStroke1,
               gradientStroke2,
-              gradientStroke3
+              gradientStroke3,
+              gradientStroke4
             ],
 
-            data: [50, 50, 50],
+            data: [tp,ts, rtm, ucp],
       borderWidth: [1, 1, 1]
           }]
         },

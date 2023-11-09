@@ -49,6 +49,14 @@ $users = json_decode($UserData, true);
 	<link rel="stylesheet" href="{{URL::asset('assets/css/semi-dark.css')}}" />
 	<link rel="stylesheet" href="{{URL::asset('assets/css/header-colors.css')}}" />
 	<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<!-- Styles -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+<!-- Or for RTL support -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" />
+
+
 	<title>CRM - Magnete Technologies Pvt. Ltd.</title>
 </head>
 
@@ -73,7 +81,7 @@ $users = json_decode($UserData, true);
 			<ul class="metismenu" id="menu">
 
 				<li class="menu-label">Dashboard</li>
-					<li>
+					<!-- <li>
 						<a href="javascript:();" class="has-arrow">
 							<div class="parent-icon"><i class="fa fa-users"></i>
 							</div>
@@ -253,12 +261,12 @@ $users = json_decode($UserData, true);
 							<li> <a href="#"><i class="fa fa-angle-right"></i>Payment Settings</a></li>
 							<li> <a href="#"><i class="fa fa-angle-right"></i>Website Settings</a></li>
 						</ul>
-					</li>
+					</li> -->
 					<li>
 						<a href="javascript:();" class="has-arrow">
 							<div class="parent-icon"><i class="fa fa-globe"></i>
 							</div>
-							<div class="menu-title">Manege Website</div>
+							<div class="menu-title">Manage Website</div>
 						</a>
 						<ul>
 							<li><a class="has-arrow" href="javascript:();">Manege Menu</a>
@@ -375,11 +383,20 @@ $users = json_decode($UserData, true);
 							</li>
 							<li> <a class="has-arrow" href="#">Manege Blogs</a>
 								<ul>
-									<li> <a href="blog/list"><i class="bx bx-right-arrow-alt"></i>All Blogs</a></li>
-									<li> <a href="blog/add"><i class="bx bx-right-arrow-alt"></i>Add Blogs</a></li>
+									<li> <a href="/blog/list"><i class="bx bx-right-arrow-alt"></i>All Blogs</a></li>
+									<li> <a href="/blog/add"><i class="bx bx-right-arrow-alt"></i>Add Blogs</a></li>
 									<!-- <li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Edit Blogs</a></li> -->
 									<!-- <li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Delete Blogs</a></li> -->
 									<li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Trash Blogs</a></li>
+								</ul>
+							</li>
+							<li> <a class="has-arrow" href="#">Manege Projects</a>
+								<ul>
+									<li> <a href="/project/list"><i class="bx bx-right-arrow-alt"></i>All Projects</a></li>
+									<li> <a href="/project/add"><i class="bx bx-right-arrow-alt"></i>Add Project</a></li>
+									<!-- <li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Edit Blogs</a></li> -->
+									<!-- <li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Delete Blogs</a></li> -->
+									<li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Trash Projects</a></li>
 								</ul>
 							</li>
 							<li> <a class="has-arrow" href="#">Manege Testimonials</a>
@@ -392,7 +409,7 @@ $users = json_decode($UserData, true);
 							</li>
 						</ul>
 					</li>
-					<li>
+					<!-- <li>
 						<a href="#">
 							<div class="parent-icon"><i class="fa fa-stop-circle"></i>
 							</div>
@@ -408,13 +425,13 @@ $users = json_decode($UserData, true);
 						<ul>
 							<li> <a href="/Users"><i class="fa fa-angle-right"></i>User List</a></li>
 							<li> <a href="/Permissions"><i class="fa fa-angle-right"></i>User Permissions</a></li>
-							 <li> <a href="/module"><i class="fa fa-angle-right"></i>Module</a></li>
+							 <li> <a href="/module"><i class="fa fa-angle-right"></i>Module</a></li> -->
 						<!--<li> <a href="#"><i class="fa fa-angle-right"></i>Email  Settings</a></li>
 						<li> <a href="#"><i class="fa fa-angle-right"></i>Payment Settings</a></li>
 						<li> <a href="#"><i class="fa fa-angle-right"></i>Website Settings</a></li> -->
-						</ul>
-					</li>
-					<li>
+						<!-- </ul>
+					</li> -->
+					<!-- <li>
 						<a href="javascript:();" class="has-arrow">
 							<div class="parent-icon"><i class="fa fa-user-circle"></i>
 							</div>
@@ -509,7 +526,7 @@ $users = json_decode($UserData, true);
 							</div>
 							<div class="menu-title">Support</div>
 						</a>
-					</li>
+					</li> -->
 				
 			</ul>
 			<!--end navigation-->

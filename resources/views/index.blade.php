@@ -10,9 +10,9 @@
 						<div class="card-body">
 							<div class="d-flex align-items-center">
 								<div>
-									<p class="mb-0 text-secondary">Total Customers</p>
-									<h4 class="my-1 text-info">50+</h4>
-									<p class="mb-0 font-13">+2.5% from last week</p>
+									<p class="mb-0 text-secondary">Total Projects</p>
+									<h4 class="my-1 text-info" id="tp">{{$Projects}}</h4>
+									<!-- <p class="mb-0 font-13">+2.5% from last week</p> -->
 								</div>
 								<div class="widgets-icons-2 rounded-circle bg-gradient-scooter text-white ms-auto"><i class='bx bxs-cart'></i>
 								</div>
@@ -25,9 +25,9 @@
 					   <div class="card-body">
 						   <div class="d-flex align-items-center">
 							   <div>
-								   <p class="mb-0 text-secondary">Total Users</p>
-								   <h4 class="my-1 text-danger">₹ 1508</h4>
-								   <p class="mb-0 font-13">+5.4% from last week</p>
+								   <p class="mb-0 text-secondary" >Total Sale</p>
+								   <h4 class="my-1 text-danger" id="ts">{{$SoldProperty}}</h4>
+								   <!-- <p class="mb-0 font-13">+5.4% from last week</p> -->
 							   </div>
 							   <div class="widgets-icons-2 rounded-circle bg-gradient-bloody text-white ms-auto"><i class='bx bxs-wallet'></i>
 							   </div>
@@ -40,9 +40,9 @@
 					   <div class="card-body">
 						   <div class="d-flex align-items-center">
 							   <div>
-								   <p class="mb-0 text-secondary">Active Customers</p>
-								   <h4 class="my-1 text-success">34.6%</h4>
-								   <p class="mb-0 font-13">-4.5% from last week</p>
+								   <p class="mb-0 text-secondary">Ready To Move Property</p>
+								   <h4 class="my-1 text-success" id="rtm">{{$ReadyToMoveProperty}}</h4>
+								   <!-- <p class="mb-0 font-13">-4.5% from last week</p> -->
 							   </div>
 							   <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto"><i class='bx bxs-bar-chart-alt-2' ></i>
 							   </div>
@@ -55,8 +55,8 @@
 					   <div class="card-body">
 						   <div class="d-flex align-items-center">
 							   <div>
-								   <p class="mb-0 text-secondary">Active Users</p>
-								   <h4 class="my-1 text-warning">1210</h4>
+								   <p class="mb-0 text-secondary" >Under Cunstruction Properties</p>
+								   <h4 class="my-1 text-warning" id="ucp">{{$UnderCustructionProperty}}</h4>
 								   <p class="mb-0 font-13">+8.4% from last week</p>
 							   </div>
 							   <div class="widgets-icons-2 rounded-circle bg-gradient-blooker text-white ms-auto"><i class='bx bxs-group'></i>
@@ -166,7 +166,7 @@
                          <div class="card-body">
 							<div class="d-flex align-items-center">
 								<div>
-									<h6 class="mb-0">Recent Add Product</h6>
+									<h6 class="mb-0">Recent Add Properties</h6>
 								</div>
 								<div class="dropdown ms-auto">
 									<a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown"><i class="bx bx-dots-horizontal-rounded font-22 text-option"></i>
@@ -185,87 +185,16 @@
 								</div>
 							</div>
 						 <div class="table-responsive">
-						   <table class="table align-middle mb-0">
+						   <table class="table align-middle mb-0" id="dashboard_project">
 							<thead class="table-light">
 							 <tr>
-							   <th>Product</th>
-							   <!-- <th>Photo</th> -->
-							   <th>Product ID</th>
-							   <!-- <th>Status</th> -->
-							   <th>Amount</th>
-							   <th>Date</th>
-							   <!-- <th>Shipping</th> -->
+							   <th>Brand</th>
+							   <th>Location</th>
+							   <th>Type</th>
+							   <th>Status</th>
 							 </tr>
 							 </thead>
-							 <tbody><tr>
-							  <td>Website Designing</td>
-							  <!-- <td><img src="assets/images/products/01.png" class="product-img-2" alt="product img"></td> -->
-							  <td>MTPL-0010</td>
-							  <!-- <td><span class="badge bg-gradient-quepal text-white shadow-sm w-100">Paid</span></td> -->
-							  <td>₹7500.00</td>
-							  <td>0 Feb 2023</td>
-							  <!-- <td><div class="progress" style="height: 6px;">
-									<div class="progress-bar bg-gradient-quepal" role="progressbar" style="width: 100%"></div>
-								  </div></td> -->
-							 </tr>
-		  
-							 <tr>
-							  <td>Mobile App</td>
-							  <!-- <td><img src="assets/images/products/02.png" class="product-img-2" alt="product img"></td> -->
-							  <td>MTPL-0008</td>
-							  <!-- <td><span class="badge bg-gradient-blooker text-white shadow-sm w-100">Pending</span></td> -->
-							  <td>₹30000.00</td>
-							  <td>05 Feb 2023</td>
-							  <!-- <td><div class="progress" style="height: 6px;">
-									<div class="progress-bar bg-gradient-blooker" role="progressbar" style="width: 60%"></div>
-								  </div></td> -->
-							 </tr>
-		  
-							 <tr>
-							  <td>CRM </td>
-							  <!-- <td><img src="assets/images/products/03.png" class="product-img-2" alt="product img"></td> -->
-							  <td>MTPL-0001</td>
-							  <!-- <td><span class="badge bg-gradient-bloody text-white shadow-sm w-100">Failed</span></td> -->
-							  <td>₹25000.00</td>
-							  <td>06 Feb 2023</td>
-							  <!-- <td><div class="progress" style="height: 6px;">
-									<div class="progress-bar bg-gradient-bloody" role="progressbar" style="width: 70%"></div>
-								  </div></td> -->
-							 </tr>
-		  
-							 <tr>
-							  <td>Logo Design</td>
-							  <!-- <td><img src="assets/images/products/04.png" class="product-img-2" alt="product img"></td> -->
-							  <td>MTPL-0003</td>
-							  <!-- <td><span class="badge bg-gradient-quepal text-white shadow-sm w-100">Paid</span></td> -->
-							  <td>₹1200.00</td>
-							  <td>14 Jan 2023</td>
-							  <!-- <td><div class="progress" style="height: 6px;">
-									<div class="progress-bar bg-gradient-quepal" role="progressbar" style="width: 100%"></div>
-								  </div></td> -->
-							 </tr>
-							 <tr>
-							  <td>Marketing Add</td>
-							  <!-- <td><img src="assets/images/products/06.png" class="product-img-2" alt="product img"></td> -->
-							  <td>MTPL-0005</td>
-							  <!-- <td><span class="badge bg-gradient-blooker text-white shadow-sm w-100">Pending</span></td> -->
-							  <td>₹1000.00</td>
-							  <td>18 Jan 2020</td>
-							  <!-- <td><div class="progress" style="height: 6px;">
-									<div class="progress-bar bg-gradient-blooker" role="progressbar" style="width: 60%"></div>
-								  </div></td> -->
-							 </tr>
-							 <tr>
-							  <td>SEO</td>
-							  <!-- <td><img src="assets/images/products/05.png" class="product-img-2" alt="product img"></td> -->
-							  <td>MTPL-0002</td>
-							  <!-- <td><span class="badge bg-gradient-bloody text-white shadow-sm w-100">Failed</span></td> -->
-							  <td>₹2500.00</td>
-							  <td>21 Jan 2023</td>
-							  <!-- <td><div class="progress" style="height: 6px;">
-									<div class="progress-bar bg-gradient-bloody" role="progressbar" style="width: 40%"></div>
-								  </div></td> -->
-							 </tr>
+							 <tbody>
 						    </tbody>
 						  </table>
 						  </div>
@@ -322,14 +251,17 @@
 								<div class="card-body">
 									<div class="chart-container-1">
 										<canvas id="chart4"></canvas>
+										
 									  </div>
 								</div>
 								<ul class="list-group list-group-flush">
-									<li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">Completed <span class="badge bg-gradient-quepal rounded-pill">25</span>
+									<li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">Total Project <span class="badge bg-gradient-quepal rounded-pill">{{$Projects}}</span>
 									</li>
-									<li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">Pending <span class="badge bg-gradient-ibiza rounded-pill">10</span>
+									<li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">Total Sale <span class="badge bg-gradient-ibiza rounded-pill">{{$SoldProperty}}</span>
 									</li>
-									<li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">Process <span class="badge bg-gradient-deepblue rounded-pill">65</span>
+									<li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">Readt To Move <span class="badge bg-gradient-deepblue rounded-pill">{{$ReadyToMoveProperty}}</span>
+									</li>
+									<li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">Under Cunstruction Property <span class="badge bg-gradient-deepblue rounded-pill">{{$UnderCustructionProperty}}</span>
 									</li>
 								</ul>
 							</div>
@@ -391,3 +323,18 @@
 		  <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
 		<!--End Back To Top Button-->
 		@include('layout.footer')
+		<script type="text/javascript">
+    $(function () {
+          var table = $('#dashboard_project').DataTable({
+              processing: true,
+              serverSide: true,
+              ajax: "/dashboard",
+              columns: [
+                  {data: 'brand', name: 'brand'},
+                  {data: 'location', name: 'location'},
+                  {data: 'type', name: 'type'},
+                  {data: 'status', name: 'status'},
+              ]
+          });
+        });
+</script>

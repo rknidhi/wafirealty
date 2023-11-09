@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -31,15 +32,15 @@ use App\Http\Controllers\WebsiteController;
 
     // Project Routs
     Route::get('project/list',[ProjectController::class,'ProjectList']);
-    Route::get('project/edit/{id}',[ProjectController::class,'EditProject']);
+    Route::get('project/edit',[ProjectController::class,'EditProject']);
     Route::get('project/add',[ProjectController::class,'AddProject']);
     Route::post('project/create',[ProjectController::class,'CreateProject']);
+    Route::get('project/delete',[ProjectController::class,'DeleteProject']);
 
 
 
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', [HomeController::class,'Index']);
+Route::get('/dashboard', [HomeController::class,'Index']);
 Route::get('/Login',function(){
     return view('login');
 });

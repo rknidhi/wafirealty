@@ -22,35 +22,15 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <div id="example_wrapper" class="dataTables_wrapper dt-bootstrap5">
-                        <table id="example" class="table table-striped table-bordered dataTable" style="width: 100%;" role="grid" aria-describedby="example_info">
+                        <table id="project_table" class="table table-striped table-bordered dataTable" style="width:100%" role="grid" aria-describedby="example_info">
                             <thead>
                                 <tr role="row">
                                     <th style="width:10%;">S. No.</th>
-                                    <th style="width:60%">Title</th>
-                                    <th style="width:15%">Date</th>
-                                    <th style="width:15%">Action</th>
+                                    <th style="width:70%">Title</th>
+                                    <th style="width:20%">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if(isset($blogs) && !empty($blogs))
-                                @foreach($blogs as $blog)
-                                    <tr>
-                                        <td><?php echo $blog['id'];?></td>
-                                        <td><?php echo $blog['title'];?></td>
-                                        <td><?php if(isset($blogs['date'])){ echo date('d-m-Y',$blog['date']);}?></td>
-                                        <td>
-                                        <div class="d-flex order-actions justify-content-center">
-                                            <a href="/blog/edit?id={{$blog['id']}}" class=""><i class="bx bxs-edit"></i></a>
-                                            <a href="javascript:void(0);" onclick="deleteTestimonial({{$blog['id']}})" class="ms-3"><i class="bx bxs-trash"></i></a>
-                                        </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                @else
-                                            <tr colspan="4">
-                                                <td>No Data Found</td>
-                                            </tr>
-                                @endif
                                
                             </tbody>
                         </table>
@@ -66,3 +46,17 @@
 
 
 @include('layout.footer')
+<script type="text/javascript">
+    $(function () {
+          var table = $('#project_table').DataTable({
+              processing: true,
+              serverSide: true,
+              ajax: "/blog/list",
+              columns: [
+                  {data: 'id', name: 'id'},
+                  {data: 'title', name: 'title'},
+                  {data: 'action', name: 'action'},
+              ]
+          });
+        });
+</script>
