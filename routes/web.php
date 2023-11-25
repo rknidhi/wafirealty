@@ -22,7 +22,7 @@ use App\Http\Controllers\WebsiteController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-
+Route::prefix('admin')->group(function(){
     //Blog Routs
     Route::get('generatetocken',[BlogController::class,'GenerateTocken']);
     Route::get('blog/list',[BlogController::class,'BlogList']);
@@ -77,3 +77,6 @@ Route::post('/UpdateUser',[UserController::class,'UpdateUser']);
 Route::post('/website/testimonials/add',[WebsiteController::class,'CreateTestimonials']);
 Route::any('/website/testimonial/list',function(){return view('/website/testimonials/alltestimonials');});
 Route::get('/website/testimonial/add',function(){return view('/website/testimonials/addtestimonials');});
+
+});
+   
