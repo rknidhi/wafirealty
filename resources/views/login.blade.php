@@ -19,7 +19,7 @@ if($check!='')
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--favicon-->
-	<link rel="icon" href="{{URL::asset('images/favicon.png')}}" type="image/png" />
+	<link rel="icon" href="{{URL::asset('images/wafi.jpg')}}" type="image/png" />
 	<!--plugins-->
 	<link href="assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
 	<link href="assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css" rel="stylesheet" />
@@ -59,10 +59,10 @@ if($check!='')
 								@include('layout.alert')
 								<div class="">
 									<div class="mb-3 text-center">
-										<img src="{{URL::asset('images/crm_magnete_technologies_logo.png')}}" width="60" alt="" />
+										<img src="{{URL::asset('images/wafi.jpg')}}" width="60" alt="" />
 									</div>
 									<div class="text-center mb-4">
-										<h5 class="">Magenete Technologies</h5>
+										<h5 class="">WafiRealty</h5>
 										<p class="mb-0">Please log in to your account</p>
 									</div>
 									<div class="form-body">

@@ -59,7 +59,7 @@
 								   <h4 class="my-1 text-warning" id="ucp">{{$UnderCustructionProperty}}</h4>
 								   <p class="mb-0 font-13">+8.4% from last week</p>
 							   </div>
-							   <div class="widgets-icons-2 rounded-circle bg-gradient-blooker text-white ms-auto"><i class='bx bxs-group'></i>
+							   <div class="widgets-icons-2 rounded-circle bg-gradient-cunstruction text-white ms-auto"><i class='bx bxs-group'></i>
 							   </div>
 						   </div>
 					   </div>
@@ -261,7 +261,7 @@
 									</li>
 									<li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">Readt To Move <span class="badge bg-gradient-deepblue rounded-pill">{{$ReadyToMoveProperty}}</span>
 									</li>
-									<li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">Under Cunstruction Property <span class="badge bg-gradient-deepblue rounded-pill">{{$UnderCustructionProperty}}</span>
+									<li class="list-group-item d-flex bg-transparent justify-content-between align-items-center">Under Cunstruction Property <span class="badge bg-gradient-cunstruction rounded-pill">{{$UnderCustructionProperty}}</span>
 									</li>
 								</ul>
 							</div>

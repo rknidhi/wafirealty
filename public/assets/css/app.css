@@ -54,7 +54,7 @@ a {
 	margin-left: 10px;
 	margin-bottom: 0;
 	letter-spacing: 1px;
-	color: #d72034;
+	color: #4c1340
 }
 
 .toggle-icon {
@@ -1589,13 +1589,23 @@ form select.error:focus {
 }
 
 .bg-gradient-deepblue {
-    background: #6a11cb;
+    background: #00b09b;
     background: -webkit-linear-gradient(
 	45deg
-	, #6a11cb, #2575fc)!important;
+	, #00b09b, #96c93d)!important;
 		background: linear-gradient(
 	45deg
-	, #6a11cb , #2575fc)!important;
+	, #00b09b , #96c93d)!important;
+}
+
+.bg-gradient-cunstruction {
+    background: #ffdf40;
+    background: -webkit-linear-gradient(
+	45deg
+	, #ffdf40, #ff8359)!important;
+		background: linear-gradient(
+	45deg
+	, #ffdf40 , #ff8359)!important;
 }
 
 
@@ -1621,13 +1631,13 @@ form select.error:focus {
 
 
 .bg-gradient-ibiza {
-    background: #ee0979;
+    background: #f54ea2;
     background: -webkit-linear-gradient(
 	45deg
-	, #ee0979, #ff6a00)!important;
+	, #f54ea2, #ff7676)!important;
 		background: linear-gradient(
 	45deg
-	, #ee0979, #ff6a00)!important;
+	, #f54ea2, #ff7676)!important;
 }
 
 .bg-gradient-scooter {
@@ -1653,13 +1663,13 @@ form select.error:focus {
 
 
 .bg-gradient-quepal {
-    background: #42e695;
+    background: #17ead9;
     background: -webkit-linear-gradient(
 45deg
-, #42e695, #3bb2b8)!important;
+, #17ead9, #6078ea)!important;
     background: linear-gradient(
 45deg
-, #42e695, #3bb2b8)!important;
+, #17ead9, #6078ea)!important;
 }
 
 

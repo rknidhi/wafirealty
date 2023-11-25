@@ -1,38 +1,4 @@
 @include('layout.header')
-<?php
-use App\Http\Controllers\DesignationController;
-use App\Models\designation;
-use App\Http\Controllers\UserController;
-$id = Session()->get('id');
-$alldesignation = designation::getRecords();
-$alldesignationarr = json_decode($alldesignation,true);
-$designationoptions = '<option value="0">--Select Designation--</option>';
-if($alldesignationarr['success']=='true')
-{
-  foreach($alldesignationarr['data'] as  $designation)
-  {
-    $designationoptions .= '<option value="'.$designation['id'].'">'.$designation['name'].'</option>';
-  }
-}
-$permission = UserController::getUserPermissionByName('user',$id);
-$permissionarr = json_decode($permission, true);
-
-if($permissionarr['success']=='false')
-{?>
-<div class="page-wrapper">
-			<div class="page-content">
-				<!--breadcrumb-->
-				
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <strong>You Are Not Authorized Person For This Module</strong>
-                    <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
-                </div>
-                
-			</div>
-		</div>
-<?php  return false; }
-
-?>
 <div class="page-wrapper">
   <div class="page-content">
     <!--breadcrumb-->
@@ -71,59 +37,65 @@ if($permissionarr['success']=='false')
     <div class="card">
       <div class="card-body">
         <div class="bs-stepper-content">
-          <form id="userform" action="/CreateUser" method="post" enctype="multipart/form-data">
+          <form id="userform" action="/user/create" method="post" enctype="multipart/form-data">
             <div id="test-l-1" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper1trigger1">
               <h5 class="mb-1">Personal Information</h5>
               <p class="mb-4">Enter personal information to get closer to our organization</p>
               <div class="row g-3">
                 <div class="col-12 col-lg-6">
                   @csrf
+                  <input type='hidden' name='id' value='<?php if(isset($users) && $users['id']!=''){echo $users['id'];}?>'/>
                   <label for="FisrtName" class="form-label">User Name</label>
-                  <input type="text" class="form-control" id="FisrtName" placeholder="First Name" name="name">
+                  <input type="text" class="form-control" id="FisrtName" placeholder="First Name" name="username" value="<?php if(isset($users) && $users['username']!=''){echo $users['username'];}?>">
                 </div>
                 <div class="col-12 col-lg-6">
+                  <label for="FisrtName" class="form-label">Name</label>
+                  <input type="text" class="form-control" id="FisrtName" placeholder="First Name" name="name" value="<?php if(isset($users) && $users['name']!=''){echo $users['name'];}?>">
+                </div>
+                <!-- <div class="col-12 col-lg-6">
                   <label for="PhoneNumber" class="form-label">Phone Number</label>
                   <input type="text" class="form-control" id="PhoneNumber" placeholder="Phone Number" name="mobile">
-                </div>
+                </div> -->
                 <div class="col-12 col-lg-6">
                   <label for="InputEmail" class="form-label">E-mail Address</label>
-                  <input type="text" class="form-control" id="InputEmail" placeholder="Enter Email Address" name="email">
+                  <input type="text" class="form-control" id="InputEmail" placeholder="Enter Email Address" name="email" value="<?php if(isset($users) && $users['email']!=''){echo $users['email'];}?>">
                 </div>
-                <div class="col-12 col-lg-6">
+                <!-- <div class="col-12 col-lg-6">
                   <label for="InputCountry" class="form-label">Designation</label>
-                  <select name="designation" class="form-select" id="designation"><?php echo $designationoptions;?></select>
-                  <!-- <input type="text" class="form-control" placeholder="Enter Designation" id="InputDesignation" aria-label="Default select example" name="designation"> -->
-                </div>
+                  <select name="designation" class="form-select" id="designation"></select>
+          
+                </div> -->
                 <div class="col-12 col-lg-6">
                   <label for="InputLanguage" class="form-label">User Type</label>
                   <select class="form-select" id="InputLanguage" aria-label="Default select example" name="usertype">
                     <option selected>--Select Type--</option>
-                    <option value="admin">Admin</option>
-                    <option value="user">User</option>
+                    <option value="admin" <?php if(isset($users) && $users['type']=='admin'){echo 'selected';}?>>Admin</option>
+                    <option value="super admin" <?php if(isset($users) && $users['type']=='super admin'){echo 'selected';}?>>Super Admin</option>
+                    <option value="user" <?php if(isset($users) && $users['type']=='user'){echo 'selected';}?>>User</option>
                   </select>
                 </div>
                 <div class="col-12 col-lg-6">
                   <label for="InputLanguage" class="form-label">Status</label>
                   <select class="form-select" id="InputLanguage" aria-label="Default select example" name="status">
                     <option selected>--Select Status--</option>
-                    <option value="active">Active</option>
-                    <option value="inactive">Inactive</option>
-                    <option value="hold">Hold</option>
-                    <option value="pending">Pending</option>
+                    <option value="active" <?php if(isset($users) && $users['status']=='active'){echo 'selected';}?>>Active</option>
+                    <option value="inactive" <?php if(isset($users) && $users['status']=='inactive'){echo 'selected';}?>>Inactive</option>
+                    <option value="hold" <?php if(isset($users) && $users['status']=='hold'){echo 'selected';}?>>Hold</option>
+                    <option value="pending" <?php if(isset($users) && $users['status']=='pending'){echo 'selected';}?>>Pending</option>
                   </select>
                 </div>
                 <div class="col-12 col-lg-6">
                   <label for="InputCountry" class="form-label">Create Password</label>
-                  <input type="text" class="form-control" placeholder="Enter Password" id="InputPassword" aria-label="Default select example" name="password">
+                  <input type="text" class="form-control" placeholder="Enter Password" id="InputPassword" aria-label="Default select example" name="password" <?php if(isset($users) && $users['id']!=''){echo 'disabled';}?>>
                 </div>
-                <div class="col-12 col-lg-6">
+                <!-- <div class="col-12 col-lg-6">
                   <label for="InputLanguage" class="form-label">Upload Photo</label>
                   <input class="form-control" type="file" id="formFile" name="user_photo">
-                </div>
-                <div class="col-12 col-lg-12">
+                </div> -->
+                <!-- <div class="col-12 col-lg-12">
                   <label for="InputEmail" class="form-label">Full Address</label>
                   <textarea type="text" class="form-control" name="address" id="address" placeholder="Enter Full Address" name="fulladdress"></textarea>
-                </div>
+                </div> -->
                 <div class="col-12 col-lg-6">
                   <button class="btn btn-primary px-4" type="submit">Submit
                   </button>

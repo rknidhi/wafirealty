@@ -52,15 +52,6 @@ class BlogController extends Controller
             'title'=>'required',
             'description'=>'required',
         ])->validate();
-        Validator::validate($request->file(), [
-            'blog_image' => [
-                'required',
-                File::image()
-                    ->min(100)
-                    ->max(10 * 1024)
-                    ->dimensions(Rule::dimensions()->maxWidth(1000)->maxHeight(500)),
-            ],
-        ]);
         $BlogData = new Blog;
         date_default_timezone_set('Asia/Kolkata');
         if(isset($request->id) && $request->id!='') 
@@ -72,10 +63,19 @@ class BlogController extends Controller
         {
             $BlogData->created_at = date("Y-m-d H:i:s");
         }
+        $add_by ='';
+        $session = session()->all();
+        if(isset($session['user_status']) && $session['user_status']=='logedin')
+        {
+            $add_by = $session['name']; 
+        }
+        else
+        {
+            return 'Not authorized';
+        }
         $BlogData->title = $request->title;
-        $BlogData->add_by = $request->add_by;
+        $BlogData->add_by = $add_by;
         $BlogData->description = $request->description;
-        // $BlogData->created_at = $request->date;
         $BlogData->metatitle = $request->metatitle;
         $BlogData->metadescription = $request->metadescription;
         if($request->file('blog_image')!=null)
@@ -129,14 +129,35 @@ class BlogController extends Controller
       $delete = Blog::destroy($request->id);
       return redirect('/blog/list')->with('success','Blog Deleted Successfully');
     }
+
+    public function getAllBlog(Request $request)
+    {
+        if($request->id)
+        {
+            $Blog = Blog::find($request->id)->toArray();
+            if(!empty($Blog))
+            {
+                $Blogs = json_encode(array('success'=>'true','data'=>$Blog,'error_code'=>'20001'));
+            }
+            else
+            {
+                $Blogs = json_encode(array('success'=>'true','data'=>'Data Not Found','error_code'=>'20002'));
+            }
+        }
+        else
+        {
+            $Blog = Blog::all()->toArray();
+            if(!empty($Blog))
+            {
+                $Blogs = json_encode(array('success'=>'true','data'=>$Blog,'error_code'=>'20003'));
+            }
+            else
+            {
+                $Blogs = json_encode(array('success'=>'true','data'=>'No Records Found','error_code'=>'20004'));
+            }
+        }
+        return $Blogs;
+    }
 }
-
-
-
-
-
-
-
-
 
 

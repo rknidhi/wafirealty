@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\URL;
 $id = Session()->get('id');
 $UserData = UserController::getUserById($id);
 $users = json_decode($UserData, true);
+$type = Session()->get('type');
 
 ?>
 <!doctype html>
@@ -28,7 +29,7 @@ $users = json_decode($UserData, true);
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<!--favicon-->
-	<link rel="icon" href="{{URL::asset('images/favicon.png')}}" type="image/png" />
+	<link rel="icon" href="{{URL::asset('images/wafi.jpg')}}" type="image/png" />
 	<!--plugins-->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="{{URL::asset('assets/plugins/vectormap/jquery-jvectormap-2.0.2.css')}}" rel="stylesheet" />
@@ -57,7 +58,7 @@ $users = json_decode($UserData, true);
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" />
 
 
-	<title>CRM - Magnete Technologies Pvt. Ltd.</title>
+	<title>Wafi Reality</title>
 </head>
 
 <body>
@@ -67,11 +68,11 @@ $users = json_decode($UserData, true);
 		<div class="sidebar-wrapper" data-simplebar="true">
 			<div class="sidebar-header">
 				<div>
-					<a href="{{URL::to('/')}}"><img src="{{URL::asset('images/crm_magnete_technologies_logo.png')}}" class="logo-icon" alt="logo icon"></a>
+					<a href="{{URL::to('/')}}"><img src="{{URL::asset('images/wafi.jpg')}}" class="logo-icon" alt="logo icon"></a>
 				</div>
 				<div>
-					<a href="{{URL::to('/')}}"><h4 class="logo-text">MAGNETE</h4></a>
-					<a href="{{URL::to('/')}}"><p class="text-left logo-text"><small>TECHNOLOGIES</small></p></a>
+					<a href="{{URL::to('/')}}"><h4 class="logo-text">WAFIREALITY</h4></a>
+					<!-- <a href="{{URL::to('/')}}"><p class="text-left logo-text"><small>TECHNOLOGIES</small></p></a> -->
 				</div>
 
 				<div class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i>
@@ -246,22 +247,33 @@ $users = json_decode($UserData, true);
 							<li> <a href="#"><i class="fa fa-angle-right"></i>Website Logs</a></li>
 							<li> <a href="#"><i class="fa fa-angle-right"></i>CRM Logs</a></li>
 						</ul>
+					</li>-->
+					@if($type=='super admin')
+					<li>
+						<a href="javascript:();" class="has-arrow">
+							<div class="parent-icon"><i class="fa fa fa-user-circle"></i>
+							</div>
+							<div class="menu-title">Manage User</div>
+						</a>
+							<ul>
+								<li> <a href="/user/list"><i class="bx bx-right-arrow-alt"></i>All Users</a></li>
+									<li> <a href="/user/add"><i class="bx bx-right-arrow-alt"></i>Add User</a></li>
+									<li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Trash User</a></li>
+							</ul>
 					</li>
 					<li>
 						<a href="javascript:();" class="has-arrow">
-							<div class="parent-icon"><i class="fa fa-cogs"></i>
+							<div class="parent-icon"><i class="fa fa fa-cogs"></i>
 							</div>
-							<div class="menu-title">Settings</div>
+							<div class="menu-title">Manage Permission</div>
 						</a>
-						<ul>
-							<li> <a href="/setting/ticket"><i class="fa fa-angle-right"></i>Ticket Settings</a></li>
-							<li> <a href="#"><i class="fa fa-angle-right"></i>Staff Settings</a></li>
-							<li> <a href="#"><i class="fa fa-angle-right"></i>Employees Settings</a></li>
-							<li> <a href="#"><i class="fa fa-angle-right"></i>Email Settings</a></li>
-							<li> <a href="#"><i class="fa fa-angle-right"></i>Payment Settings</a></li>
-							<li> <a href="#"><i class="fa fa-angle-right"></i>Website Settings</a></li>
-						</ul>
-					</li> -->
+							<ul>
+								<li> <a href="/user/list"><i class="bx bx-right-arrow-alt"></i>All Users Permission</a></li>
+									<li> <a href="/user/add"><i class="bx bx-right-arrow-alt"></i>Add User Permission</a></li>
+									<!-- <li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Trash User</a></li> -->
+							</ul>
+					</li>
+					@endif 
 					<li>
 						<a href="javascript:();" class="has-arrow">
 							<div class="parent-icon"><i class="fa fa-globe"></i>
@@ -269,7 +281,7 @@ $users = json_decode($UserData, true);
 							<div class="menu-title">Manage Website</div>
 						</a>
 						<ul>
-							<li><a class="has-arrow" href="javascript:();">Manege Menu</a>
+							<!-- <li><a class="has-arrow" href="javascript:();">Manege Menu</a>
 								<ul>
 									<li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Add Menu</a></li>
 									<li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Edit Menu</a></li>
@@ -380,7 +392,7 @@ $users = json_decode($UserData, true);
 									<li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Delete Media</a></li>
 									<li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Trash Media</a></li>
 								</ul>
-							</li>
+							</li> -->
 							<li> <a class="has-arrow" href="#">Manege Blogs</a>
 								<ul>
 									<li> <a href="/blog/list"><i class="bx bx-right-arrow-alt"></i>All Blogs</a></li>

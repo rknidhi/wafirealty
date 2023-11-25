@@ -175,103 +175,155 @@ class ProjectController extends Controller
         $query = '';
         $error_massege = '';
         $i = 0;
-        if(isset($param) && !empty($param))
+        if($request->isMethod('post'))
         {
-            
-            if(count($param)==1)
+            $filterdata = $request->all();
+            if(!empty($filterdata))
             {
-                
-                foreach($param as $key=>$value)
+                foreach($filterdata as $filterkey => $filtervalue)
                 {
-                    $check = Schema::hasColumn('projets',$key);
-                    if(isset($check) && $check!='')
-                    {
-                        if($value!='')
-                        {
-                            if($key=='id')
-                            {
-                                $ids = explode(',',$value);
-                                $ProjectData = Project::whereIn($key,$ids)->get()->toArray();
-                            }
-                            else
-                            {
-                                $ProjectData = Project::where($key,$value)->get()->toArray();
-                            }
-                            if(!empty($ProjectData))
-                            {
-                                $project = json_encode(array('status'=>'sucess','data'=>$ProjectData,'error_code'=>'10001'));
-                            }
-                            else
-                            {
-                                $project = json_encode(array('status'=>'error','data'=>'Data Not Exist','error_code'=>'10002'));
-                            }
-                        } 
-                    }
-                    else
-                    {
-                        $error_massege .=$key.' Column Not Exist in Database';
-                        $project = json_encode(array('status'=>'error','data'=>$error_massege,'error_code'=>'10003'));
-                    }
-
-                }
-            }
-            else
-            {
-                foreach($param as $key=>$value)
-                {
-                    $check = Schema::hasColumn('projets',$key);
-                    if(isset($check) && $check!='' && $check==0)
-                    {
-                        $i++;
+                    $check = Schema::hasColumn('projets',$filterkey);
+                    if($check!='')
+                    {   
+                        $i ++;
                         if($i==1)
                         {
-                            $query = 'select * from projets where '.$key.'= "'.$value.'"';
-                        }
-                        elseif($key=='id')
-                        {
-                            $where .= 'and '.$key.' in ('.$value.')';
+                            $query = 'select * from projets where '.$filterkey.' LIKE "%'.$filtervalue.'%"';
                         }
                         else
                         {
-                            $where .= 'and '.$key.'='.$value;
+                            $where .= ' and '.$filterkey.' LIKE "%'.$filtervalue.'%"';
                         }
                     }
                     else
                     {
-                        $error_massege .=$key.' Column Not Exist in Database';
+                        $error_massege .=$filterkey.' Column Not Exist in Database';
                     }
                 }
                 if($query!='' && $where!='')
                 {
                     $qry = $query.' '.$where;
                     $ProjectData = DB::select($qry);
+                    if(empty($ProjectData))
+                    {
+                        $error_massege .= "Data Not Found";
+                    }
                 }
                 else
                 {
                     $ProjectData = array();
                     $error_massege .= 'Error in make query';
                 }
-                if(!empty($ProjectData))
+                    if(!empty($ProjectData))
                 {
-                    $project = json_encode(array('status'=>'sucess','data'=>$ProjectData,'error_code'=>'10004'));
+                    $project = json_encode(array('status'=>'sucess','data'=>$ProjectData,'error_code'=>'10008'));
                 }
                 else
                 {
-                    $project = json_encode(array('status'=>'error','data'=>$error_massege,'error_code'=>'10005'));
+                    $project = json_encode(array('status'=>'error','data'=>$error_massege,'error_code'=>'10009'));
                 }
             }
-            
         }
         else
         {
-            $ProjectData = Project::all()->toArray();
-            if(!empty($ProjectData))
+            if(isset($param) && !empty($param))
             {
-                $project = json_encode(array('status'=>'sucess','data'=>$ProjectData,'error_code'=>'10006'));
+                
+                if(count($param)==1)
+                {
+                    
+                    foreach($param as $key=>$value)
+                    {
+                        $check = Schema::hasColumn('projets',$key);
+                        if(isset($check) && $check!='')
+                        {
+                            if($value!='')
+                            {
+                                if($key=='id')
+                                {
+                                    $ids = explode(',',$value);
+                                    $ProjectData = Project::whereIn($key,$ids)->get()->toArray();
+                                }
+                                else
+                                {
+                                    $ProjectData = Project::where($key,$value)->get()->toArray();
+                                }
+                                if(!empty($ProjectData))
+                                {
+                                    $project = json_encode(array('status'=>'sucess','data'=>$ProjectData,'error_code'=>'10001'));
+                                }
+                                else
+                                {
+                                    $project = json_encode(array('status'=>'error','data'=>'Data Not Exist','error_code'=>'10002'));
+                                }
+                            } 
+                        }
+                        else
+                        {
+                            $error_massege .=$key.' Column Not Exist in Database';
+                            $project = json_encode(array('status'=>'error','data'=>$error_massege,'error_code'=>'10003'));
+                        }
+
+                    }
+                }
+                else
+                {
+                    foreach($param as $key=>$value)
+                    {
+                        $check = Schema::hasColumn('projets',$key);
+                        if(isset($check) && $check!='' && $check==0)
+                        {
+                            $i++;
+                            if($i==1)
+                            {
+                                $query = 'select * from projets where '.$key.'= "'.$value.'"';
+                            }
+                            elseif($key=='id')
+                            {
+                                $where .= 'and '.$key.' in ('.$value.')';
+                            }
+                            else
+                            {
+                                $where .= 'and '.$key.'='.$value;
+                            }
+                        }
+                        else
+                        {
+                            $error_massege .=$key.' Column Not Exist in Database';
+                        }
+                    }
+                    if($query!='' && $where!='')
+                    {
+                        $qry = $query.' '.$where;
+                        $ProjectData = DB::select($qry);
+                    }
+                    else
+                    {   
+                        $ProjectData = array();
+                        $error_massege .= 'Error in make query';
+                    }
+                    if(!empty($ProjectData))
+                    {
+                        $project = json_encode(array('status'=>'sucess','data'=>$ProjectData,'error_code'=>'10004'));
+                    }
+                    else
+                    {
+                        $project = json_encode(array('status'=>'error','data'=>$error_massege,'error_code'=>'10005'));
+                    }
+                }
+                
             }
             else
             {
-                $project = json_encode(array('status'=>'error','data'=>'','error_code'=>'10007'));
+                $ProjectData = Project::all()->toArray();
+                if(!empty($ProjectData))
+                {
+                    $project = json_encode(array('status'=>'sucess','data'=>$ProjectData,'error_code'=>'10006'));
+                }
+                else
+                {
+                    $project = json_encode(array('status'=>'error','data'=>'','error_code'=>'10007'));
+                }
             }
         }
         return $project;

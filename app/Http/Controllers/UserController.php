@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Crypt;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
+use DataTables;
 
 class UserController extends Controller
 {
@@ -24,12 +25,13 @@ class UserController extends Controller
                $user['name'] = $items->name;
                $user['id'] = $items->id;
                $user['email'] = $items->email;
+               $user['type'] = $items->type;
             }
             
                if(!empty($user) && $user['id']!='')
                {
                    Log::info('Login Data Fetched',array('userdata'=>$user));
-                   session()->put(['user_status'=>'logedin','name'=>$user['name'],'id'=>$user['id'],'email'=>$user['email']]);
+                   session()->put(['user_status'=>'logedin','name'=>$user['name'],'id'=>$user['id'],'email'=>$user['email'],'type'=>$user['type']]);
                    return redirect('/',302,['users'=>$UserData])->with('success','Login Successfull');
                }
                else
@@ -97,43 +99,43 @@ class UserController extends Controller
         $UserData = DB::select('Select * from `users`');
         return json_encode(array('success'=>'true','data'=>$UserData,'error_code'=>'10001'));
     }
-    function CreateUser(Request $data)
-    {
-        $name = $data->name;
-        $email = $data->email;
-        $mobile = $data->mobile;
-        $designation = $data->designation;
-        $usertype = $data->usertype;
-        $status = $data->status;
-        $address = $data->address;
-        $password = md5($data->password);
-        // $user_photo = $data->user_photo;
-        $created_at = time();
-        $updated_at = time();
-        $created_by = Session()->get('id');
-        $updated_by = Session()->get('id');
-        if(!empty($_FILES) && $_FILES['user_photo']['name']!='')
-        {
-            $imageName = time().'.'.$data->user_photo->extension();  
-            $data->user_photo->move(public_path('uploads/userprofile'), $imageName);
-            $profile_path = 'uploads/userprofile/'.$imageName;
-            $AddUserData = DB::insert('INSERT INTO `users` (`name`,`mobile`,`email`,`designation`,`usertype`,`status`,`address`,`profile_photo_path`,`created_at`,`updated_at`,`created_by`,`updated_by`,`password`) VALUES ("'.$name.'",'.$mobile.',"'.$email.'","'.$designation.'","'.$usertype.'","'.$status.'","'.$address.'","'.$profile_path.'","'.$created_at.'","'.$updated_at.'","'.$created_by.'","'.$updated_by.'","'.$password.'")');
+    // function CreateUser(Request $data)
+    // {
+    //     $name = $data->name;
+    //     $email = $data->email;
+    //     $mobile = $data->mobile;
+    //     $designation = $data->designation;
+    //     $usertype = $data->usertype;
+    //     $status = $data->status;
+    //     $address = $data->address;
+    //     $password = md5($data->password);
+    //     // $user_photo = $data->user_photo;
+    //     $created_at = time();
+    //     $updated_at = time();
+    //     $created_by = Session()->get('id');
+    //     $updated_by = Session()->get('id');
+    //     if(!empty($_FILES) && $_FILES['user_photo']['name']!='')
+    //     {
+    //         $imageName = time().'.'.$data->user_photo->extension();  
+    //         $data->user_photo->move(public_path('uploads/userprofile'), $imageName);
+    //         $profile_path = 'uploads/userprofile/'.$imageName;
+    //         $AddUserData = DB::insert('INSERT INTO `users` (`name`,`mobile`,`email`,`designation`,`usertype`,`status`,`address`,`profile_photo_path`,`created_at`,`updated_at`,`created_by`,`updated_by`,`password`) VALUES ("'.$name.'",'.$mobile.',"'.$email.'","'.$designation.'","'.$usertype.'","'.$status.'","'.$address.'","'.$profile_path.'","'.$created_at.'","'.$updated_at.'","'.$created_by.'","'.$updated_by.'","'.$password.'")');
             
-        }
-        else
-        {
-            $AddUserData = DB::insert('INSERT INTO `users` (`name`,`mobile`,`email`,`designation`,`usertype`,`status`,`address`,`created_at`,`updated_at`,`created_by`,`updated_by`,`password`) VALUES ("'.$name.'",'.$mobile.',"'.$email.'","'.$designation.'","'.$usertype.'","'.$status.'","'.$address.'","'.$created_at.'","'.$updated_at.'","'.$created_by.'","'.$updated_by.'","'.$password.'")');
+    //     }
+    //     else
+    //     {
+    //         $AddUserData = DB::insert('INSERT INTO `users` (`name`,`mobile`,`email`,`designation`,`usertype`,`status`,`address`,`created_at`,`updated_at`,`created_by`,`updated_by`,`password`) VALUES ("'.$name.'",'.$mobile.',"'.$email.'","'.$designation.'","'.$usertype.'","'.$status.'","'.$address.'","'.$created_at.'","'.$updated_at.'","'.$created_by.'","'.$updated_by.'","'.$password.'")');
             
-        }
-        if($AddUserData==1)
-        {
-            return redirect('/AddUser')->with('success', 'User Added Successfully');
-        }
-        else
-        {
-            return redirect('/AddUser')->with('error', 'User Not Added');
-        }
-    }
+    //     }
+    //     if($AddUserData==1)
+    //     {
+    //         return redirect('/AddUser')->with('success', 'User Added Successfully');
+    //     }
+    //     else
+    //     {
+    //         return redirect('/AddUser')->with('error', 'User Not Added');
+    //     }
+    // }
     function UpdateUser(Request $data)
     {
         $name = $data->name;
@@ -247,5 +249,91 @@ class UserController extends Controller
                 return json_encode(array('success'=>'false','data'=>'','error_code'=>'1004'));
             }
         }
+    }
+
+    public function UserList()
+    {
+        if(\request()->ajax()){
+            $data = User::latest()->get();
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $actionBtn = '<a href="/user/edit?id='.$row['id'].'" class="edit btn btn-success btn-sm">Edit</a> <a href="/user/delete?id='.$row['id'].'" class="delete btn btn-danger btn-sm">Delete</a>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+        return view('user/list');
+    }
+    public function AddUser()
+    {
+        return view('user/add');
+    }
+
+    public function EditUser(Request $request)
+    {
+        $users = User::find($request->id)->toArray();
+        if(!empty($users))
+        {
+            return view('user/add',['users'=>$users]);
+        }
+        else
+        {
+            return redirect('/user/list')->with('error','User Not Found');
+        }
+    }
+
+    public function CreateUser(Request $request)
+    {
+        $validated = Validator::make($request->all(),[
+            'name'=>'required|max:255',
+            'username'=>'required',
+            'email'=>'required|email',
+            'usertype'=>'required',
+            'status'=>'required',
+        ])->validate();
+        $UserData = new User;
+        date_default_timezone_set('Asia/Kolkata');
+        if(isset($request->id) && $request->id!='') 
+        {
+            $UserData = User::find($request->id);
+            $UserData->updated_at = date("Y-m-d H:i:s");
+        }
+        else
+        {
+            $UserData->created_at = date("Y-m-d H:i:s");
+        }
+        $add_by ='';
+        $session = session()->all();
+        if(isset($session['user_status']) && $session['user_status']=='logedin')
+        {
+            $add_by = $session['name']; 
+        }
+        else
+        {
+            return 'Not authorized';
+        }
+        $UserData->name = $request->name;
+        $UserData->username = $request->username;
+        $UserData->email = $request->email;
+        $UserData->type = $request->usertype;
+        $UserData->status = $request->status;
+        $UserData->password = md5($request->password);
+        if($UserData->save())
+        {
+            return redirect('/user/list')->with('success','User Added Successfully');
+        }
+        else
+        {
+            return redirect('/user/list')->with('error','Something went wrong! User Not Added');
+        }
+
+    }
+
+    public function DeleteUser(Request $request)
+    {
+      $delete = User::destroy($request->id);
+      return redirect('/user/list')->with('success','User Deleted Successfully');
     }
 }
