@@ -2661,3 +2661,6 @@ input.search-control-2::placeholder {
 	text-align: left;
     float: right;
 }
+#ui-datepicker-div{
+	z-index: 99 !important;
+}

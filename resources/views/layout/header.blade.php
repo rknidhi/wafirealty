@@ -268,8 +268,8 @@ $type = Session()->get('type');
 							<div class="menu-title">Manage Permission</div>
 						</a>
 							<ul>
-								<li> <a href="/user/list"><i class="bx bx-right-arrow-alt"></i>All Users Permission</a></li>
-									<li> <a href="/user/add"><i class="bx bx-right-arrow-alt"></i>Add User Permission</a></li>
+								<li> <a href="/userpermission/list"><i class="bx bx-right-arrow-alt"></i>All Users Permission</a></li>
+									<li> <a href="/userpermission/add"><i class="bx bx-right-arrow-alt"></i>Add User Permission</a></li>
 									<!-- <li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Trash User</a></li> -->
 							</ul>
 					</li>
@@ -400,6 +400,15 @@ $type = Session()->get('type');
 									<!-- <li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Edit Blogs</a></li> -->
 									<!-- <li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Delete Blogs</a></li> -->
 									<li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Trash Blogs</a></li>
+								</ul>
+							</li>
+							<li> <a class="has-arrow" href="#">Manege Category</a>
+								<ul>
+									<li> <a href="/category/list"><i class="bx bx-right-arrow-alt"></i>All Category</a></li>
+									<li> <a href="/category/add"><i class="bx bx-right-arrow-alt"></i>Add Category</a></li>
+									<!-- <li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Edit Blogs</a></li> -->
+									<!-- <li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Delete Blogs</a></li> -->
+									<li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Trash Category</a></li>
 								</ul>
 							</li>
 							<li> <a class="has-arrow" href="#">Manege Projects</a>

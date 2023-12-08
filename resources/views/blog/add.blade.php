@@ -26,7 +26,13 @@
                 <div class="row">
                 <input type='hidden' name='id' value='<?php if(isset($blogs) && $blogs['id']!=''){echo $blogs['id'];}?>'/>
                 <div class="col-12 col-lg-6">
-                  <label for="" class="form-label">Blog Title</label>
+                  <label for="" class="form-label">Category</label>
+                  <select name="category" id="category" class="form-control select2">
+                    {!!$option!!}
+                  </select>
+                </div>
+                <div class="col-12 col-lg-6">
+                  <label for="" class="form-label">Title</label>
                   <input type="text" required class="form-control" id="title" 
                   value="<?php if(isset($blogs) && $blogs['title']!=''){echo $blogs['title'];}?>" placeholder="Blog Title" name="title">
                 </div>
@@ -67,6 +73,8 @@
                 </div>
                 </div>
                 <div class="row">
+                <div class="col-12 col-lg-12"> &nbsp;
+                </div>
                 <div class="col-12 col-lg-2">
                 <button class="btn btn-primary px-4" type="submit">Submit
                   </button>

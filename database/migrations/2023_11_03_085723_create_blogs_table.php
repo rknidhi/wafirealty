@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('description',2000)->nullable();
             $table->string('metatitle',2000)->nullable();
             $table->string('metadescription',2000)->nullable();
+            $table->string('category',2000)->nullable();
             
         });
     }

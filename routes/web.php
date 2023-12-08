@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectController;
@@ -22,7 +23,7 @@ use App\Http\Controllers\WebsiteController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
-Route::prefix('admin')->group(function(){
+// Route::prefix('admin')->group(function(){
     //Blog Routs
     Route::get('generatetocken',[BlogController::class,'GenerateTocken']);
     Route::get('blog/list',[BlogController::class,'BlogList']);
@@ -52,6 +53,11 @@ Route::prefix('admin')->group(function(){
     Route::get('user/add',[UserController::class,'AddUser']);
     Route::post('user/create',[UserController::class,'CreateUser']);
 
+    //Category Routes
+    Route::get('category/list',[CategoryController::class,'CategoryList']);
+    Route::get('category/edit',[CategoryController::class,'EditCategory']);
+    Route::get('category/add',[CategoryController::class,'AddCategory']);
+    Route::post('category/create',[CategoryController::class,'CreateCategory']);
 
 
 Route::get('/', [HomeController::class,'Index']);
@@ -78,5 +84,5 @@ Route::post('/website/testimonials/add',[WebsiteController::class,'CreateTestimo
 Route::any('/website/testimonial/list',function(){return view('/website/testimonials/alltestimonials');});
 Route::get('/website/testimonial/add',function(){return view('/website/testimonials/addtestimonials');});
 
-});
-   
+// });
+//    

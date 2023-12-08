@@ -13,7 +13,6 @@ class UserController extends Controller
 {
     function Login(Request $data)
     {
-        
         Log::info('Login',array('data'=>$data));
         if($data->email!='' && $data->password!='')
         {

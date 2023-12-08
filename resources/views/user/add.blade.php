@@ -96,6 +96,8 @@
                   <label for="InputEmail" class="form-label">Full Address</label>
                   <textarea type="text" class="form-control" name="address" id="address" placeholder="Enter Full Address" name="fulladdress"></textarea>
                 </div> -->
+                <div class="col-12 col-lg-12"> &nbsp;
+                </div>
                 <div class="col-12 col-lg-6">
                   <button class="btn btn-primary px-4" type="submit">Submit
                   </button>

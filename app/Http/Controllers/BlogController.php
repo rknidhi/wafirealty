@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Blog;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -30,15 +31,38 @@ class BlogController extends Controller
     }
     public function AddBlog()
     {
-        return view('blog/add');
+
+        $category = Category::all()->toArray();
+        $option ='<option></option>';
+        if(!empty($category))
+        {
+           
+            foreach($category as $cat)
+            {
+                $option .= '<option value="'.$cat['category'].'">'.$cat['category'].'</option>';
+            }
+        }
+        return view('blog/add',['option'=>$option]);
     }
 
     public function EditBlog(Request $request)
     {
         $blogs = Blog::find($request->id)->toArray();
+        $category = Category::all()->toArray();
+        $option ='<option></option>';
+        if(!empty($category))
+        {
+            
+            foreach($category as $cat)
+            {
+                $select = '';
+                if($cat['category']==$blogs['category']){$select = "selected";}
+                $option .= '<option value="'.$cat['category'].'" '.$select.'>'.$cat['category'].'</option>';
+            }
+        }
         if(!empty($blogs))
         {
-            return view('blog/add',['blogs'=>$blogs]);
+            return view('blog/add',['blogs'=>$blogs,'option'=>$option]);
         }
         else
         {
@@ -78,6 +102,7 @@ class BlogController extends Controller
         $BlogData->description = $request->description;
         $BlogData->metatitle = $request->metatitle;
         $BlogData->metadescription = $request->metadescription;
+        $BlogData->category = $request->category;
         if($request->file('blog_image')!=null)
         {
             $name = time().rand(1,50).'.'.$request->file('blog_image')->extension();

@@ -163,6 +163,8 @@
                 </div>
                 &nbsp;
                 <div class="row">
+                <div class="col-12 col-lg-12"> &nbsp;
+                </div>
                 <div class="col-12 col-lg-2">
                 <button class="btn btn-primary px-4" type="submit">Submit
                   </button>
