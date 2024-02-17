@@ -89,14 +89,14 @@
                   <label for="InputCountry" class="form-label">Create Password</label>
                   <input type="text" class="form-control" placeholder="Enter Password" id="InputPassword" aria-label="Default select example" name="password" <?php if(isset($users) && $users['id']!=''){echo 'disabled';}?>>
                 </div>
-                <!-- <div class="col-12 col-lg-6">
-                  <label for="InputLanguage" class="form-label">Upload Photo</label>
-                  <input class="form-control" type="file" id="formFile" name="user_photo">
-                </div> -->
-                <!-- <div class="col-12 col-lg-12">
-                  <label for="InputEmail" class="form-label">Full Address</label>
-                  <textarea type="text" class="form-control" name="address" id="address" placeholder="Enter Full Address" name="fulladdress"></textarea>
-                </div> -->
+                <div class="col-12 col-lg-6">
+					<label for="about" class="form-label">About</label>
+					<input type="text" name="about" class="form-control" value="<?php if(isset($users)){ echo $users['about'];} ?>" />
+				</div>
+				<div class="col-12 col-lg-6">
+					<label for="proile_photo" class="form-label">Profile Photo</label>
+				    <input type="file" class="form-control" name="profile_photo" />
+				</div>
                 <div class="col-12 col-lg-12"> &nbsp;
                 </div>
                 <div class="col-12 col-lg-6">

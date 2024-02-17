@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\DB;
 class FrontController extends Controller
 {
     public function Index(Request $req)
-    {
-        $category = ProjectType::all()->toArray();
+    { 
+        $category = ProjectType::latest()->take(6)->get()->toArray();
         $projects = Project::latest()->take(10)->get()->toArray();
         foreach($projects as $key=> $project)
         {
@@ -26,7 +26,7 @@ class FrontController extends Controller
             $projects[$key]['days'] = abs(round($diff / 86400));
         }
         $experts = User::where('type','super admin')->get()->toArray();
-        $news = Blog::where('category','news')->get()->toArray();
+        $news = Blog::latest()->take(3)->get()->toArray();
         $categoryoption = '<option>Property Type</option>';
         foreach($category as $cat){
             $categoryoption .= '<option value="'.$cat['type'].'">'.$cat['type'].'</option>';
@@ -43,14 +43,7 @@ class FrontController extends Controller
     }
 
     public function FrontProjectList(Request $req){
-        if(isset($req->category) && $req->category!='')
-        {
-            $projects = Project::where('type',$req->category)->get()->toArray();
-        }
-        else
-        {
-            $projects = Project::all()->toArray();
-        }
+        $projects = Project::all()->toArray();
         foreach($projects as $key=> $project)
         {
             $images = Image::where('project_id',$project['id'])->get('image_path')->toArray();

@@ -168,7 +168,7 @@ Browse properties -->
             <div class="col-sm-6 col-md-4">
               <div class="property-item">
                 <div class="property-image bg-overlay-gradient-04">
-                  <img class="img-fluid" src="{{end($project['images'])['image_path']}}" alt="">
+                  <img class="img-fluid" src="/public/{{end($project['images'])['image_path']}}" alt="">
                   <div class="property-lable">
                     <span class="badge badge-md bg-primary">{{$project['type']}}</span>
                     <span class="badge badge-md bg-info">Sale</span>
@@ -232,7 +232,7 @@ Featured properties-->
 
   <!--=================================
  offering the Best Real Estate-->
-  <!-- <section class="clearfix">
+  <section class="clearfix">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8">
@@ -243,101 +243,64 @@ Featured properties-->
           </div>
         </div>
       </div>
+     
       <div class="row">
         <div class="col-12">
           <div class="owl-carousel owl-nav-top-right" data-animateOut="fadeOut" data-nav-arrow="true" data-items="1"
             data-md-items="1" data-sm-items="1" data-xs-items="1" data-xx-items="1" data-space="0">
-            <div class="item">
-              <div class="property-offer">
-                <div class="property-offer-item">
-                  <div class="property-offer-image bg-holder"
-                    style="background: url('images/property/big-img-01.jpg');">
-                    <div class="row">
-                      <div class="col-lg-6 col-md-10 col-sm-12">
-                        <div class="property-details">
-                          <div class="property-details-inner">
-                            <h5 class="property-title"><a href="#">Ample apartment at last
-                                floor </a></h5>
-                            <span class="property-address"><i class="fas fa-map-marker-alt fa-xs"></i>Virginia drive
-                              temple hills</span>
-                            <span class="property-agent-date"><i class="far fa-clock fa-md"></i>10 days ago</span>
-                            <p class="mb-0 d-block mt-3">Use a past defeat as a motivator. Remind yourself you have
-                              nowhere to go except up as you.</p>
-                            <div class="property-price">$150.00<span> / month</span> </div>
-                            <ul class="property-info list-unstyled d-flex">
-                              <li class="flex-fill property-bed"><i class="fas fa-bed"></i>Bed<span>1</span></li>
-                              <li class="flex-fill property-bath"><i class="fas fa-bath"></i>Bath<span>2</span></li>
-                              <li class="flex-fill property-m-sqft"><i class="far fa-square"></i>sqft<span>145m</span>
-                              </li>
-                            </ul>
-                          </div>
-                          <div class="property-btn">
-                            <a class="property-link" href="#">See Details</a>
-                            <ul class="property-listing-actions list-unstyled mb-0">
-                              <li class="property-compare"><a data-bs-toggle="tooltip" data-bs-placement="top"
-                                  title="Compare" href="#"><i class="fas fa-exchange-alt"></i></a></li>
-                              <li class="property-favourites"><a data-bs-toggle="tooltip" data-bs-placement="top"
-                                  title="Favourite" href="#"><i class="far fa-heart"></i></a></li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="item">
-              <div class="property-offer">
-                <div class="property-offer-item">
-                  <div class="property-offer-image bg-holder"
-                    style="background: url('images/property/big-img-02.jpg');">
-                    <div class="row">
-                      <div class="col-lg-6 col-md-10 col-sm-12">
-                        <div class="property-details">
-                          <div class="property-details-inner">
-                            <h5 class="property-title"><a href="#">Luxury villa with
-                                pool</a></h5>
-                            <span class="property-address"><i class="fas fa-map-marker-alt fa-xs"></i>West Indian St.
-                              Missoula</span>
-                            <span class="property-agent-date"><i class="far fa-clock fa-md"></i>2 years ago</span>
-                            <p class="mb-0 d-block mt-3">For those of you who are serious about having more, doing more,
-                              giving more and being more.</p>
-                            <div class="property-price">$698.00<span> / month</span> </div>
-                            <ul class="property-info list-unstyled d-flex">
-                              <li class="flex-fill property-bed"><i class="fas fa-bed"></i>Bed<span>5</span></li>
-                              <li class="flex-fill property-bath"><i class="fas fa-bath"></i>Bath<span>4</span></li>
-                              <li class="flex-fill property-m-sqft"><i class="far fa-square"></i>sqft<span>1,658m</span>
-                              </li>
-                            </ul>
-                          </div>
-                          <div class="property-btn">
-                            <a class="property-link" href="#">See Details</a>
-                            <ul class="property-listing-actions list-unstyled mb-0">
-                              <li class="property-compare"><a data-bs-toggle="tooltip" data-bs-placement="top"
-                                  title="Compare" href="#"><i class="fas fa-exchange-alt"></i></a></li>
-                              <li class="property-favourites"><a data-bs-toggle="tooltip" data-bs-placement="top"
-                                  title="Favourite" href="#"><i class="far fa-heart"></i></a></li>
-                            </ul>
+              @foreach($projects as $best)
+              @if($best['home_project']==1)
+              
+                    <div class="item">
+                      <div class="property-offer">
+                        <div class="property-offer-item">
+                          <div class="property-offer-image bg-holder"
+                            style="background: url('/public/{{end($best['images'])['image_path']}}');">
+                            <div class="row">
+                              <div class="col-lg-6 col-md-10 col-sm-12">
+                                <div class="property-details">
+                                  <div class="property-details-inner">
+                                    <h5 class="property-title"><a href="#">{{$best['project_name']}}</a></h5>
+                                    <span class="property-address"><i class="fas fa-map-marker-alt fa-xs"></i>{{$best['location']}}</span>
+                                    <span class="property-agent-date"><i class="far fa-clock fa-md"></i>{{$best['days']}} days ago</span>
+                                    <p class="mb-0 d-block mt-3">{!!substr($best['about_project'],0,80).'....'!!}</p>
+                                    <div class="property-price">{{$best['price']}} </div>
+                                    <ul class="property-info list-unstyled d-flex">
+                                      <li class="flex-fill property-bed"><i class="fas fa-bed"></i>Bed<span>{{$best['configurations']}}</span></li>
+                                      <!--<li class="flex-fill property-bath"><i class="fas fa-bath"></i>Bath<span>2</span></li>-->
+                                      <li class="flex-fill property-m-sqft"><i class="far fa-square"></i>{{$best['area']}}
+                                      </li>
+                                    </ul>
+                                  </div>
+                                  <div class="property-btn">
+                                    <a class="property-link" href="/project-details?id={{$best['id']}}">See Details</a>
+                                    <ul class="property-listing-actions list-unstyled mb-0">
+                                      <li class="property-compare"><a data-bs-toggle="tooltip" data-bs-placement="top"
+                                          title="Compare" href="#"><i class="fas fa-exchange-alt"></i></a></li>
+                                      <li class="property-favourites"><a data-bs-toggle="tooltip" data-bs-placement="top"
+                                          title="Favourite" href="#"><i class="far fa-heart"></i></a></li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+                    @endif
+              @endforeach
           </div>
         </div>
       </div>
     </div>
-  </section> -->
+  </section> 
   <!--=================================
   offering the Best Real Estate-->
 
   <!--=================================
   Feature -->
-  <section class="space-ptb bg-holder-bottom building-space" style="background-image: url(images/building-bg.png);">
+  <section class="space-ptb bg-holder-bottom building-space" style="background-image: url(public/front/images/building-bg.png);">
     <div class="container">
       <div class="row align-items-center">
         <div class="col-lg-9">
@@ -405,9 +368,9 @@ Featured properties-->
           <p class="mb-4">Ten years and thousands of home buyers have turned to WafiReality to find their dream home. We
             offer a comprehensive list of for-sale properties, as well as the knowledge and tools to make informed real
             estate decisions. Today, more than ever, WafiReality is the home of home Search.</p>
-          <div class="popup-video">
-            <a class="popup-icon popup-youtube" href="#"> <i class="flaticon-play-button"></i> </a>
-          </div>
+          <!--<div class="popup-video">-->
+          <!--  <a class="popup-icon popup-youtube" href="#"> <i class="flaticon-play-button"></i> </a>-->
+          <!--</div>-->
         </div>
       </div>
     </div>
@@ -417,7 +380,7 @@ Featured properties-->
 
   <!--=================================
 testimonial -->
-  <section class="testimonial-main bg-holder" style="background-image: url(images/bg/02.jpg);">
+  <section class="testimonial-main bg-holder" style="background-image: url(public/front/images/bg/02.jpg);">
     <div class="container">
       <div class="row">
         <div class="col-lg-8">
@@ -458,99 +421,46 @@ testimonial -->
 
   <!--=================================
 Meet our agent -->
-  <!-- <section class="space-ptb">
+   <section class="space-ptb">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8">
           <div class="section-title text-center">
-            <h2>Meet our agents</h2>
+            <h2>Meet our Experts</h2>
             <p>WafiReality Agents are customer advocates. We are accountable for helping clients buy and sell the right
               home, at the right price.</p>
           </div>
         </div>
       </div>
       <div class="row g-0">
-        <div class="col-lg-3 col-sm-6 mb-4 mb-sm-0">
-          <div class="agent text-center">
-            <div class="agent-detail">
-              <div class="agent-avatar avatar avatar-xllll">
-                <img class="img-fluid rounded-circle" src="{{asset('front/images/agent/01.jpg')}}" alt="">
-              </div>
-              <div class="agent-info">
-                <h6 class="mb-0"> <a href="#">Alice Williams </a></h6>
-                <span class="text-primary font-sm">Founder & CEO </span>
-                <p class="mt-3 mb-0">The first thing to remember about success is that it is a process – nothing more,
-                  nothing less.</p>
-              </div>
-            </div>
-            <div class="agent-button">
-              <a class="btn btn-light d-grid" href="#">View Profile</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-sm-6 mb-4 mb-sm-0">
-          <div class="agent text-center">
-            <div class="agent-detail">
-              <div class="agent-avatar avatar avatar-xllll">
-                <img class="img-fluid rounded-circle" src="{{asset('front/images/agent/02.jpg')}}" alt="">
-              </div>
-              <div class="agent-info">
-                <h6 class="mb-0"> <a href="#">Felica queen </a></h6>
-                <span class="text-primary font-sm">Construction</span>
-                <p class="mt-3 mb-0">There are basically six key areas to higher achievement. Some people will tell you
-                  there are four.</p>
+          @foreach($experts as $expert)
+            <div class="col-lg-3 col-sm-6 mb-4 mb-sm-0 mt-1 p-1">
+              <div class="agent text-center">
+                <div class="agent-detail">
+                  <div class="agent-avatar avatar avatar-xllll">
+                    <img class="img-fluid rounded-circle" src="/public/{{$expert['profile_photo_path']}}" alt="">
+                  </div>
+                  <div class="agent-info">
+                    <h6 class="mb-0"> <a href="#">{{$expert['name']}}</a></h6>
+                    <span class="text-primary font-sm">{{$expert['designation']}}</span>
+                    <p class="mt-3 mb-0">{{$expert['about']}}</p>
+                  </div>
+                </div>
+                <div class="agent-button">
+                  <a class="btn btn-light d-grid" href="#">View Profile</a>
+                </div>
               </div>
             </div>
-            <div class="agent-button">
-              <a class="btn btn-light d-grid" href="#">View Profile</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-sm-6 mb-4 mb-sm-0">
-          <div class="agent text-center">
-            <div class="agent-detail">
-              <div class="agent-avatar avatar avatar-xllll">
-                <img class="img-fluid rounded-circle" src="{{asset('front/images/agent/03.jpg')}}" alt="">
-              </div>
-              <div class="agent-info">
-                <h6 class="mb-0"> <a href="#">Paul flavius </a></h6>
-                <span class="text-primary font-sm">Investment</span>
-                <p class="mt-3 mb-0">While others may tell you there are eight. One thing for certain though, is that
-                  irrespective of the.</p>
-              </div>
-            </div>
-            <div class="agent-button">
-              <a class="btn btn-light d-grid" href="#">View Profile</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-sm-6">
-          <div class="agent text-center">
-            <div class="agent-detail">
-              <div class="agent-avatar avatar avatar-xllll">
-                <img class="img-fluid rounded-circle" src="{{asset('front/images/agent/04.jpg')}}" alt="">
-              </div>
-              <div class="agent-info">
-                <h6 class="mb-0"> <a href="#">Sara lisbon </a></h6>
-                <span class="text-primary font-sm">Land development</span>
-                <p class="mt-3 mb-0">If success is a process with a number of defined steps, then it is just like any
-                  other process.</p>
-              </div>
-            </div>
-            <div class="agent-button">
-              <a class="btn btn-light d-grid" href="#">View Profile</a>
-            </div>
-          </div>
-        </div>
+          @endforeach
       </div>
     </div>
-  </section> -->
+  </section>
   <!--=================================
 Meet our agent -->
 
   <!--=================================
 Most popular places -->
-  <!-- <section class="space-pb">
+   <section class="space-pb">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8">
@@ -566,7 +476,7 @@ Most popular places -->
             <div class="col-md-6 mb-4 mb-lg-0">
               <a href="#">
                 <div class="location-item bg-overlay-gradient bg-holder"
-                  style="background-image: url(images/location/01.jpg);">
+                  style="background-image: url(public/front/images/location/ithum4.jpg);">
                   <div class="location-item-info">
                     <h5 class="location-item-title">Mumbai</h5>
                     <span class="location-item-list">10 Properties</span>
@@ -577,7 +487,7 @@ Most popular places -->
             <div class="col-md-6 mb-4 mb-md-0">
               <a href="#">
                 <div class="location-item bg-overlay-gradient bg-holder"
-                  style="background-image: url(images/location/02.jpg);">
+                  style="background-image: url(public/front/images/location/ithume3.jpg);">
                   <div class="location-item-info">
                     <h5 class="location-item-title">Los angeles</h5>
                     <span class="location-item-list">14 Properties</span>
@@ -588,7 +498,7 @@ Most popular places -->
             <div class="col-lg-12 mt-0 mt-lg-4">
               <a href="#">
                 <div class="location-item bg-overlay-gradient bg-holder"
-                  style="background-image: url(images/location/04.jpg);">
+                  style="background-image: url(public/front/images/location/ithum2.jpg);">
                   <div class="location-item-info">
                     <h5 class="location-item-title">Miami</h5>
                     <span class="location-item-list">22 Properties</span>
@@ -600,8 +510,8 @@ Most popular places -->
         </div>
         <div class="col-lg-6 mt-4 mt-lg-0">
           <a href="#">
-            <div class="location-item location-item-big bg-overlay-gradient bg-holder" data-jarallax='{"speed": 0.6}'
-              data-jarallax-video="#">
+            <div class="location-item location-item-big bg-overlay-gradient bg-holder"  style="background-image: url(public/front/images/location/ithum.jpg);">
+                
               <div class="location-item-info">
                 <h5 class="location-item-title">San francisco </h5>
                 <span class="location-item-list">29 Properties</span>
@@ -611,13 +521,13 @@ Most popular places -->
         </div>
       </div>
     </div>
-  </section> -->
+  </section> 
   <!--=================================
 Most popular places -->
 
   <!--=================================
 mobile app -->
-  <section class="space-pt bg-light">
+ <section class="space-pt bg-light">
     <div class="container">
       <div class="row">
         <div class="col-lg-7">
@@ -627,40 +537,59 @@ mobile app -->
               rent.</p>
           </div>
           <div class="row">
-            <div class="col-md-4 mb-5">
-              <div class="d-flex">
-                <div class="me-3">
-                  <i class="flaticon-rent font-xlll"></i>
+            <div class="col-md-12 mb-5">
+              <div class="d-flex android-box">
+                <div class="me-3 android-features">
+                  <figure>
+                    <img src="https://www.wafirealty.com/public/front/images/dreg.png" alt="Download and Register">
+                  </figure>
+                 
                 </div>
-                <h6 class="text-primary">Real time property listing</h6>
+                <div class="android-features">
+                  <h6>Download and Register</h6>
+                  <p>Download PeProp.Money app and sign up. PeProp.Money points worth up to 500* will be credited to your account</p>
+                </div>
+               
               </div>
             </div>
-            <div class="col-md-4 mb-5">
-              <div class="d-flex">
-                <div class="me-3">
-                  <i class="flaticon-contract font-xlll"></i>
+            <div class="col-md-12 mb-5">
+              <div class="d-flex android-box">
+                <div class="me-3 android-features">
+                  <figure>
+                    <img src="https://www.wafirealty.com/public/front/images/selprop.png" alt="Select the Project">
+                  </figure>
                 </div>
-                <h6 class="text-primary">Budget filter for budget</h6>
+                <div class="android-features">
+                  <h6>Select & Site Visit</h6>
+                <p>Select your preferred project, complete the site visit and get rewarded with PeProp.Money points worth up to 1500*</p>
+                </div>
+                
               </div>
             </div>
-            <div class="col-md-4 mb-5">
-              <div class="d-flex">
-                <div class="me-3">
-                  <i class="flaticon-notification font-xlll"></i>
+            <div class="col-md-12 mb-5">
+              <div class="d-flex android-box">
+                <div class="me-3 android-features">
+                  <figure>
+                    <img src="https://www.wafirealty.com/public/front/images/closedeal.png" alt="Close the Deal">
+                  </figure>
                 </div>
-                <h6 class="text-primary">Notification price reduction</h6>
+                <div class="android-features">
+                  <h6>Pay and Book</h6>
+                  <p>Finalize and book the unit on the app and become eligible for cashback and rewards worth up to 25 Lakhs + additional benefits worth up to 87K every year</p>
+                </div>
+               
               </div>
             </div>
           </div>
           <div class="d-block d-sm-flex">
-            <a class="btn btn-dark btn-sm btn-app me-0 me-sm-2 mb-2 mb-sm-0" href="#">
+            <a class="btn btn-dark btn-sm btn-app me-0 me-sm-2 mb-2 mb-sm-0" href="https://apps.apple.com/in/app/peprop-money/id1673701215"target="_blank">
               <i class="fab fa-apple"></i>
               <div class="btn-text text-start">
                 <small class="small-text">Download on the </small>
                 <span class="mb-0 text-white d-block">App store</span>
               </div>
             </a>
-            <a class="btn btn-dark btn-sm btn-app mb-2 mb-sm-0" href="#">
+            <a class="btn btn-dark btn-sm btn-app mb-2 mb-sm-0" href="https://play.google.com/store/apps/details?id=com.dasv.peprop_consumer_app"target="_blank">
               <i class="fab fa-google-play"></i>
               <div class="btn-text text-start">
                 <small class="small-text">Get in on </small>
@@ -670,7 +599,9 @@ mobile app -->
           </div>
         </div>
         <div class="col-lg-5 mt-5 mt-lg-0 text-center">
-          <img class="img-fluid" src="{{asset('front/images/mobile-app.png')}}" alt="">
+           <div class="Our-android-phone">
+               <img class="img-fluid" src="{{asset('front/images/mobile-app.png')}}" alt="">
+            </div>
         </div>
       </div>
     </div>
@@ -686,8 +617,7 @@ News, tips & articles -->
         <div class="col-lg-8">
           <div class="section-title text-center">
             <h2>News, tips & articles</h2>
-            <p>Grow your appraisal and real estate career with tips, trends, insights and learn more about our expert's
-              advice.</p>
+            <p>Connect with WafiReality for the latest updates, news, and valuable tips to stay informed and engaged.</p>
           </div>
         </div>
       </div>
@@ -696,19 +626,19 @@ News, tips & articles -->
         <div class="col-lg-4">
           <div class="blog-post">
             <div class="blog-post-image">
-              <img class="img-fluid" src="{{$new['image_path']}}" alt="">
+              <img class="img-fluid" src="/public/{{$new['image_path']}}" alt="">
             </div>
             <div class="blog-post-content">
               <div class="blog-post-details">
                 <div class="blog-post-category">
-                  <a class="mb-3" href="#"><strong>Home improvement</strong></a>
+                  <a class="mb-3" href="/detail-blog?id={{$new['id']}}"><strong>{{$new['category']}}</strong></a>
                 </div>
                 <div class="blog-post-title">
-                  <h5><a href="#">{{$new['title']}}</a></h5>
+                  <h5><a href="/detail-blog?id={{$new['id']}}">{{$new['title']}}</a></h5>
                 </div>
-                <div class="blog-post-description">
-                  <p class="mb-0">{!!substr($new['description'],0,80)!!}...</p>
-                </div>
+                <!--<div class="blog-post-description">-->
+                <!--  <p class="mb-0">{{substr(strip_tags($new['description']),0,80)}}</p>-->
+                <!--</div>-->
               </div>
               <div class="blog-post-footer">
                 <div class="blog-post-time">
@@ -734,7 +664,7 @@ News, tips & articles -->
 
   <!--=================================
 call to action -->
-  <section class="py-5 bg-primary">
+  <section class="py-4 bgg-light">
     <div class="container">
       <div class="row align-items-center">
         <div class="col-lg-9">
@@ -749,4 +679,4 @@ call to action -->
   <!--=================================
 call to action -->
 
-@include('front-layout.footer');
+@include('front-layout.footer')

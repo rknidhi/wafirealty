@@ -25,10 +25,11 @@ Breadcrumb -->
                 <div class="row">
                     <div class="col-lg-4 mb-5 mb-lg-0 order-lg-2">
                         <div class="sticky-top">
+                            <div class="sidebar">
                             <div class="mb-4">
                                 <h3>{{$project['project_name']}}</h3>
                                 <span class="d-block mb-3"><i class="fas fa-map-marker-alt fa-xs pe-2"></i>{{$project['location']}}</span>
-                                <span class="price font-xll text-primary d-block">{{$project['price']}}</span>
+                                <span class="price font-xll text-dark d-block">{{$project['price']}}</span>
                                 <span class="sub-price font-lg text-dark d-block"><b>{{$project['area']}}</b> </span>
                                 <!-- <ul class="property-detail-meta list-unstyled ">
                                     <li><a href="#"> <i class="fas fa-star text-warning pe-2"></i>3.9/5 </a></li>
@@ -47,6 +48,75 @@ Breadcrumb -->
                                     <li><a href="#"> <i class="fas fa-print"></i> </a></li>
                                 </ul> -->
                             </div>
+                            
+                            <div class="agent-contact mb-4">
+                <div class="agent-contact-inner bg-dark p-4">
+                  <!--<div class="d-flex align-items-center mb-4">-->
+                  <!--  <div class="agent-contact-avatar me-3">-->
+                  <!--    <img class="img-fluid rounded-circle avatar avatar-lg" src="images/avatar/01.jpg" alt="">-->
+                  <!--  </div>-->
+                  <!--  <div class="agent-contact-name">-->
+                  <!--    <h6 class="text-white">Felica queen</h6>-->
+                  <!--    <span>Company Agent</span>-->
+                  <!--  </div>-->
+                  <!--</div>-->
+                  <div class="d-flex mb-4 align-items-center">
+                    <h6 class="text-primary border p-2 mb-0"><a href="#"><i class="fas fa-phone-volume text-white pe-2"></i>xx-xxx-xxx</a></h6>
+                    <a class="btn btn-link p-0 ms-auto text-white" href="#"><u>View all listing </u></a>
+                  </div>
+                  <form>
+                    <div class="mb-3">
+                      <input type="email" class="form-control" placeholder="Your email Adress">
+                    </div>
+                    <div class="mb-3">
+                      <input type="text" class="form-control" placeholder="Your Phone number">
+                    </div>
+                    <div class="mb-3">
+                      <textarea class="form-control" rows="3" placeholder="Write Message"></textarea>
+                    </div>
+                    <div class="form-check mb-3">
+                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                      <label class="form-check-label text-white" for="flexCheckDefault">
+                        I here by agree for processing my personal data
+                      </label>
+                    </div>
+                    <a class="btn btn-primary d-grid" href="#">Send Message</a>
+                  </form>
+                </div>
+              </div>
+              <div class="widget">
+                <div class="widget-title">
+                  <h6>Recently listed properties</h6>
+                </div>
+                <div class="recent-list-item">
+                  <img class="img-fluid" src="https://themes.potenzaglobalsolutions.com/html/real-villa/images/property/list/01.jpg" alt="">
+                  <div class="recent-list-item-info">
+                    <a class="address mb-2" href="#">Ample apartment at last floor</a>
+                    <span class="text-dark">$1,147,457 </span>
+                  </div>
+                </div>
+                <div class="recent-list-item">
+                  <img class="img-fluid" src="https://themes.potenzaglobalsolutions.com/html/real-villa/images/property/list/01.jpg" alt="">
+                  <div class="recent-list-item-info">
+                    <a class="address mb-2" href="#">Contemporary apartment</a>
+                    <span class="text-dark">$2,577,577 </span>
+                  </div>
+                </div>
+                <div class="recent-list-item">
+                  <img class="img-fluid" src="https://themes.potenzaglobalsolutions.com/html/real-villa/images/property/list/01.jpg" alt="">
+                  <div class="recent-list-item-info">
+                    <a class="address mb-2" href="#">3 bedroom house in gardner</a>
+                    <span class="text-dark">$3,575,547 </span>
+                  </div>
+                </div>
+                <div class="recent-list-item">
+                  <img class="img-fluid" src="https://themes.potenzaglobalsolutions.com/html/real-villa/images/property/list/01.jpg" alt="">
+                  <div class="recent-list-item-info">
+                    <a class="address mb-2" href="#">Stunning 2 bedroom home in village</a>
+                    <span class="text-dark">$1,475,575 </span>
+                  </div>
+                </div>
+              </div>
                             <!-- <div class="agent-contact">
                                 <div class="d-flex align-items-center p-4 border border-bottom-0">
                                     <div class="agent-contact-avatar me-3">
@@ -66,6 +136,8 @@ Breadcrumb -->
                                 </div>
                             </div> -->
                         </div>
+                        </div>
+                        
                     </div>
                     <div class="col-lg-8 order-lg-1">
                         <div class="property-detail-img popup-gallery">
@@ -74,8 +146,8 @@ Breadcrumb -->
                                 data-loop="true">
                                 @foreach($images as $img)
                                 <div class="item">
-                                    <a class="portfolio-img" href="{{$img['image_path']}}"><img
-                                            class="img-fluid" src="{{$img['image_path']}}" alt=""></a>
+                                    <a class="portfolio-img" href="/public{{$img['image_path']}}"><img
+                                            class="img-fluid" src="/public{{$img['image_path']}}" alt=""></a>
                                 </div>
                                 @endforeach
                             </div>
@@ -90,39 +162,39 @@ Breadcrumb -->
                                         <div class="col-sm-6">
                                             <ul class="property-list list-unstyled">
                                                 <li><b>Property ID:</b> RV151</li>
-                                                <li><b>Price:</b> $484,400</li>
-                                                <li><b>Property Size:</b> 1466 Sq Ft</li>
-                                                <li><b>Bedrooms:</b> 4</li>
-                                                <li><b>Bathrooms:</b> 2</li>
+                                                <li><b>Price:</b>{{$project['price']}}</li>
+                                                <li><b>Property Size:</b>{{$project['area']}}</li>
+                                                <li><b>Bedrooms:</b>{{$project['configurations']}}</li>
+                                                <!--<li><b>Bathrooms:</b></li>-->
                                             </ul>
                                         </div>
                                         <div class="col-sm-6">
                                             <ul class="property-list list-unstyled">
-                                                <li><b>Garage:</b> 1</li>
-                                                <li><b>Garage Size:</b> 458 SqFt</li>
-                                                <li><b>Year Built:</b> 2019-01-09</li>
-                                                <li><b>Property Type:</b> Full Family Home</li>
-                                                <li><b>Property Status:</b> For rent</li>
+                                                <!--<li><b>Garage:</b> 1</li>-->
+                                                <!--<li><b>Garage Size:</b></li>-->
+                                                <!--<li><b>Year Built:</b> 2019-01-09</li>-->
+                                                <li><b>Property Type:</b>{{$project['type']}}</li>
+                                                <!--<li><b>Property Status:</b> For rent</li>-->
                                             </ul>
                                         </div>
                                     </div>
-                                    <h6 class="text-primary mb-3 mb-sm-0">Additional details</h6>
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <ul class="property-list list-unstyled mb-0">
-                                                <li><b>Deposit:</b> 30%</li>
-                                                <li><b>Pool Size:</b> 457 Sqft</li>
-                                                <li><b>Last remodel year:</b> 1956</li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <ul class="property-list list-unstyled mb-0">
-                                                <li><b>Amenities:</b> Clubhouse</li>
-                                                <li><b>Additional Rooms:</b> Guest Bat</li>
-                                                <li><b>Equipment:</b> Grill - Gas - light</li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                                    <h6 class="text-dark mb-3 mb-sm-0">Additional details</h6>
+                                    <!--<div class="row">-->
+                                    <!--    <div class="col-sm-6">-->
+                                    <!--        <ul class="property-list list-unstyled mb-0">-->
+                                    <!--            <li><b>Deposit:</b> 30%</li>-->
+                                    <!--            <li><b>Pool Size:</b> 457 Sqft</li>-->
+                                    <!--            <li><b>Last remodel year:</b> 1956</li>-->
+                                    <!--        </ul>-->
+                                    <!--    </div>-->
+                                    <!--    <div class="col-sm-6">-->
+                                    <!--        <ul class="property-list list-unstyled mb-0">-->
+                                    <!--            <li><b>Amenities:</b> Clubhouse</li>-->
+                                    <!--            <li><b>Additional Rooms:</b> Guest Bat</li>-->
+                                    <!--            <li><b>Equipment:</b> Grill - Gas - light</li>-->
+                                    <!--        </ul>-->
+                                    <!--    </div>-->
+                                    <!--</div>-->
                                 </div>
                             </div>
                         </div>

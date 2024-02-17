@@ -1,82 +1,126 @@
 
   <!--=================================
 footer-->
-<footer class="footer bg-dark space-pt">
+<div class="footer-area">
+    <div class=" footer">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-md-3 col-sm-6">
+            <div class="single-footer">
+              <h5>About us </h5>
+              <div class="footer-title-line"></div>
+
+              <!-- <img src="https://happy-homes.in/assets/img/Happy-Homes-Logo.png" alt="" class="wow pulse" data-wow-delay="1s"> -->
+              <p>WafiRealty.com, India's Leading Real Estate Portal and Your Reliable Consulting Partner, Can Help You Unlock the Real Estate Potential in India
+              </p>
+            
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <div class="single-footer">
+              <h5>Quick links </h5>
+              <div class="footer-title-line"></div>
+              <ul class="footer-menu">
+                <li><a href="#">Home</a> </li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Blogs</a></li>
+                <li><a href="#">Properties</a> </li>
+                <li><a href="#">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <div class="single-footer">
+              <h5>Popular Links</h5>
+              <div class="footer-title-line"></div>
+              <ul class="footer-menu">
+                <li><a href="#">Property in Pune</a></li>
+                <li><a href="#">Property In Delhi</a></li>
+                <li><a href="#">Property in Noida</a></li>
+                <li><a href="#">Property in Gurgaon</a></li>
+                <li><a href="#">Property In Bangalore</a></li>
+                <li><a href="#">Property in Hyderabad</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-3 col-sm-6">
+            <div class="single-footer news-letter">
+              <h5>Let's Stay in Touch</h5>
+              <div class="footer-title-line"></div>
+              <p>We practically transformed the face of the real estate industry in India by bringing professionalism in
+                this sector. Don't forget to follow us on:</p>
+
+  <ul class="footer-adress">
+                <li><i class="fa fa-map"> </i> D-156, Sector-7, 3rd Floor, Noida (U.P).</li>
+
+                <li><i class="fa fa-envelope"> </i>wafirealty123@gmail.com</li>
+                <li><i class="fa fa-phone"> </i>+91-958210227</li>
+              </ul>
+              <div class="social pull-left">
+                <ul>
+                  <li><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                  <li><a href="https://www.facebook.com/wafirealty" target="_blank"><i class="fab fa-facebook"></i></a>
+                  </li>
+
+                  <li><a href="https://www.instagram.com/wafirealty/"
+                      target="_blank"><i class="fab fa-instagram"></i></a></li>
+
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-copy text-center">
     <div class="container">
       <div class="row">
-        <div class="col-lg-3 col-md-6">
-          <div class="footer-contact-info">
-            <h5 class="text-primary mb-4">About Wafireality</h5>
-            <p class="text-white mb-4">Wafireality helped thousands of clients to find the right property for their
-              needs.</p>
-            <ul class="list-unstyled mb-0">
-              <li> <b> <i class="fas fa-map-marker-alt"></i></b><span>D-156, Sector-7, 3rd Floor, Noida</span>
-              </li>
-              <li> <b><i class="fas fa-microphone-alt"></i></b><span>+91 – 9582106227</span> </li>
-
-            </ul>
+        <div class="col-lg-6">
+          <div class="pull-left">
+            <h6><span> Copyright © 2024 All rights reserved. </span> </h6>
           </div>
         </div>
-        <div class="col-lg-3 col-md-6 mt-4 mt-md-0">
-          <div class="footer-link">
-            <h5 class="text-primary mb-4">Quick Links</h5>
-            <ul class="list-unstyled mb-0">
-              <li> <a href="#">Home </a> </li>
-              <li> <a href="#">About us </a> </li>
-              <li> <a href="#">Properies </a> </li>
-              <li> <a href="#">Blog </a> </li>
-              <li> <a href="#">Contact Us </a> </li>
-
-            </ul>
-
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 mt-4 mt-md-0">
-          <div class="footer-link">
-            <h5 class="text-primary mb-4">Popular Links</h5>
-            <ul class="list-unstyled mb-0">
-              <li> <a href="#">Property In Delhi </a> </li>
-              <li> <a href="#">Property In Noida </a> </li>
-              <li> <a href="#">Property In Gurgaon </a> </li>
-
-            </ul>
-
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 mt-4 mt-lg-0">
-          <h5 class="text-primary mb-4">Let's Stay In Touch</h5>
-
-          <div class="socials pull-right">
+        <div class="col-lg-6">
+          <div class="bottom-menu pull-right">
             <ul>
-              <li><a href="#"> <i class="fab fa-facebook-f"></i> </a></li>
-              <li><a href="#"> <i class="fab fa-twitter"></i> </a></li>
-              <li><a href="#"> <i class="fab fa-instagram"></i> </a></li>
-
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Privacy</a></li>
+              <li><a href="#" target="_blank">Disclaimer</a></li>
+              <li><a href="#">Terms &
+                  Conditions</a>
+              </li>
             </ul>
           </div>
         </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <div class="container">
-        <div class="row align-items-center">
-
-
-          <div class="col-md-6 text-center text-md-end">
-            <p class="mb-0 text-white"> &copy;Copyright <span id="copyright">
-                <script>document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))</script>
-              </span> <a href="#"> Wafireality </a> All Rights Reserved </p>
-          </div>
-          <div class="col-md-6 text-center my-3 mt-md-0 mb-md-0">
-            <a id="back-to-top" class="back-to-top" href="#"><i class="fas fa-angle-double-up"></i> </a>
+  </div>
+  
+ 
+  <div class="footer-copy text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="pull-left">
+            <p class="text-white">The content provided here serves solely for general informational purposes and does not imply any endorsement, warranty, representation, or offer from wafirealty.com. Information sources include details sourced from public channels such as State RERA websites, project websites established by developers and authorized channel partners, as well as official documentation shared by these authorized advertisers, including project brochures, price lists, and payment plans. wafirealty.com merely presents this content in a simplified format for user research and education and does not claim ownership of any content. Users are encouraged to exercise caution and verify facts directly from the builder or promoter before making any purchase decisions.</p>
           </div>
         </div>
+        
       </div>
     </div>
-  </footer>
+  </div>
+  
+  
+  
+  </div>
   <!--=================================
 footer-->
+
+
 
   <!--=================================
 Javascript -->

@@ -245,7 +245,7 @@ Listing – grid view -->
             <div class="row g-0">
               <div class="col-lg-4 col-md-5">
                 <div class="property-image bg-overlay-gradient-04">
-                  <img class="img-fluid" src="{{end($pro['images'])['image_path']}}" alt="">
+                  <img class="img-fluid" src="/public{{end($pro['images'])['image_path']}}" alt="">
                   <div class="property-lable">
                     <span class="badge badge-md bg-primary">{{$pro['type']}}</span>
                     <span class="badge badge-md bg-info">Sale</span>

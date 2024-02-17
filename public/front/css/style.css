@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+
 body {
-  font-family: "Roboto", sans-serif;
-  font-weight: normal;
+  font-family: "Lexend", serif;
+  font-weight: 300;
   font-style: normal;
-  font-size: 14px;
-  color: #969696;
+  font-size: 16px;
+  color: #333;
   overflow-x: hidden;
 }
 
@@ -83,7 +86,7 @@ h6 {
 }
 
 p {
-  font-weight: normal;
+  font-weight: 300;
   line-height: 1.5;
 }
 
@@ -105,6 +108,9 @@ p {
   text-shadow: none;
 }
 
+strong{
+    font-weight:600;
+}
 @media (min-width: 1200px) {
   .container {
     max-width: 1140px;
@@ -465,6 +471,9 @@ input.form-control {
 .text-primary {
   color: #fff !important;
 }
+.bgg-light{
+    background-color:#c7a175;
+}
 
 .text-white {
   color: #ffffff;
@@ -491,7 +500,7 @@ input.form-control {
 }
 
 .space-pt {
-  padding: 90px 0 0;
+  padding: 90px 0 36px;
 }
 
 .space-pb {
@@ -3330,8 +3339,8 @@ button {
 }
 
 .header .topbar {
-  background: #001022;
-  padding: 10px 0;
+  background: #4c1340;
+  padding: 6px 0;
 }
 
 .header .topbar a {
@@ -3378,6 +3387,7 @@ button {
 
 .header .topbar .social ul li a {
   color: #ffffff;
+  font-size: 14px;
 }
 
 .header .topbar .social ul li a:hover {
@@ -3422,7 +3432,7 @@ button {
 
 .navbar .navbar-nav .nav-link {
   font-weight: 500;
-  font-size: 16px;
+  font-size: 18px;
   padding: 10px 20px;
   color: #001935;
   text-transform: capitalize;
@@ -5768,6 +5778,13 @@ button {
   color: #ffffff;
 }
 
+.blog-post-description ul li{
+  padding-bottom:10px;
+}
+.blog-post-description ol li{
+  padding-bottom:10px;
+}
+
 .blog-post .blog-post-footer {
   border-top: 1px solid #eeeeee;
   padding: 12px 0px;
@@ -5801,7 +5818,7 @@ button {
 
 .blog-post .blog-post-footer a {
   font-size: 13px;
-  color: #969696;
+  color: #4c1340;
 }
 
 .blog-post .blog-post-footer a:hover {
@@ -5937,7 +5954,7 @@ button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  color: #969696;
+  color: #333;
   width: 100%;
 }
 
@@ -7266,11 +7283,7 @@ button {
   color: rgb(156, 156, 156);
 }
 
-.footer ul li a {
-  color: #fff;
-  font-weight: 500;
-  font-size: 13px;
-}
+
 
 .socials ul li a i {
   color: rgb(156, 156, 156);
@@ -7279,6 +7292,178 @@ button {
 }
 
 
+/* ------New Footer------- */
+.footer-area {
+  border-top: 1px solid #D1D1D1;
+  background: #555 url(https://www.wafirealty.com/public/front/images/footer-bg.jpg) repeat scroll 0% 0%;
+  background-position: center center;
+  color: #fff;
+}
+
+.footer {
+  padding: 45px 0px 45px;
+  background: #00000091  none repeat scroll 0% 0%;
+}
+
+.single-footer {
+  margin-top: 25px;
+}
+
+.footer h5 {
+  color: #fff;
+  margin-top: 20px;
+  font-weight: 700;
+}
+
+.footer-title-line {
+  width: 100px;
+  height: 2px;
+  background: #fff;
+  margin: 0px 0px 33px;
+  position: relative;
+  top: -2px;
+}
+
+.footer p {
+  line-height: 25px;
+  font-size: 15px;
+
+}
+
+.footer a {
+  color: #fff;
+}
+
+.footer ol,
+.footer ul {
+  list-style: outside none none;
+}
+
+.footer ul {
+  padding: 0px;
+  margin: 0px;
+}
+
+ul.footer-adress li {
+  margin-bottom: -4px;
+}
+
+ul.footer-adress li i {
+  padding-right: 10px;
+}
+
+.footer-adress ul li i {
+  padding-right: 10px;
+  color: #fff;
+}
+
+.single-footer {
+  margin-top: 25px;
+}
+
+.footer ul li {
+  margin-bottom: 5px;
+}
+
+.footer-menu li {
+  border-bottom: 1px solid rgba(245, 134, 52, 0.31);
+}
+
+.footer ul li a {
+  color: #fff;
+  font-weight: 400;
+  font-size: 15px;
+}
+
+.social ul {
+  padding: 0px;
+  list-style: outside none none;
+}
+
+.social ul li i {}
+
+.social ul li a {
+  display: block;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgb(156, 156, 156);
+  transition: all 0.8s ease 0s;
+  /* color: rgb(156, 156, 156); */
+  text-align: center;
+  color: #fff;
+}
+
+.social li {
+  display: inline-block;
+  padding-right: 0.3em;
+  padding-bottom: 0.3em;
+}
+
+.footer-copy {
+  background: rgba(25, 25, 25, 0.9) none repeat scroll 0% 0%;
+  border-top: 0.051px solid rgba(25, 25, 25, 0.46);
+  padding-top: 14px;
+}
+
+.footer-copy h6 {
+  font-weight: normal;
+  text-transform: none;
+}
+
+.footer-copy span {
+  margin-right: 20px;
+  font-size: 15px;
+  color: #fff;
+}
+
+.bottom-menu ul {
+  list-style: outside none none;
+}
+
+.bottom-menu ul li {
+  float: left;
+  display: inline-block;
+}
+
+.bottom-menu ul li a {
+  font-size: 15px;
+  color: #ffffff;
+  padding: 10px;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+
+.pull-right {
+  float: right !important;
+}
+
+.pull-left {
+  float: left !important;
+}
+
+
+/*----Android And IOS--strat---*/
+.android-features h6{
+    color: #000000;
+    font-size: 24px;
+}
+.android-features figure{
+  padding: 17px 0;
+}
+.android-box{
+  background: #fff;
+  padding: 10px;
+}
+.Our-android-phone img{
+  padding: 80px 0;
+}
+/*----Android And IOS--end----*/
+
+
+/* ------New Footer------- */
 
 
 

@@ -45,8 +45,11 @@ header -->
         <div class="row">
           <div class="col-12">
             <div class="d-block d-md-flex align-items-center text-center">
-              <div class="me-3 d-inline-block">
+             <div class="me-3 d-inline-block">
                 <a href="tel:+91 – 9582106227"><i class="fa fa-phone me-2 fa fa-flip-horizontal"></i>+91 – 9582106227
+                </a>&nbsp;&nbsp;
+                <a href="mailto:shyam@wmmsols.com"><i
+                    class="fa fa-envelope me-2 fa fa-flip-horizontal"></i>shyam@wmmsols.com
                 </a>
               </div>
               <div class="me-auto d-inline-block">
@@ -55,9 +58,10 @@ header -->
 
               <div class="social d-inline-block">
                 <ul class="list-unstyled">
-                  <li><a href="#"> <i class="fab fa-facebook-f"></i> </a></li>
-                  <li><a href="#"> <i class="fab fa-twitter"></i> </a></li>
-                  <li><a href="#"> <i class="fab fa-instagram"></i> </a></li>
+                  <li><a href="https://www.facebook.com/wafirealty" target="_blank"> <i class="fab fa-facebook-f"></i> </a></li>
+                 
+                  <li><a href="https://www.instagram.com/wafirealty/" target="_blank"> <i class="fab fa-instagram"></i> </a></li>
+                   <li><a href="#"> <i class="fab fa-twitter"></i> </a></li>
                 </ul>
               </div>
 
@@ -70,13 +74,13 @@ header -->
       <div class="container-fluid">
         <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"><i
             class="fas fa-align-left"></i></button>
-        <a class="navbar-brand" href="index.html">
+        <a class="navbar-brand" href="https://www.wafirealty.com/">
           <img class="img-fluid" src="{{asset('front/images/wafireality.jpg')}}" alt="logo">
         </a>
-        <div class="navbar-collapse collapse justify-content-center">
+        <div class="navbar-collapse collapse justify-content-end">
           <ul class="nav navbar-nav">
             <li class="nav-item dropdown active">
-              <a class="nav-link" href="index.html" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              <a class="nav-link" href="https://www.wafirealty.com/" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">Home</a>
 
             </li>

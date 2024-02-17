@@ -73,16 +73,17 @@ class UserController extends Controller
         $twitter = $UserUpdateData->twitter;
         $instagram = $UserUpdateData->instagram;
         $facebook = $UserUpdateData->facebook;
+        $about = $UserUpdateData->about;
         if(!empty($_FILES) && $_FILES['profile_photo']['name']!='')
         {
             $imageName = time().'.'.$UserUpdateData->profile_photo->extension();  
             $UserUpdateData->profile_photo->move(public_path('uploads/userprofile'), $imageName);
             $path = 'uploads/userprofile/'.$imageName;
-            $UpdateUser = DB::table('users')->where('id','=',$id)->update(['name'=>$name,'email'=>$email,'designation'=>$designation,'mobile'=>$mobile,'address'=>$address,'profile_photo_path'=>$path,'github'=>$github,'twitter'=>$twitter,'instagram'=>$instagram,'facebook'=>$facebook]);
+            $UpdateUser = DB::table('users')->where('id','=',$id)->update(['about'=>$about,'name'=>$name,'email'=>$email,'designation'=>$designation,'mobile'=>$mobile,'address'=>$address,'profile_photo_path'=>$path,'github'=>$github,'twitter'=>$twitter,'instagram'=>$instagram,'facebook'=>$facebook]);
         }
         else
         {
-            $UpdateUser = DB::table('users')->where('id','=',$id)->update(['name'=>$name,'email'=>$email,'designation'=>$designation,'mobile'=>$mobile,'address'=>$address,'github'=>$github,'twitter'=>$twitter,'instagram'=>$instagram,'facebook'=>$facebook]);
+            $UpdateUser = DB::table('users')->where('id','=',$id)->update(['about'=>$about,'name'=>$name,'email'=>$email,'designation'=>$designation,'mobile'=>$mobile,'address'=>$address,'github'=>$github,'twitter'=>$twitter,'instagram'=>$instagram,'facebook'=>$facebook]);
         }
         if($UpdateUser==1)
         {
@@ -145,7 +146,7 @@ class UserController extends Controller
         $status = $data->status;
         $address = $data->address;
         $id = $data->userid;
-        
+        $about = $data->about;
         // $password = md5($data->password);
         // $user_photo = $data->user_photo;
         // $created_at = time();
@@ -157,12 +158,12 @@ class UserController extends Controller
             $imageName = time().'.'.$data->user_photo->extension();  
             $data->user_photo->move(public_path('uploads/userprofile'), $imageName);
             $profile_path = 'uploads/userprofile/'.$imageName;
-            $AddUserData = DB::insert('UPDATE `users` SET  `name`= "'.$name.'",`mobile`='.$mobile.',`email`="'.$email.'",`designation`="'.$designation.'",`usertype`="'.$usertype.'",`status`="'.$status.'",`address`="'.$address.'",`profile_photo_path`="'.$profile_path.'",`updated_at`="'.$updated_at.'",`updated_by`="'.$updated_by.'" WHERE id="'.$id.'"');
+            $AddUserData = DB::insert('UPDATE `users` SET  `about`= "'.$about.'",`name`= "'.$name.'",`mobile`='.$mobile.',`email`="'.$email.'",`designation`="'.$designation.'",`usertype`="'.$usertype.'",`status`="'.$status.'",`address`="'.$address.'",`profile_photo_path`="'.$profile_path.'",`updated_at`="'.$updated_at.'",`updated_by`="'.$updated_by.'" WHERE id="'.$id.'"');
             
         }
         else
         {
-            $AddUserData = DB::insert('UPDATE `users` SET  `name`= "'.$name.'",`mobile`='.$mobile.',`email`="'.$email.'",`designation`="'.$designation.'",`usertype`="'.$usertype.'",`status`="'.$status.'",`address`="'.$address.'",`updated_at`="'.$updated_at.'",`updated_by`="'.$updated_by.'" WHERE id="'.$id.'"');
+            $AddUserData = DB::insert('UPDATE `users` SET  `about`= "'.$about.'",`name`= "'.$name.'",`mobile`='.$mobile.',`email`="'.$email.'",`designation`="'.$designation.'",`usertype`="'.$usertype.'",`status`="'.$status.'",`address`="'.$address.'",`updated_at`="'.$updated_at.'",`updated_by`="'.$updated_by.'" WHERE id="'.$id.'"');
             
         }
         if($AddUserData==1)
@@ -318,7 +319,16 @@ class UserController extends Controller
         $UserData->email = $request->email;
         $UserData->type = $request->usertype;
         $UserData->status = $request->status;
+        $UserData->about = $request->about;
         $UserData->password = md5($request->password);
+        if(!empty($_FILES) && $_FILES['profile_photo']['name']!='')
+        {
+            
+            $imageName = time().'.'.$request->profile_photo->extension();  
+            $request->profile_photo->move(public_path('uploads/userprofile'), $imageName);
+            $path = 'uploads/userprofile/'.$imageName;
+            $UserData->profile_photo_path =  $path;
+        }
         if($UserData->save())
         {
             return redirect('/user/list')->with('success','User Added Successfully');

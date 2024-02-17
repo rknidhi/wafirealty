@@ -24,7 +24,7 @@ blog-detail -->
                                 </div>
                             </div>
                             <div class="blog-post-image">
-                                <img class="img-fluid mb-4" src="{{$blogs['image_path']}}" alt="">
+                                <img class="img-fluid mb-4" src="/public/{{$blogs['image_path']}}" alt="">
                             </div>
                             <div class="blog-post-content border-0">
                                 <div class="blog-post-description">
@@ -42,7 +42,7 @@ blog-detail -->
                                                     <div class="item">
                                                         <div class="blog-post">
                                                             <div class="blog-post-image">
-                                                                <img class="img-fluid" src="{{$related['image_path']}}" alt="">
+                                                                <img class="img-fluid" src="/public/{{$related['image_path']}}" alt="">
                                                             </div>
                                                             <div class="blog-post-content">
                                                                 <div class="blog-post-details">
@@ -62,7 +62,7 @@ blog-detail -->
                                                                     </div>
                                                                     <div class="blog-post-author">
                                                                         <span> By <a href="/detail-blog?id={{$related['id']}}"> <img class="img-fluid"
-                                                                                    src="images/avatar/01.jpg" alt="">{{$related['add_by']}}</a> </span>
+                                                                                    src="images/avatar/01.jpg" alt="">WafiRealty</a> </span>
                                                                     </div>
                                                                     <div class="blog-post-comment">
                                                                         <a href="#"> <i class="far fa-comment"></i></a>
@@ -99,7 +99,7 @@ blog-detail -->
                             @if($blog['id']!=$blogs['id'])
                             <div class="d-flex mb-3 align-items-top">
                                 <div class="avatar avatar-xl h-auto">
-                                    <img class="img-fluid" src="{{$blog['image_path']}}" alt="">
+                                    <img class="img-fluid" src="/public/{{$blog['image_path']}}" alt="">
                                 </div>
                                 <div class="ms-3">
                                     <a class="text-dark" href="/detail-blog?id={{$blog['id']}}"><b>{{$blog['title']}}</b></a>

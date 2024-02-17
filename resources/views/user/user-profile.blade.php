@@ -39,7 +39,7 @@
 							<div class="card">
 								<div class="card-body">
 									<div class="d-flex flex-column align-items-center text-center">
-										<img src="<?php echo $users['data'][0]['profile_photo_path']; ?>" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
+										<img src="/public/<?php echo $users['data'][0]['profile_photo_path']; ?>" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
 										<div class="mt-3">
 											<h4><?php echo $users['data'][0]['name']; ?></h4>
 											<p class="text-secondary mb-1"></p>
@@ -122,9 +122,7 @@
 											<h6 class="mb-0">Designation</h6>
 										</div>
 										<div class="col-sm-9 text-secondary">
-											<select name="designation" id="designation" class="form-select">
-												
-											</select>
+											<input type="text" name="designation" id="designation" class="form-control" value="<?php echo $users['data'][0]['designation']; ?>">
 										</div>
 									</div>
 									<div class="row mb-3">
@@ -141,6 +139,14 @@
 										</div>
 										<div class="col-sm-9 text-secondary">
 											<input type="text" name="address" class="form-control" value="<?php echo $users['data'][0]['address']; ?>" />
+										</div>
+									</div>
+									<div class="row mb-3">
+										<div class="col-sm-3">
+											<h6 class="mb-0">About</h6>
+										</div>
+										<div class="col-sm-9 text-secondary">
+											<input type="text" name="about" class="form-control" value="<?php echo $users['data'][0]['about']; ?>" />
 										</div>
 									</div>
 									<div class="row mb-3">

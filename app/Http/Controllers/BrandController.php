@@ -16,7 +16,7 @@ class BrandController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
-                    $actionBtn = '<a href="/brand/edit?id='.$row['id'].'" class="edit btn btn-success btn-sm">Edit</a> <a href="/brnad/delete?id='.$row['id'].'" class="delete btn btn-danger btn-sm">Delete</a>';
+                    $actionBtn = '<a href="/brand/edit?id='.$row['id'].'" class="edit btn btn-success btn-sm">Edit</a> <a href="/brand/delete?id='.$row['id'].'" class="delete btn btn-danger btn-sm">Delete</a>';
                     return $actionBtn;
                 })
                 ->rawColumns(['action'])

@@ -36,6 +36,7 @@ use App\Http\Controllers\WebsiteController;
     Route::get('blog/edit',[BlogController::class,'EditBlog']);
     Route::get('blog/add',[BlogController::class,'AddBlog']);
     Route::post('blog/create',[BlogController::class,'CreateBlog']);
+    Route::get('blog/delete',[BlogController::class,'DeleteBlog']);
 
 
     // Project Routs
@@ -51,6 +52,14 @@ use App\Http\Controllers\WebsiteController;
     Route::get('projecttype/add',[ProjectController::class,'AddProjectType']);
     Route::post('projecttype/create',[ProjectController::class,'CreateProjectType']);
     Route::get('projecttype/delete',[ProjectController::class,'DeleteProjectType']);
+    
+    
+    ///Project Amenities Routes
+    Route::get('projectamenities/list',[ProjectController::class,'ProjectAmenityList']);
+    Route::get('projectamenities/edit',[ProjectController::class,'EditProjectAmenity']);
+    Route::get('projectamenities/add',[ProjectController::class,'AddProjectAmenity']);
+    Route::post('projectamenities/create',[ProjectController::class,'CreateProjectAmenity']);
+    Route::get('projectamenities/delete',[ProjectController::class,'DeleteProjectAmenity']);
 
 
     //Menu Routes

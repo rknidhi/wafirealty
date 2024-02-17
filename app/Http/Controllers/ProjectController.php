@@ -6,6 +6,7 @@ use App\Models\Brand;
 use App\Models\Image;
 use App\Models\Project;
 use App\Models\ProjectType;
+use App\Models\ProjectAmenities;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -34,13 +35,23 @@ class ProjectController extends Controller
     public function AddProject()
     {
         $brands = Brand::all()->toArray();
+        $amenity = ProjectAmenities::all()->toArray();
         $option ='<option></option>';
+        $amenityoption = '<option></option>';
         if(!empty($brands))
         {
            
             foreach($brands as $brand)
             {
                 $option .= '<option value="'.$brand['name'].'">'.$brand['name'].'</option>';
+            }
+        }
+        if(!empty($amenity))
+        {
+           
+            foreach($amenity as $amt)
+            {
+                $amenityoption .= '<option value="'.$amt['amenity'].'">'.$amt['amenity'].'</option>';
             }
         }
         $projecttype = ProjectType::all()->toArray();
@@ -53,7 +64,7 @@ class ProjectController extends Controller
                 $typeoption .= '<option value="'.$type['type'].'">'.$type['type'].'</option>';
             }
         }
-        return view('project/add',['option'=>$option,'typeoption'=>$typeoption]);
+        return view('project/add',['option'=>$option,'typeoption'=>$typeoption,'amenityoption'=>$amenityoption]);
     }
     
     public function EditProject(Request $request)
@@ -118,7 +129,8 @@ class ProjectController extends Controller
         //     'home_project' => 'required',
         //    // 'project_images' => 'required',
                
-        // ]);        
+        // ]); 
+        
         if(!empty($request->amenities))
         {
             $amenities = implode(', ',$request->amenities);
@@ -130,10 +142,12 @@ class ProjectController extends Controller
         {
             $ProjectData = Project::find($request->id);
             $ProjectData->updated_at = date("Y-m-d H:i:s");
+            $ProjectData->updated_by = $request->session()->get('id');
         }
         else
         {
             $ProjectData->created_at = date("Y-m-d H:i:s");
+            $ProjectData->add_by = $request->session()->get('id');
         }
         $ProjectData->location = $request->location;
         $ProjectData->type = $request->type;
@@ -416,8 +430,82 @@ class ProjectController extends Controller
     public function DeleteProjectType(Request $request)
     {
 
-      $delete = Project::destroy($request->id);
+      $delete = ProjectType::destroy($request->id);
       return redirect('projecttype/list')->with('success','Project Type Deleted Successfully');
+    }
+    
+    ///Project Amanities Contollers
+    public function ProjectAmenityList()
+    {
+        if(\request()->ajax()){
+            $data = ProjectAmenities::latest()->get();
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $actionBtn = '<a href="/projectamenities/edit?id='.$row['id'].'" class="edit btn btn-success btn-sm">Edit</a> <a href="/projectamenities/delete?id='.$row['id'].'" class="delete btn btn-danger btn-sm">Delete</a>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+        // dd($Projects);
+        return view('amenities/list');
+    }
+    public function AddProjectAmenity()
+    {
+        return view('amenities/add');
+    }
+    
+    public function EditProjectAmenity(Request $request)
+    {
+        $Projects = ProjectAmenities::find($request->id)->toArray();
+        if(!empty($Projects))
+        {
+            return view('amenities/add',['Projects'=>$Projects]);
+        }
+        else
+        {
+            return redirect('projectamenities/list')->with('error','Project Amenity Not Found');
+        }
+    }   
+
+    public function CreateProjectAmenity(Request $request)
+    {
+        // dd($request->file());die;
+        $validator = $request->validate([
+            'status'=>'required',
+            'amenity'=>'required',
+        ]);        
+        
+        $ProjectData = new ProjectAmenities;
+        date_default_timezone_set('Asia/Kolkata');
+        if(isset($request->id) && $request->id!='') 
+        {
+            $ProjectData = ProjectAmenities::find($request->id);
+            $ProjectData->updated_at = date("Y-m-d H:i:s");
+        }
+        else
+        {
+            $ProjectData->created_at = date("Y-m-d H:i:s");
+        }
+        $ProjectData->status = $request->status;
+        $ProjectData->amenity = $request->amenity;
+        if($ProjectData->save())
+        {
+            return redirect('projectamenities/list')->with('success','Project Amenity Added Successfully');
+        }
+        else
+        {
+            return redirect('projectamenities/list')->with('error','Something went wrong! Project Amenity Not Added');
+        }
+
+    }
+   
+    public function DeleteProjectAmenity(Request $request)
+    {
+
+      $delete = ProjectAmenities::destroy($request->id);
+      return redirect('projectamenities/list')->with('success','Project Amenity Deleted Successfully');
     }
 }
 

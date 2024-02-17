@@ -29,26 +29,26 @@ $type = Session()->get('type');
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<!--favicon-->
-	<link rel="icon" href="{{URL::asset('images/wafi.jpg')}}" type="image/png" />
+	<link rel="icon" href="{{URL::asset('/images/wafi.jpg')}}" type="image/png" />
 	<!--plugins-->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link href="{{URL::asset('assets/plugins/vectormap/jquery-jvectormap-2.0.2.css')}}" rel="stylesheet" />
-	<link href="{{URL::asset('assets/plugins/simplebar/css/simplebar.css')}}" rel="stylesheet" />
-	<link href="{{URL::asset('assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css')}}" rel="stylesheet" />
-	<link href="{{URL::asset('assets/plugins/metismenu/css/metisMenu.min.css')}}" rel="stylesheet" />
+	<link href="{{URL::asset('/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css')}}" rel="stylesheet" />
+	<link href="{{URL::asset('/assets/plugins/simplebar/css/simplebar.css')}}" rel="stylesheet" />
+	<link href="{{URL::asset('/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css')}}" rel="stylesheet" />
+	<link href="{{URL::asset('/assets/plugins/metismenu/css/metisMenu.min.css')}}" rel="stylesheet" />
 	<!-- loader-->
-	<link href="{{URL::asset('assets/css/pace.min.css')}}" rel="stylesheet" />
-	<script src="{{URL::asset('assets/js/pace.min.js')}}"></script>
+	<link href="{{URL::asset('/assets/css/pace.min.css')}}" rel="stylesheet" />
+	<script src="{{URL::asset('/assets/js/pace.min.js')}}"></script>
 	<!-- Bootstrap CSS -->
-	<link href="{{URL::asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
-	<link href="{{URL::asset('assets/css/bootstrap-extended.css')}}" rel="stylesheet">
+	<link href="{{URL::asset('/assets/css/bootstrap.min.css')}}" rel="stylesheet">
+	<link href="{{URL::asset('/assets/css/bootstrap-extended.css')}}" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&amp;display=swap" rel="stylesheet">
-	<link href="{{URL::asset('assets/css/app.css')}}" rel="stylesheet">
-	<link href="{{URL::asset('assets/css/icons.css')}}" rel="stylesheet">
+	<link href="{{URL::asset('/assets/css/app.css')}}" rel="stylesheet">
+	<link href="{{URL::asset('/assets/css/icons.css')}}" rel="stylesheet">
 	<!-- Theme Style CSS -->
-	<link rel="stylesheet" href="{{URL::asset('assets/css/dark-theme.css')}}" />
-	<link rel="stylesheet" href="{{URL::asset('assets/css/semi-dark.css')}}" />
-	<link rel="stylesheet" href="{{URL::asset('assets/css/header-colors.css')}}" />
+	<link rel="stylesheet" href="{{URL::asset('/assets/css/dark-theme.css')}}" />
+	<link rel="stylesheet" href="{{URL::asset('/assets/css/semi-dark.css')}}" />
+	<link rel="stylesheet" href="{{URL::asset('/assets/css/header-colors.css')}}" />
 	<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <!-- Styles -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" />
@@ -248,7 +248,7 @@ $type = Session()->get('type');
 							<li> <a href="#"><i class="fa fa-angle-right"></i>CRM Logs</a></li>
 						</ul>
 					</li>-->
-					@if($type=='super admin')
+					@if($type=='super admin' || $type=='admin')
 					<li>
 						<a href="javascript:();" class="has-arrow">
 							<div class="parent-icon"><i class="fa fa fa-user-circle"></i>
@@ -451,10 +451,13 @@ $type = Session()->get('type');
 									<!-- <li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Trash Projects</a></li> -->
 								</ul>
 							</li>
-							<li> <a class="has-arrow" href="#">Manege Floor Plans</a>
+							<li> <a class="has-arrow" href="#">Manege Projects Amenities</a>
 								<ul>
-									<li> <a href="/floorplan/list"><i class="bx bx-right-arrow-alt"></i>All Floor Plans</a></li>
-									<li> <a href="/floorplan/add"><i class="bx bx-right-arrow-alt"></i>Add Floor Plan</a></li>
+									<li> <a href="/projectamenities/list"><i class="bx bx-right-arrow-alt"></i>All Project Amenities</a></li>
+									<li> <a href="/projectamenities/add"><i class="bx bx-right-arrow-alt"></i>Add Project Amenities</a></li>
+									<!-- <li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Edit Blogs</a></li> -->
+									<!-- <li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Delete Blogs</a></li> -->
+									<!-- <li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Trash Projects</a></li> -->
 								</ul>
 							</li>
 							<li> <a class="has-arrow" href="#">Manege Testimonials</a>
@@ -936,7 +939,7 @@ $type = Session()->get('type');
 					</div>
 					<div class="user-box dropdown">
 						<a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							<img src="" class="user-img" alt="user avatar">
+							<img src="/public/<?php echo $users['data'][0]['profile_photo_path'] ?>" class="user-img" alt="user avatar">
 							<div class="user-info ps-3">
 								<p class="user-name mb-0"><?php echo $users['data'][0]['name'] ?></p>
 								<p class="designattion mb-0"></p>
