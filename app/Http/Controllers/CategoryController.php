@@ -22,11 +22,11 @@ class CategoryController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        return view('category/list');
+        return view('event/category/list');
     }
     public function AddCategory()
     {
-        return view('category/add');
+        return view('event/category/add');
     }
 
     public function EditCategory(Request $request)
@@ -34,7 +34,7 @@ class CategoryController extends Controller
         $category = Category::find($request->id)->toArray();
         if(!empty($category))
         {
-            return view('category/add',['category'=>$category]);
+            return view('event/category/add',['category'=>$category]);
         }
         else
         {

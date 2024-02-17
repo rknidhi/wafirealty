@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use App\Models\Image;
 use App\Models\Project;
+use App\Models\ProjectType;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -31,49 +33,92 @@ class ProjectController extends Controller
     }
     public function AddProject()
     {
-        return view('project/add');
+        $brands = Brand::all()->toArray();
+        $option ='<option></option>';
+        if(!empty($brands))
+        {
+           
+            foreach($brands as $brand)
+            {
+                $option .= '<option value="'.$brand['name'].'">'.$brand['name'].'</option>';
+            }
+        }
+        $projecttype = ProjectType::all()->toArray();
+        $typeoption ='<option></option>';
+        if(!empty($projecttype))
+        {
+           
+            foreach($projecttype as $type)
+            {
+                $typeoption .= '<option value="'.$type['type'].'">'.$type['type'].'</option>';
+            }
+        }
+        return view('project/add',['option'=>$option,'typeoption'=>$typeoption]);
     }
-
+    
     public function EditProject(Request $request)
     {
         $Projects = Project::find($request->id)->toArray();
         $images = Image::where('project_id',$request->id)->get()->toArray();
+        $brands = Brand::all()->toArray();
+        $option ='<option></option>';
+        if(!empty($brands))
+        {
+            foreach($brands as $brand)
+            {   
+                $select='';
+                if($brand['name']==$Projects['brand']){$select = "selected";}
+                $option .= '<option value="'.$brand['name'].'" '.$select.'>'.$brand['name'].'</option>';
+            }
+        }
+        $projecttype = ProjectType::all()->toArray();
+        $typeoption ='<option></option>';
+        if(!empty($projecttype))
+        {
+           
+            foreach($projecttype as $type)
+            {
+                $select1='';
+                if($type['type']==$Projects['type']){$select1 = "selected";}
+                $typeoption .= '<option value="'.$type['type'].'" '.$select1.'>'.$type['type'].'</option>';
+            }
+        }
         if(!empty($Projects))
         {
-            return view('project/add',['Projects'=>$Projects,'Images'=>$images]);
+            return view('project/add',['Projects'=>$Projects,'Images'=>$images,'option'=>$option,'typeoption'=>$typeoption]);
         }
         else
         {
             return redirect('project/list')->with('error','Project Not Found');
         }
-    }
+    }   
 
     public function CreateProject(Request $request)
     {
         // dd($request->file());die;
-        $validator = $request->validate([
-            'location'=>'required|max:255',
-            'type'=>'required',
-            'brand'=>'required',
-            'project_name'=>'required',
-            'price'=>'required',
-            'metatitle' => 'required',
-            'metadescription' => 'required',
-            'configurations' => 'required',
-            'status' => 'required',
-            'rera_no' => 'required',
-            'area' => 'required',
-            'about_partner' => 'required',
-            'about_project' => 'required',
-            'why_choose' => 'required',
-            'specification' => 'required',
-            'amenities' => 'required',
-            'about_developer' => 'required', 
-            'map_location' => 'required',
-            'home_project' => 'required',
-           // 'project_images' => 'required',
+        // $validator = $request->validate([
+        //     'location'=>'required|max:255',
+        //     'type'=>'required',
+        //     'brand'=>'required',
+        //     'project_name'=>'required',
+        //     'price'=>'required',
+        //     'metatitle' => 'required',
+        //     'metadescription' => 'required',
+        //     'configurations' => 'required',
+        //     'status' => 'required',
+        //     'rera_no' => 'required',
+        //     'area' => 'required',
+        //     'about_partner' => 'required',
+        //     'about_project' => 'required',
+        //     'why_choose' => 'required',
+        //     'specification' => 'required',
+        //     'amenities' => 'required',
+        //     'about_developer' => 'required', 
+        //     'map_location' => 'required',
+        //     'home_project' => 'required',
+        //    // 'project_images' => 'required',
                
-        ]);        
+        // ]);        
         if(!empty($request->amenities))
         {
             $amenities = implode(', ',$request->amenities);
@@ -133,35 +178,7 @@ class ProjectController extends Controller
         }
 
     }
-
-    // public function UpdateProject(Request $request)
-    // {
-    //     $validated = $request->validate([
-    //         'title'=>'requred|max:255',
-    //         'description'=>'required',
-    //     ]);
-    //     $ProjectData = Project::find($request->id);
-    //     $ProjectData->title = $request->title;
-    //     $ProjectData->add_by = $request->add_by;
-    //     $ProjectData->description = $request->description;
-    //     if($request->file('project_image')!=null)
-    //     {
-    //         $name = time().rand(1,50).'.'.$request->file('project_image')->extension();
-    //         $request->file('project_image')->move(public_path('uploads/projectimages'), $name); 
-    //         $path = 'uploads/projectimages/'.$name; 
-    //         $ProjectData->image_path = $path;
-    //     }
-    //     if($ProjectData->save())
-    //     {
-    //         return redirect('project/list')->with('success','Project Updated Successfully');
-    //     }
-    //     else
-    //     {
-    //         return redirect('project/list')->with('error','Something went wrong! Project Not Update');
-    //     }
-
-    // }
-
+   
     public function DeleteProject(Request $request)
     {
 
@@ -315,7 +332,7 @@ class ProjectController extends Controller
             }
             else
             {
-                $ProjectData = Project::all()->toArray();
+                $ProjectData = Project::join('project_image','projets.id', '=', 'project_image.project_id')->groupBy('project_image.project_id')->get()->toArray();
                 if(!empty($ProjectData))
                 {
                     $project = json_encode(array('status'=>'sucess','data'=>$ProjectData,'error_code'=>'10006'));
@@ -327,6 +344,80 @@ class ProjectController extends Controller
             }
         }
         return $project;
+    }
+
+    ///Project Type Contollers
+    public function ProjectTypeList()
+    {
+        if(\request()->ajax()){
+            $data = ProjectType::latest()->get();
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row){
+                    $actionBtn = '<a href="/projecttype/edit?id='.$row['id'].'" class="edit btn btn-success btn-sm">Edit</a> <a href="/projecttype/delete?id='.$row['id'].'" class="delete btn btn-danger btn-sm">Delete</a>';
+                    return $actionBtn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+        // dd($Projects);
+        return view('projecttype/list');
+    }
+    public function AddProjectType()
+    {
+        return view('projecttype/add');
+    }
+    
+    public function EditProjectType(Request $request)
+    {
+        $Projects = ProjectType::find($request->id)->toArray();
+        if(!empty($Projects))
+        {
+            return view('projecttype/add',['Projects'=>$Projects]);
+        }
+        else
+        {
+            return redirect('projecttype/list')->with('error','Project Type Not Found');
+        }
+    }   
+
+    public function CreateProjectType(Request $request)
+    {
+        // dd($request->file());die;
+        $validator = $request->validate([
+            'status'=>'required',
+            'type'=>'required',
+        ]);        
+        
+        $ProjectData = new ProjectType;
+        date_default_timezone_set('Asia/Kolkata');
+        if(isset($request->id) && $request->id!='') 
+        {
+            $ProjectData = ProjectType::find($request->id);
+            $ProjectData->updated_at = date("Y-m-d H:i:s");
+        }
+        else
+        {
+            $ProjectData->created_at = date("Y-m-d H:i:s");
+        }
+        $ProjectData->status = $request->status;
+        $ProjectData->type = $request->type;
+        if($ProjectData->save())
+        {
+            return redirect('projecttype/list')->with('success','Project Type Added Successfully');
+        }
+        else
+        {
+            return redirect('projecttype/list')->with('error','Something went wrong! Project Type Not Added');
+        }
+
+    }
+   
+    public function DeleteProjectType(Request $request)
+    {
+
+      $delete = Project::destroy($request->id);
+      return redirect('projecttype/list')->with('success','Project Type Deleted Successfully');
     }
 }
 

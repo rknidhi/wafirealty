@@ -1,9 +1,9 @@
-@include('layout.header')
+@include('event.layout.header')
 
 		<!--start page wrapper -->
 		<div class="page-wrapper">
 			<div class="page-content">
-			@include('layout.alert')
+			@include('event.layout.alert')
 				<div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
                    <div class="col">
 					 <div class="card radius-10 border-start border-0 border-3 border-info">
@@ -322,7 +322,7 @@
 		<!--Start Back To Top Button-->
 		  <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
 		<!--End Back To Top Button-->
-		@include('layout.footer')
+		@include('event.layout.footer')
 		<script type="text/javascript">
     $(function () {
           var table = $('#dashboard_project').DataTable({

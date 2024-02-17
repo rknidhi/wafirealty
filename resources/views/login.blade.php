@@ -56,7 +56,7 @@ if($check!='')
 					<div class="col-12 col-xl-5 col-xxl-4 auth-cover-right align-items-center justify-content-center">
 						<div class="card rounded-0 m-3 shadow-none bg-transparent mb-0">
 							<div class="card-body p-sm-5">
-								@include('layout.alert')
+								@include('event.layout.alert')
 								<div class="">
 									<div class="mb-3 text-center">
 										<img src="{{URL::asset('images/wafi.jpg')}}" width="60" alt="" />

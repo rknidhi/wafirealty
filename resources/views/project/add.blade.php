@@ -1,8 +1,8 @@
-@include('layout.header')
+@include('event.layout.header')
 
 <div class="page-wrapper">
     <div class="page-content">
-    @include('layout.alert')
+    @include('event.layout.alert')
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
             <div class="breadcrumb-title pe-3">Manage Website</div>
             <div class="ps-3">
@@ -66,8 +66,9 @@
                 </div>
                 <div class="col-12 col-lg-6">
                   <label for="" class="form-label">Brand</label>
-                  <input type="text"  class="form-control" id="brand" 
-                  value="<?php if(isset($Projects['brand']) && $Projects['brand']!=''){echo $Projects['brand'];}?>" placeholder="Brand" name="brand">
+                  <select name="brand" id="brand" class="form-control select2">
+                    {!!$option!!}
+                  </select>
                 </div>
                 <div class="col-12 col-lg-6">
                   <label for="" class="form-label">Price</label>
@@ -83,7 +84,7 @@
                   <label for="" class="form-label">Project Status</label>
                   <select name="status" id="status" class="form-control select2">
                     <option value="">Select Status</option>
-                    <option value="Under Cunstruction" <?php if(isset($Projects['status']) && $Projects['status']=='Under Cunstruction'){echo 'selected';}?>>Under Cunstruction</option>
+                    <option value="Under Construction" <?php if(isset($Projects['status']) && $Projects['status']=='Under Construction'){echo 'selected';}?>>Under Construction</option>
                     <option value="Ready To Move" <?php if(isset($Projects['status']) && $Projects['status']=='Ready To Move'){echo 'selected';}?>>Ready To Move</option>
                     <option value="Sold" <?php if(isset($Projects['status']) && $Projects['status']=='Sold'){echo 'selected';}?>>Sold</option>
                   </select>
@@ -126,13 +127,7 @@
                 <div class="col-6 col-lg-6">
                   <label for="" class="form-label">Project Type</label>
                   <select class="form-control select2" name="type" id="type">
-                    <option value="">Select Project Type</option>
-                    <option value="Independent Floors" <?php if(isset($Projects) && $Projects['type']=='Independent Floors'){echo 'selected';}?>>Independent Floors</option>
-                    <option value="Retail Shops" <?php if(isset($Projects) && $Projects['type']=='Retail Shops'){echo 'selected';}?>>Retail Shops</option>
-                    <option value="Lockable Office Space" <?php if(isset($Projects) && $Projects['type']=='Lockable Office Space'){echo 'selected';}?>>Lockable Office Space</option>
-                    <option value="Studio Apartment" <?php if(isset($Projects) && $Projects['type']=='Studio Apartment'){echo 'selected';}?>>Studio Apartment</option>
-                    <option value="Office" <?php if(isset($Projects) && $Projects['type']=='Office'){echo 'selected';}?>>Office</option>
-                    <option value="Premium Residential Apartments" <?php if(isset($Projects) && $Projects['type']=='Premium Residential Apartments'){echo 'selected';}?>>Premium Residential Apartments</option>
+                  {!!$typeoption!!}
                   </select>
                 </div>
                 <div class="col-6 col-lg-6">
@@ -178,7 +173,7 @@
 
     </div>
 </div>
-@include('layout.footer')
+@include('event.layout.footer')
 <script>
 $(document).ready(function(){
   let AmenitiesArray = '@php if(isset($Projects["amenities"]) && $Projects["amenities"]!="") {echo $Projects["amenities"];} @endphp';

@@ -1,4 +1,4 @@
-@include('layout.header')
+@include('event.layout.header')
 
 
 
@@ -36,7 +36,7 @@
             </div>
         </div>
         <!--end breadcrumb-->
-        @include('layout.alert')
+        @include('event.layout.alert')
         <!-- Listing code start -->
 
         <div class="card radius-10">
@@ -90,7 +90,7 @@
 
 
 
-@include('layout.footer')
+@include('event.layout.footer')
 <script type="text/javascript">
     $(function () {
           var table = $('#user_table').DataTable({

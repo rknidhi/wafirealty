@@ -1,4 +1,4 @@
-@include('layout.header')
+@include('event.layout.header')
 <?php
 
 use App\Models\testimonial;
@@ -15,7 +15,7 @@ if($testimonialarr['success']=='true')
 ?>
 <div class="page-wrapper">
     <div class="page-content">
-    @include('layout.alert')
+    @include('event.layout.alert')
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
             <div class="breadcrumb-title pe-3">Manage Website</div>
             <div class="ps-3">
@@ -85,4 +85,4 @@ if($testimonialarr['success']=='true')
 
 
 
-@include('layout.footer')
+@include('event.layout.footer')

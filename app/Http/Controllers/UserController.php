@@ -31,7 +31,7 @@ class UserController extends Controller
                {
                    Log::info('Login Data Fetched',array('userdata'=>$user));
                    session()->put(['user_status'=>'logedin','name'=>$user['name'],'id'=>$user['id'],'email'=>$user['email'],'type'=>$user['type']]);
-                   return redirect('/',302,['users'=>$UserData])->with('success','Login Successfull');
+                   return redirect('/dashboard',302,['users'=>$UserData])->with('success','Login Successfull');
                }
                else
                {
@@ -334,5 +334,13 @@ class UserController extends Controller
     {
       $delete = User::destroy($request->id);
       return redirect('/user/list')->with('success','User Deleted Successfully');
+    }
+
+    public function UserProfile(Request $request)
+    {
+        $id = Session()->get('id');
+        $UserData = UserController::getUserById($id);
+        $users = json_decode($UserData, true);
+        return view('/user/user-profile',compact('users'));
     }
 }

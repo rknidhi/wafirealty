@@ -11,9 +11,9 @@ use DataTables;
 class BlogController extends Controller
 {
     public function GenerateTocken()
-{
+    {
     return csrf_token(); 
-}
+    }
     public function BlogList()
     {
         if(\request()->ajax()){
@@ -27,7 +27,7 @@ class BlogController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        return view('blog/list');
+        return view('event/blog/list');
     }
     public function AddBlog()
     {
@@ -42,7 +42,7 @@ class BlogController extends Controller
                 $option .= '<option value="'.$cat['category'].'">'.$cat['category'].'</option>';
             }
         }
-        return view('blog/add',['option'=>$option]);
+        return view('event/blog/add',['option'=>$option]);
     }
 
     public function EditBlog(Request $request)
@@ -62,7 +62,7 @@ class BlogController extends Controller
         }
         if(!empty($blogs))
         {
-            return view('blog/add',['blogs'=>$blogs,'option'=>$option]);
+            return view('event/blog/add',['blogs'=>$blogs,'option'=>$option]);
         }
         else
         {

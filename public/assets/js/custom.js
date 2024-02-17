@@ -193,3 +193,35 @@ function getAllNewTicketsByUser(type)
     });
 
 }
+function getUserPermission(id)
+{
+    var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+    $.ajax({
+        url:'/permission/userpermission',
+        data:{id:id,_token:CSRF_TOKEN},
+        type:'post',
+        success:function(suc)
+        {
+            console.log(suc);
+            $('#permission_modal').modal('show');
+            $('#permissionstable').html(suc);
+        }
+    })
+}
+
+function getProject(id)
+{
+    
+}
+
+function getPlans(no)
+{
+    
+    row = '';
+    num = parseInt(no);
+    for(i=1;i<=num;i++)
+    {
+        row += "<div class='row col-12 col-lg-12 mt-3'><div class='col-2 col-lg-2'><label> Add Floor Plan For "+i+" BHK</label></div><div class='col-10 col-lg-10'><div class='col-4 col-lg-4'><input type='file' class='form-control' id='plan_"+i+"' name='plan_"+i+"'></div></div></div>";
+    }
+    $('.planarea').html(row);
+}

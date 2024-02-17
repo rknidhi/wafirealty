@@ -1,13 +1,19 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\FloorPlanController;
+use App\Http\Controllers\FrontController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\TaskReportController;
 use App\Http\Controllers\WebsiteController;
 /*
 |--------------------------------------------------------------------------
@@ -31,12 +37,21 @@ use App\Http\Controllers\WebsiteController;
     Route::get('blog/add',[BlogController::class,'AddBlog']);
     Route::post('blog/create',[BlogController::class,'CreateBlog']);
 
+
     // Project Routs
     Route::get('project/list',[ProjectController::class,'ProjectList']);
     Route::get('project/edit',[ProjectController::class,'EditProject']);
     Route::get('project/add',[ProjectController::class,'AddProject']);
     Route::post('project/create',[ProjectController::class,'CreateProject']);
     Route::get('project/delete',[ProjectController::class,'DeleteProject']);
+
+    ///Project Type Routes
+    Route::get('projecttype/list',[ProjectController::class,'ProjectTypeList']);
+    Route::get('projecttype/edit',[ProjectController::class,'EditProjectType']);
+    Route::get('projecttype/add',[ProjectController::class,'AddProjectType']);
+    Route::post('projecttype/create',[ProjectController::class,'CreateProjectType']);
+    Route::get('projecttype/delete',[ProjectController::class,'DeleteProjectType']);
+
 
     //Menu Routes
     Route::get('menu/listmenu', [MenuController::class, 'listmenu'])->name('listmenu');
@@ -47,42 +62,88 @@ use App\Http\Controllers\WebsiteController;
     Route::post('menu/update/{id}', [MenuController::class, 'update'])->name('update');
     Route::get('menu/fetch_page/{name}', [MenuController::class, 'fetch_page'])->name('fetch_page');
 
+    
     //User Routes
     Route::get('user/list',[UserController::class,'UserList']);
     Route::get('user/edit',[UserController::class,'EditUser']);
     Route::get('user/add',[UserController::class,'AddUser']);
     Route::post('user/create',[UserController::class,'CreateUser']);
+    Route::get('user/delete',[UserController::class,'DeleteUser']);
+    Route::get('/UserProfile',[UserController::class,'UserProfile']);
+    Route::post('/CreateUser',[UserController::class,'CreateUser']);
+    Route::get('/Logout',[UserController::class,'LogoutUser']);
+    Route::post('/UpdateUser',[UserController::class,'UpdateUser']);
+    Route::post('/UserLogin',[UserController::class,'Login']);
+    Route::post('/UpdateProfile',[UserController::class,'UpdateProfile']);
+
 
     //Category Routes
     Route::get('category/list',[CategoryController::class,'CategoryList']);
     Route::get('category/edit',[CategoryController::class,'EditCategory']);
     Route::get('category/add',[CategoryController::class,'AddCategory']);
     Route::post('category/create',[CategoryController::class,'CreateCategory']);
+    Route::get('category/delete',[CategoryController::class,'DeleteCategory']);
 
 
-Route::get('/', [HomeController::class,'Index']);
-Route::get('/dashboard', [HomeController::class,'Index']);
-Route::get('/Login',function(){
-    return view('login');
-});
-Route::post('/UserLogin',[UserController::class,'Login']);
+    //Brand Routes
+    Route::get('brand/list',[BrandController::class,'BrandList']);
+    Route::get('brand/edit',[BrandController::class,'EditBrand']);
+    Route::get('brand/add',[BrandController::class,'AddBrand']);
+    Route::post('brand/create',[BrandController::class,'CreateBrand']);
+    Route::get('brand/delete',[BrandController::class,'DeleteBrand']);
 
-Route::get('/UserProfile',function(){
-    return view('/user/user-profile');
-});
-Route::post('/UpdateProfile',[UserController::class,'UpdateProfile']);
-Route::get('/EditUser/{uid}',function($uid){
-    return view('/user/edituser',['uid'=>$uid]);
-});
-Route::get('/AddUser',function(){
-    return view('/user/adduser');
-});
-Route::post('/CreateUser',[UserController::class,'CreateUser']);
-Route::get('/Logout',[UserController::class,'LogoutUser']);
-Route::post('/UpdateUser',[UserController::class,'UpdateUser']);
-Route::post('/website/testimonials/add',[WebsiteController::class,'CreateTestimonials']);
-Route::any('/website/testimonial/list',function(){return view('/website/testimonials/alltestimonials');});
-Route::get('/website/testimonial/add',function(){return view('/website/testimonials/addtestimonials');});
+
+    //Permission Routes
+    Route::get('permission/list',[PermissionController::class,'PermissionList']);
+    Route::get('permission/edit',[PermissionController::class,'EditPermission']);
+    Route::get('permission/add',[PermissionController::class,'AddPermission']);
+    Route::post('permission/create',[PermissionController::class,'CreatePermission']);
+    Route::get('permission/delete',[PermissionController::class,'DeletePermission']);
+    Route::post('permission/userpermission',[PermissionController::class,'getAllPermission']);
+    Route::post('permission/addpermission',[PermissionController::class,'addUserPermission']);
+
+
+    //Module Routes
+    Route::get('module/list',[ModuleController::class,'ModuleList']);
+    Route::get('module/edit',[ModuleController::class,'EditModule']);
+    Route::get('module/add',[ModuleController::class,'AddModule']);
+    Route::post('module/create',[ModuleController::class,'CreateModule']);
+    Route::get('module/delete',[ModuleController::class,'DeleteModule']);
+
+
+    //Task Report Routes
+    Route::get('report/add',[TaskReportController::class,'AddReport']);
+    Route::post('report/create',[TaskReportController::class,'CreateReport']);
+    Route::get('report/myreport',[TaskReportController::class,'MyReport']);
+    Route::get('report/allreport',[TaskReportController::class,'AllReports']);
+    Route::get('report/delete',[TaskReportController::class,'DeleteReport']);
+
+
+    ///Floor Plan Routs////
+    Route::get('floorplan/list',[FloorPlanController::class,'FloorPlanList']);
+    Route::get('floorplan/add',[FloorPlanController::class,'AddFloorPlan']);
+    Route::post('floorplan/create',[FloorPlanController::class,'CreateFloorPlan']);
+    ///Front End Routs//////
+    Route::controller(FrontController::class)->group(function(){
+            Route::get('/','Index');
+            Route::any('/project-details','ProjectDetails');
+            Route::any('/project-list','FrontProjectList');
+            Route::post('/schedule','setScheduleForClient');
+            Route::any('/search-propert','FilterPropert');
+            Route::get('blog','FrontBlog');
+            Route::get('detail-blog','FrontBlogDetails');
+    });
+
+
+    ///Miscelenious Routes
+    Route::get('/Admin', [HomeController::class,'Index']);
+    Route::get('/dashboard', [HomeController::class,'Index']);
+    Route::get('/Login',function(){return view('login');});
+    Route::get('/EditUser/{uid}',function($uid){return view('/user/edituser',['uid'=>$uid]);});
+    Route::get('/AddUser',function(){return view('/user/adduser');});
+    Route::post('/website/testimonials/add',[WebsiteController::class,'CreateTestimonials']);
+    Route::any('/website/testimonial/list',function(){return view('/website/testimonials/alltestimonials');});
+    Route::get('/website/testimonial/add',function(){return view('/website/testimonials/addtestimonials');});
 
 // });
 //    

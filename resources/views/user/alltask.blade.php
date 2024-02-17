@@ -1,4 +1,4 @@
-@include('layout.header')
+@include('event.layout.header')
 <?php
 
 use App\Models\ticket;
@@ -141,7 +141,7 @@ if ($permissionarr['success'] == 'false') { ?>
                 </div>
             </div>
         </div>
-        @include('layout.alert')
+        @include('event.layout.alert')
         <div class="table-responsive">
             <table class="table table-striped table-bordered dataTable mt-3 text-center">
                 <thead class="table-light">
@@ -206,4 +206,4 @@ if ($permissionarr['success'] == 'false') { ?>
     </div>
 </div>
 
-@include('layout.footer')
+@include('event.layout.footer')

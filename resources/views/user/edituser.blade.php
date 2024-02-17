@@ -1,4 +1,4 @@
-@include('layout.header')
+@include('event.layout.header')
 <?php
 use App\Models\designation;
 use App\Http\Controllers\UserController;
@@ -64,7 +64,7 @@ if($users!='')
       </div> -->
     </div>
     <!--end breadcrumb-->
-    @include('layout.alert')
+    @include('event.layout.alert')
     <div class="card">
       <div class="card-body">
         <div class="bs-stepper-content">
@@ -181,4 +181,4 @@ else
 
 
 
-@include('layout.footer')
+@include('event.layout.footer')

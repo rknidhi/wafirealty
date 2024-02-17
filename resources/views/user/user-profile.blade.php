@@ -1,40 +1,4 @@
-@include('layout.header')
-<?php
-
-use App\Http\Controllers\UserController;
-use App\Models\designation;
-
-$id = Session()->get('id');
-$alldesignation = designation::getRecords();
-$alldesignationarr = json_decode($alldesignation, true);
-$designationoptions = '<option value="0">--Select Designation--</option>';
-$permission = UserController::getUserPermissionByName('user', $id);
-$permissionarr = json_decode($permission, true);
-print_r($permissionarr);
-if ($permissionarr['success'] == 'false') { ?>
-	<div class="page-wrapper">
-		<div class="page-content">
-			<!--breadcrumb-->
-
-			<div class="alert alert-danger alert-dismissible fade show" role="alert">
-				<strong>You Are Not Authorized Person For This Module</strong>
-				<!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
-			</div>
-
-		</div>
-	</div>
-<?php return false;
-}
-
-?>
-<?php
-
-$id = Session()->get('id');
-$UserData = UserController::getUserById($id);
-$users = json_decode($UserData, true);
-?>
-
-
+@include('event.layout.header')
 <!--end header -->
 <!--start page wrapper -->
 <div class="page-wrapper">
@@ -65,7 +29,7 @@ $users = json_decode($UserData, true);
 			</div>
 		</div>
 		<!--end breadcrumb-->
-		@include('layout.alert')
+		@include('event.layout.alert')
 		<div class="container">
 			<div class="main-body">
 
@@ -159,18 +123,7 @@ $users = json_decode($UserData, true);
 										</div>
 										<div class="col-sm-9 text-secondary">
 											<select name="designation" id="designation" class="form-select">
-												<?php
-												if ($alldesignationarr['success'] == 'true') {
-													foreach ($alldesignationarr['data'] as  $designation) {
-														$selectcheck = '';
-														if ($designation['id'] == $users['data'][0]['designation']) {
-															$selectcheck = 'selected="selected"';
-															$designationoptions = '<option ' . $selectcheck . ' value="' . $designation['id'] . '">' . $designation['name'] . '</option>';
-														}
-													}
-												}
-												echo $designationoptions;
-												?>
+												
 											</select>
 										</div>
 									</div>
@@ -216,4 +169,4 @@ $users = json_decode($UserData, true);
 		</div>
 	</div>
 </div>
-@include('layout.footer')
+@include('event.layout.footer')

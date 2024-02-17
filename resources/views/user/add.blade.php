@@ -1,4 +1,4 @@
-@include('layout.header')
+@include('event.layout.header')
 <div class="page-wrapper">
   <div class="page-content">
     <!--breadcrumb-->
@@ -33,7 +33,7 @@
       </div> -->
     </div>
     <!--end breadcrumb-->
-    @include('layout.alert')
+    @include('event.layout.alert')
     <div class="card">
       <div class="card-body">
         <div class="bs-stepper-content">
@@ -72,6 +72,7 @@
                     <option value="admin" <?php if(isset($users) && $users['type']=='admin'){echo 'selected';}?>>Admin</option>
                     <option value="super admin" <?php if(isset($users) && $users['type']=='super admin'){echo 'selected';}?>>Super Admin</option>
                     <option value="user" <?php if(isset($users) && $users['type']=='user'){echo 'selected';}?>>User</option>
+                    <option value="agent" <?php if(isset($users) && $users['type']=='agent'){echo 'selected';}?>>Agent</option>
                   </select>
                 </div>
                 <div class="col-12 col-lg-6">
@@ -115,4 +116,4 @@
 
 
 
-@include('layout.footer')
+@include('event.layout.footer')
