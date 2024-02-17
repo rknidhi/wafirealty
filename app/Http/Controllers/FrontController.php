@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Category;
+use App\Models\ClientEnquiry;
 use App\Models\Image;
 use App\Models\Project;
 use App\Models\ProjectType;
@@ -122,5 +123,25 @@ class FrontController extends Controller
         $relatedblogs = Blog::where('category',$blog['category'])->get()->toArray();
         $blogcategory = Category::all()->toArray();
         return view('front.Blog.details',['blogs'=>$blog,'allblogs'=>$allblogs,'relatedblogs'=>$relatedblogs,'blogcategory'=>$blogcategory]);
+    }
+
+    public function ClientEnquiry(Request $request)
+    {
+        date_default_timezone_set('Asia/Kolkata');
+        $enquiry = new ClientEnquiry;
+        $enquiry->name = $request->name;
+        $enquiry->email = $request->email;
+        $enquiry->phone = $request->phone;
+        $enquiry->msg = $request->msg;
+        $enquiry->client = $request->client;
+        $enquiry->created_at = date("Y-m-d H:i:s");
+        if($enquiry->save())
+        {
+            return redirect(url()->previous())->with('success','We will call you for fixed the fixed your schedule');
+        }
+        else
+        {
+            return redirect(url()->previous())->with('error','Some thing went wrong');
+        }
     }
 }

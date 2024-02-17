@@ -141,6 +141,7 @@ use App\Http\Controllers\WebsiteController;
             Route::any('/search-propert','FilterPropert');
             Route::get('blog','FrontBlog');
             Route::get('detail-blog','FrontBlogDetails');
+            Route::post('/clientenquiry','ClientEnquiry');
     });
 
 
