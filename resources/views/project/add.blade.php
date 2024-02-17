@@ -130,10 +130,12 @@
                   {!!$typeoption!!}
                   </select>
                 </div>
+                
                 <div class="col-6 col-lg-6">
                   <label for="" class="form-label">Project Amenities</label>
                   <select class="form-control select2" name="amenities[]" id="amenities" multiple="multiple" >
-                    <option value="">Select Project Amenities</option>
+                  {!!$amenityoption!!}
+                    <!-- <option value="">Select Project Amenities</option>
                     <option value="CAR PARKING">CAR PARKING</option>
                     <option value="CHILDREN PLAY AREA">CHILDREN PLAY AREA</option>
                     <option value="CLUB HOUSE">CLUB HOUSE</option>
@@ -143,7 +145,7 @@
                     <option value="PUBLIC PARK">PUBLIC PARK</option>
                     <option value="SPORTS FACILITY">SPORTS FACILITY</option>
                     <option value="SWIMMING POOL">SWIMMING POOL</option>
-                    <option value="WIFI SIGNAL">WIFI SIGNAL</option>
+                    <option value="WIFI SIGNAL">WIFI SIGNAL</option> -->
                   </select>
                 </div>
                 <div class="col-6 col-lg-6">
@@ -176,7 +178,7 @@
 @include('event.layout.footer')
 <script>
 $(document).ready(function(){
-  let AmenitiesArray = '@php if(isset($Projects["amenities"]) && $Projects["amenities"]!="") {echo $Projects["amenities"];} @endphp';
+  let AmenitiesArray = '@php if(isset($Projects["amenities"]) && $Projects["amenities"]!="") {echo strtolower($Projects["amenities"]);} @endphp';
   const Amenities = AmenitiesArray.split(', ');
   if(Amenities[0]!='')
   {

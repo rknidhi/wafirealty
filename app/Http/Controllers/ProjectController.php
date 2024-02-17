@@ -72,7 +72,17 @@ class ProjectController extends Controller
         $Projects = Project::find($request->id)->toArray();
         $images = Image::where('project_id',$request->id)->get()->toArray();
         $brands = Brand::all()->toArray();
+        $amenity = ProjectAmenities::all()->toArray();
         $option ='<option></option>';
+        $amenityoption = '<option></option>';
+        if(!empty($amenity))
+        {
+           
+            foreach($amenity as $amt)
+            {
+                $amenityoption .= '<option value="'.strtolower($amt['amenity']).'">'.ucfirst($amt['amenity']).'</option>';
+            }
+        }
         if(!empty($brands))
         {
             foreach($brands as $brand)
@@ -96,7 +106,7 @@ class ProjectController extends Controller
         }
         if(!empty($Projects))
         {
-            return view('project/add',['Projects'=>$Projects,'Images'=>$images,'option'=>$option,'typeoption'=>$typeoption]);
+            return view('project/add',['Projects'=>$Projects,'Images'=>$images,'option'=>$option,'typeoption'=>$typeoption,'amenityoption'=>$amenityoption]);
         }
         else
         {

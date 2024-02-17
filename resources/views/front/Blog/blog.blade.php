@@ -25,7 +25,7 @@
                                         <h5><a href="#">{{$blog['title']}}</a></h5>
                                     </div>
                                     <div class="blog-post-description">
-                                        <p class="mb-0">{!!substr($blog['description'],0,200).'....'!!}</p>
+                                        <!-- <p class="mb-0">{!!substr($blog['description'],0,200).'....'!!}</p> -->
                                     </div>
                                     <div class="blog-post-link mt-4">
                                         <a class="btn btn-link p-0" href="/detail-blog?id={{$blog['id']}}"> Continue read</a>
@@ -56,6 +56,13 @@
                             </div>
                         </div>
                     @endforeach
+                    @if(count($blogs)==0)
+                                <div class="d-flex mb-3 align-items-top">
+                                    <div class="ms-3">
+                                        <h3>No Data Found</h3>
+                                    </div>
+                                </div>
+                            @endif
                 </div><br>
                 {!!$blogs->links('pagination::bootstrap-4')!!}  
                 <div class="col-lg-4 mt-4 mt-lg-0">
@@ -84,8 +91,26 @@
                                 </div>
                             </div>
                             @endforeach
+                            @if(count($blogs)==0)
+                                <div class="d-flex mb-3 align-items-top">
+                                    <div class="ms-3">
+                                        <h3>No Data Found</h3>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
-                        @endforeach
+                        <div class="widget">
+                            <div class="widget-title">
+                                <h6>Category</h6>
+                            </div>
+                            @foreach($blogcategory as $category)
+                            <div class="d-flex mb-3 align-items-top">
+                                <div class="ms-3">
+                                    <a class="text-dark" href="/blog?category={{$category['category']}}"><b>{{$category['category']}}</b></a>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
                     </div>
 
 

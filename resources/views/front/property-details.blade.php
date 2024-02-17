@@ -558,7 +558,7 @@ Breadcrumb -->
                                                 <div class="input-group date" id="datetimepicker-01"
                                                     data-target-input="nearest">
                                                     <input type="text" name="date" class="form-control datetimepicker-input"
-                                                        placeholder="Date" data-target="#datetimepicker-01">
+                                                        placeholder="Date" data-target="#datetimepicker-01" required>
                                                     <div class="input-group input-group-box"
                                                         data-target="#datetimepicker-01" data-toggle="datetimepicker">
                                                         <div class="input-group-text rounded-0 rounded-end"><i
@@ -570,7 +570,7 @@ Breadcrumb -->
                                                 <div class="input-group date" id="datetimepicker-03"
                                                     data-target-input="nearest">
                                                     <input type="text" name="time" class="form-control datetimepicker-input"
-                                                        placeholder="Time" data-target="#datetimepicker-03" />
+                                                        placeholder="Time" data-target="#datetimepicker-03" required />
                                                     <div class="input-group input-group-box"
                                                         data-target="#datetimepicker-03" data-toggle="datetimepicker">
                                                         <div class="input-group-text rounded-0 rounded-end"><i
@@ -579,13 +579,13 @@ Breadcrumb -->
                                                 </div>
                                             </div>
                                             <div class="mb-3 col-sm-12">
-                                                <input type="text" name="name" class="form-control" placeholder="Name">
+                                                <input type="text" name="name" class="form-control" placeholder="Name" required>
                                             </div>
                                             <div class="mb-3 col-sm-12">
-                                                <input type="email" name="email" class="form-control" placeholder="Email">
+                                                <input type="email" name="email" class="form-control" placeholder="Email" required>
                                             </div>
                                             <div class="mb-3 col-sm-12">
-                                                <input type="Text" name="phone" class="form-control" placeholder="Phone">
+                                                <input type="Text" name="phone" class="form-control" placeholder="Phone" required maxlength="10" minlength="10">
                                             </div>
                                             <div class="mb-3 col-sm-12">
                                                 <textarea class="form-control" name="msg" rows="4" placeholder="Message"></textarea>

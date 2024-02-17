@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
+use App\Models\Category;
 use App\Models\Image;
 use App\Models\Project;
 use App\Models\ProjectType;
@@ -63,7 +64,7 @@ class FrontController extends Controller
             'name'=>'required',
             'email'=>'required',
             'phone'=>'required',
-            'msg'=>'required',
+            // 'msg'=>'required',
         ]);
         date_default_timezone_set('Asia/Kolkata');        
         $schedule = new Schedule;
@@ -106,7 +107,12 @@ class FrontController extends Controller
     function FrontBlog(Request $request)
     {
         $blogs = Blog::paginate(10);
-        return view('front.Blog.blog',compact('blogs'));
+        if(isset($request->category) && $request->category!='')
+        {
+            $blogs = Blog::where('category',$request->category)->paginate(10); 
+        }
+        $blogcategory = Category::all()->toArray();
+        return view('front.Blog.blog',compact('blogs','blogcategory'));
     }
 
     function FrontBlogDetails(Request $request)
@@ -114,6 +120,7 @@ class FrontController extends Controller
         $blog = Blog::find($request->id)->toArray();
         $allblogs = Blog::all()->toArray();
         $relatedblogs = Blog::where('category',$blog['category'])->get()->toArray();
-        return view('front.Blog.details',['blogs'=>$blog,'allblogs'=>$allblogs,'relatedblogs'=>$relatedblogs]);
+        $blogcategory = Category::all()->toArray();
+        return view('front.Blog.details',['blogs'=>$blog,'allblogs'=>$allblogs,'relatedblogs'=>$relatedblogs,'blogcategory'=>$blogcategory]);
     }
 }

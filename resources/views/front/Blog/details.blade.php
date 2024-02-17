@@ -108,6 +108,18 @@ blog-detail -->
                             </div>
                             @endif
                             @endforeach
+                            <div class="widget">
+                            <div class="widget-title">
+                                <h6>Category</h6>
+                            </div>
+                            @foreach($blogcategory as $category)
+                            <div class="d-flex mb-3 align-items-top">
+                                <div class="ms-3">
+                                    <a class="text-dark" href="/blog?category={{$category['category']}}"><b>{{$category['category']}}</b></a>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
                         </div>
                     </div>
                 </div>
