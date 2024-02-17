@@ -88,34 +88,15 @@ Breadcrumb -->
                 <div class="widget-title">
                   <h6>Recently listed properties</h6>
                 </div>
-                <div class="recent-list-item">
-                  <img class="img-fluid" src="https://themes.potenzaglobalsolutions.com/html/real-villa/images/property/list/01.jpg" alt="">
-                  <div class="recent-list-item-info">
-                    <a class="address mb-2" href="#">Ample apartment at last floor</a>
-                    <span class="text-dark">$1,147,457 </span>
-                  </div>
-                </div>
-                <div class="recent-list-item">
-                  <img class="img-fluid" src="https://themes.potenzaglobalsolutions.com/html/real-villa/images/property/list/01.jpg" alt="">
-                  <div class="recent-list-item-info">
-                    <a class="address mb-2" href="#">Contemporary apartment</a>
-                    <span class="text-dark">$2,577,577 </span>
-                  </div>
-                </div>
-                <div class="recent-list-item">
-                  <img class="img-fluid" src="https://themes.potenzaglobalsolutions.com/html/real-villa/images/property/list/01.jpg" alt="">
-                  <div class="recent-list-item-info">
-                    <a class="address mb-2" href="#">3 bedroom house in gardner</a>
-                    <span class="text-dark">$3,575,547 </span>
-                  </div>
-                </div>
-                <div class="recent-list-item">
-                  <img class="img-fluid" src="https://themes.potenzaglobalsolutions.com/html/real-villa/images/property/list/01.jpg" alt="">
-                  <div class="recent-list-item-info">
-                    <a class="address mb-2" href="#">Stunning 2 bedroom home in village</a>
-                    <span class="text-dark">$1,475,575 </span>
-                  </div>
-                </div>
+                @foreach($recentprojects as $recentproject)
+                    <div class="recent-list-item">
+                    <img class="img-fluid" src="/public/{{$recentproject['images'][0]['image_path']}}" alt="">
+                    <div class="recent-list-item-info">
+                        <a class="address mb-2" href="/project-details?id={{$recentproject['id']}}">{{$recentproject['project_name']}}</a>
+                        <span class="text-dark">{{$recentproject['price']}}</span>
+                    </div>
+                    </div>
+                @endforeach
               </div>
                             <!-- <div class="agent-contact">
                                 <div class="d-flex align-items-center p-4 border border-bottom-0">
@@ -178,7 +159,7 @@ Breadcrumb -->
                                             </ul>
                                         </div>
                                     </div>
-                                    <h6 class="text-dark mb-3 mb-sm-0">Additional details</h6>
+                                    <!-- <h6 class="text-dark mb-3 mb-sm-0">Additional details</h6> -->
                                     <!--<div class="row">-->
                                     <!--    <div class="col-sm-6">-->
                                     <!--        <ul class="property-list list-unstyled mb-0">-->
@@ -265,7 +246,7 @@ Breadcrumb -->
                                 </div>
                             </div>
                         </div>
-                        <hr class="mt-4 mb-4 mb-sm-5 mt-sm-5">
+                        <!-- <hr class="mt-4 mb-4 mb-sm-5 mt-sm-5"> -->
                         <!-- <div class="property-floor-plans">
                             <div class="row">
                                 <div class="col-sm-3 mb-3 mb-sm-0">
@@ -355,6 +336,8 @@ Breadcrumb -->
                                 </div>
                             </div>
                         </div>
+                        
+                        @if(isset($project['near_by']) && $project['near_by']!='')
                         <hr class="mt-4 mb-4 mb-sm-5 mt-sm-5">
                         <div class="property-nearby">
                             <div class="row">
@@ -363,185 +346,12 @@ Breadcrumb -->
                                 </div>
                                 <div class="col-sm-9">
                                     <div class="nearby-info mb-4">
-                                        <span class="nearby-title mb-2 d-block text-info">
-                                            <i class="fas fa-graduation-cap me-2"></i><b>Education</b>
-                                        </span>
-                                        <div class="nearby-list">
-                                            <ul class="property-list list-unstyled mb-0">
-                                                <li class="d-flex">
-                                                    <span class="me-1"><b>Case Western Reserve University</b> (2.10
-                                                        km)</span>
-                                                    <ul class="list-unstyled list-inline ms-auto">
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star fa-xs"></i></li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star fa-xs"></i></li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star fa-xs"></i></li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star fa-xs"></i></li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star-half-alt fa-xs"></i>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li class="d-flex">
-                                                    <span class="me-1"><b>Georgia Institute of Technology</b> (1.42
-                                                        km)</span>
-                                                    <ul class="list-unstyled list-inline ms-auto">
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star fa-xs"></i></li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star fa-xs"></i></li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star fa-xs"></i></li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star-half-alt fa-xs"></i>
-                                                        </li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="far fa-star fa-xs"></i></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="d-flex">
-                                                    <span class="me-1"><b>Harvey Mudd College</b> (1.64 km)</span>
-                                                    <ul class="list-unstyled list-inline ms-auto">
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star fa-xs"></i></li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star fa-xs"></i></li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star-half-alt fa-xs"></i>
-                                                        </li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="far fa-star fa-xs"></i></li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="far fa-star fa-xs"></i></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="nearby-info mb-4">
-                                        <span class="nearby-title mb-2 d-block text-success">
-                                            <i class="fas fa-user-md me-2"></i><b>Health & Medical</b>
-                                        </span>
-                                        <div class="nearby-list">
-                                            <ul class="property-list list-unstyled mb-0">
-                                                <li class="d-flex">
-                                                    <span class="me-1"><b>Hopedale Community Hospital</b> (2.04
-                                                        km)</span>
-                                                    <ul class="list-unstyled list-inline ms-auto">
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star fa-xs"></i></li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star fa-xs"></i></li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star fa-xs"></i></li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star fa-xs"></i></li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star-half-alt fa-xs"></i>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li class="d-flex">
-                                                    <span class="me-1"><b>North Star Medical Clinic</b> (1.45 km)</span>
-                                                    <ul class="list-unstyled list-inline ms-auto">
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star fa-xs"></i></li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star fa-xs"></i></li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star fa-xs"></i></li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star-half-alt fa-xs"></i>
-                                                        </li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="far fa-star fa-xs"></i></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="d-flex">
-                                                    <span class="me-1"><b>Maple Valley General Hospital</b> (2.64
-                                                        km)</span>
-                                                    <ul class="list-unstyled list-inline ms-auto">
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star fa-xs"></i></li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star fa-xs"></i></li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star-half-alt fa-xs"></i>
-                                                        </li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="far fa-star fa-xs"></i></li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="far fa-star fa-xs"></i></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="nearby-info">
-                                        <span class="nearby-title mb-2 d-block text-danger">
-                                            <i class="fas fa-bus-alt me-2"></i><b>Transportation</b>
-                                        </span>
-                                        <div class="nearby-list">
-                                            <ul class="property-list list-unstyled mb-0">
-                                                <li class="d-flex">
-                                                    <span class="me-1"><b>Central bus depot </b> (2.04 km)</span>
-                                                    <ul class="list-unstyled list-inline ms-auto">
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star fa-xs"></i></li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star fa-xs"></i></li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star fa-xs"></i></li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star fa-xs"></i></li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star-half-alt fa-xs"></i>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li class="d-flex">
-                                                    <span class="me-1"><b>Travello & Bus Charter Express</b> (2.54
-                                                        km)</span>
-                                                    <ul class="list-unstyled list-inline ms-auto">
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star fa-xs"></i></li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star fa-xs"></i></li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star fa-xs"></i></li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star-half-alt fa-xs"></i>
-                                                        </li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="far fa-star fa-xs"></i></li>
-                                                    </ul>
-                                                </li>
-                                                <li class="d-flex">
-                                                    <span class="me-1"><b>Charing Cross & Paddington Shipping</b> (2.64
-                                                        km)</span>
-                                                    <ul class="list-unstyled list-inline ms-auto">
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star fa-xs"></i></li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star fa-xs"></i></li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="fas fa-star-half-alt fa-xs"></i>
-                                                        </li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="far fa-star fa-xs"></i></li>
-                                                        <li class="list-inline-item m-0 text-warning"><i
-                                                                class="far fa-star fa-xs"></i></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                        {!!$project['near_by']!!}
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        @endif
                         <hr class="mt-4 mb-4 mb-sm-5 mt-sm-5">
                         <div class="property-schedule">
                             <div class="row">

@@ -140,7 +140,6 @@ class ProjectController extends Controller
         //    // 'project_images' => 'required',
                
         // ]); 
-        
         if(!empty($request->amenities))
         {
             $amenities = implode(', ',$request->amenities);
@@ -179,20 +178,21 @@ class ProjectController extends Controller
         $ProjectData->about_developer = $request->about_developer;
         $ProjectData->map_location = $request->map_location;
         $ProjectData->home_project = $request->home_project;
+        $ProjectData->near_by = $request->near_by;
         if($ProjectData->save())
         {
             if($request->file('project_images')!=null)
             {
                 foreach($request->file('project_images') as $file)
-                    {
-                            $name = time().rand(1,50).'.'.$file->extension();
-                            $file->move(public_path('/uploads/projectimage/'.$request->project_name.'/'), $name); 
-                            $path = '/uploads/projectimage/'.$request->project_name.'/'.$name; 
-                            $images = new Image;
-                            $images->image_path = $path;
-                            $images->project_id = $ProjectData->id;
-                            $images->save(); 
-                    }
+                {
+                        $name = time().rand(1,50).'.'.$file->extension();
+                        $file->move(public_path('/uploads/projectimage/'.$request->project_name.'/'), $name); 
+                        $path = '/uploads/projectimage/'.$request->project_name.'/'.$name; 
+                        $images = new Image;
+                        $images->image_path = $path;
+                        $images->project_id = $ProjectData->id;
+                        $images->save(); 
+                }
             }
             return redirect('project/list')->with('success','Project Added Successfully');
         }

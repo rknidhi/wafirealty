@@ -125,6 +125,14 @@
                   <textarea class="texteditor" name="about_developer" id="about_developer"><?php if(isset($Projects) && $Projects['about_developer']!=''){echo $Projects['about_developer'];}?></textarea>
                 </div>
                 <div class="col-6 col-lg-6">
+                  <label for="" class="form-label">Near By Area</label>
+                  <textarea class="texteditor" name="near_by" id="near_by"><?php if(isset($Projects) && $Projects['near_by']!=''){echo $Projects['near_by'];}?></textarea>
+                </div>
+                <div class="col-6 col-lg-6">
+                  <!-- <label for="" class="form-label">Near By Area</label>
+                  <textarea class="texteditor" name="near_by" id="near_by"><?php if(isset($Projects) && $Projects['near_by']!=''){echo $Projects['near_by'];}?></textarea> -->
+                </div>
+                <div class="col-6 col-lg-6">
                   <label for="" class="form-label">Project Type</label>
                   <select class="form-control select2" name="type" id="type">
                   {!!$typeoption!!}
@@ -160,7 +168,45 @@
                 </div>
                 &nbsp;
                 <div class="row">
-                <div class="col-12 col-lg-12"> &nbsp;
+                <div class="col-12 col-lg-12"> 
+                  <h5 style="box-shadow: 0px 1px 10px -3px;" class="p-2">Floor Plans</h5>
+                  <div class="col-6 col-lg-6">
+                    <input type="hidden" value="0" name="onebhk">
+                    <input type="checkbox" value="1" name="onebhk">
+                    <label for="" class="form-label">1 BHK</label>
+                    <input type="file" name="onebhkfile" class="form-control">
+                  </div>
+                  <div class="col-6 col-lg-6">
+                    <input type="hidden" value="0" name="twobhk">
+                    <input type="checkbox" value="1" name="twobhk">
+                    <label for="" class="form-label" >2 BHK</label>
+                    <input type="file" name="twobhkfile" class="form-control">
+                  </div>
+                  <div class="col-6 col-lg-6">
+                    <input type="hidden" value="0"name="threebhk">
+                    <input type="checkbox" value="1"name="threebhk">
+                    <label for="" class="form-label">3 BHK</label>
+                    <input type="file" name="threebhkfile" class="form-control">
+                  </div>
+                  <div class="col-6 col-lg-6">
+                    <input type="hidden" value="0"name="fourbhk">
+                    <input type="checkbox" value="1"name="fourbhk">
+                    <label for="" class="form-label">4 BHK</label>
+                    <input type="file" name="fourbhkfile" class="form-control">
+                  </div>
+                  <div class="col-6 col-lg-6">
+                    <input type="hidden" value="0"name="fivebhk">
+                    <input type="checkbox" value="1"name="fivebhk">
+                    <label for="" class="form-label">5 BHK</label>
+                    <input type="file" name="fivebhkfile" class="form-control">
+                  </div>
+                  <div class="col-6 col-lg-6">
+                    <input type="hidden" value="0"name="villa">
+                    <input type="checkbox" value="1"name="villa">
+                    <label for="" class="form-label">villa</label>
+                    <input type="file" name="villafile" class="form-control">
+                  </div>
+                &nbsp;
                 </div>
                 <div class="col-12 col-lg-2">
                 <button class="btn btn-primary px-4" type="submit">Submit

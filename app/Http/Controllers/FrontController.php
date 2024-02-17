@@ -37,11 +37,19 @@ class FrontController extends Controller
     }
 
     public function ProjectDetails(Request $req){
+        $recentprojects = Project::latest()->take(10)->get()->toArray();
+        foreach($recentprojects as $key=> $recentproject)
+        {
+            $images = Image::where('project_id',$recentproject['id'])->get('image_path')->toArray();
+            $recentprojects[$key]['images'] = $images;
+            $diff = strtotime(date('Y-m-d H:i:s')) - strtotime($recentproject['created_at']);
+            $recentprojects[$key]['days'] = abs(round($diff / 86400));
+        }
         $id = $req->id;
         $project = Project::find($id)->toArray();
         $aminities = explode(', ',$project['amenities']);
         $images = Image::where('project_id',$id)->get('image_path')->toArray();
-        return view('front.property-details',compact('id','project','images','aminities'));
+        return view('front.property-details',compact('id','project','images','aminities','recentprojects'));
     }
 
     public function FrontProjectList(Request $req){

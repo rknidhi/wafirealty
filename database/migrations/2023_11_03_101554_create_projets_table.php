@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('location',255)->nullable();
-            $table->enum('type',['Independent Floors','Retail Shops','Lockable Office Space','Studio Apartment','Office','Premium Residential Apartments'])->nullable();
+            $table->string('type')->nullable();
             $table->string('brand',255)->nullable();
             $table->string('project_name',255)->nullable();
             $table->string('price',255)->nullable();
@@ -33,6 +33,13 @@ return new class extends Migration
             $table->string('about_developer',255)->nullable();
             $table->string('map_location',255)->nullable();
             $table->enum('home_project',[0,1])->nullable();
+            $table->string('near_by')->nullable();
+            $table->string('onebhk')->nullable();
+            $table->string('twobhk')->nullable();
+            $table->string('threebhk')->nullable();
+            $table->string('fourbhk')->nullable();
+            $table->string('fivebhk')->nullable();
+            $table->string('villabhk')->nullable();
         });
     }
 
