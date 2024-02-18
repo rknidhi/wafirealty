@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Category;
 use App\Models\ClientEnquiry;
+use App\Models\FloorPlanImage;
 use App\Models\Image;
 use App\Models\Project;
 use App\Models\ProjectType;
@@ -46,10 +47,11 @@ class FrontController extends Controller
             $recentprojects[$key]['days'] = abs(round($diff / 86400));
         }
         $id = $req->id;
+        $floorplans = FloorPlanImage::where('pid',$id)->get()->toArray();
         $project = Project::find($id)->toArray();
         $aminities = explode(', ',$project['amenities']);
         $images = Image::where('project_id',$id)->get('image_path')->toArray();
-        return view('front.property-details',compact('id','project','images','aminities','recentprojects'));
+        return view('front.property-details',compact('id','project','images','aminities','recentprojects','floorplans'));
     }
 
     public function FrontProjectList(Request $req){

@@ -209,19 +209,14 @@ function getUserPermission(id)
     })
 }
 
-function getProject(id)
-{
-    
-}
-
-function getPlans(no)
+function getPlans()
 {
     
     row = '';
+    no = $('#totalplans').val();
     num = parseInt(no);
-    for(i=1;i<=num;i++)
-    {
-        row += "<div class='row col-12 col-lg-12 mt-3'><div class='col-2 col-lg-2'><label> Add Floor Plan For "+i+" BHK</label></div><div class='col-10 col-lg-10'><div class='col-4 col-lg-4'><input type='file' class='form-control' id='plan_"+i+"' name='plan_"+i+"'></div></div></div>";
-    }
-    $('.planarea').html(row);
+    row = "<div class='row col-12 col-lg-12 mt-3'><div class='col-2 col-lg-2'><select class='form-control select2' name='room_"+num+"'><option value='1'>1 BHK</option><option value='2'>2 BHK</option><option value='3'>3 BHK</option><option value='4'>4 BHK</option><option value='5'>5 BHK</option><option value='6'>Villa</option></select></div><div class='col-10 col-lg-10'><div class='col-4 col-lg-4'><input type='file' class='form-control' id='plan_"+num+"' name='plan_"+num+"'></div></div></div>";
+    
+    $('.planarea').append(row);
+    $('#totalplans').val(num+1);
 }

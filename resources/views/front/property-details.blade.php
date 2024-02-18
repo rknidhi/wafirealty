@@ -89,6 +89,7 @@ Breadcrumb -->
                   <h6>Recently listed properties</h6>
                 </div>
                 @foreach($recentprojects as $recentproject)
+                @if(!empty($recentproject['images']))
                     <div class="recent-list-item">
                     <img class="img-fluid" src="/public/{{$recentproject['images'][0]['image_path']}}" alt="">
                     <div class="recent-list-item-info">
@@ -96,6 +97,7 @@ Breadcrumb -->
                         <span class="text-dark">{{$recentproject['price']}}</span>
                     </div>
                     </div>
+                @endif
                 @endforeach
               </div>
                             <!-- <div class="agent-contact">
@@ -246,65 +248,40 @@ Breadcrumb -->
                                 </div>
                             </div>
                         </div>
-                        <!-- <hr class="mt-4 mb-4 mb-sm-5 mt-sm-5"> -->
-                        <!-- <div class="property-floor-plans">
+                        <hr class="mt-4 mb-4 mb-sm-5 mt-sm-5">
+                        <div class="property-floor-plans">
                             <div class="row">
                                 <div class="col-sm-3 mb-3 mb-sm-0">
                                     <h5>Floor plans</h5>
                                 </div>
                                 <div class="col-sm-9">
                                     <div class="accordion-style-2" id="accordion">
+                                        
+                                        @foreach($floorplans as $plan)
                                         <div class="card">
-                                            <div class="card-header" id="headingOne">
+                                            <div class="card-header" id="headingOne{{$plan['id']}}">
                                                 <h5 class="accordion-title mb-0">
                                                     <button class="btn btn-link d-flex ms-auto align-items-center"
-                                                        data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                                                        aria-expanded="true" aria-controls="collapseOne">First Floor
+                                                        data-bs-toggle="collapse" data-bs-target="#collapseOne{{$plan['id']}}"
+                                                        aria-expanded="true" aria-controls="collapseOne{{$plan['id']}}">{{$plan['room']}} BHK
                                                         <i class="fas fa-chevron-down fa-xs"></i></button>
                                                 </h5>
                                             </div>
-                                            <div id="collapseOne" class="collapse show accordion-content"
-                                                aria-labelledby="headingOne" data-bs-parent="#accordion">
+                                            <div id="collapseOne{{$plan['id']}}" class="collapse accordion-content"
+                                                aria-labelledby="headingOne{{$plan['id']}}" data-bs-parent="#accordion">
                                                 <div class="card-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                        Cupiditate labore amet nulla a
-                                                        nobis iste consequuntur laudantium natus corporis, eveniet quo
-                                                        quidem perferendis sint illo
-                                                        autem, aut incidunt enim libero.</p>
-                                                    <img class="img-fluid" src="{{asset('front/images/property/floor-plans-01.jpg')}}"
+                                                    <img class="img-fluid" src="/public{{$plan['image_path']}}"
                                                         alt="">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card">
-                                            <div class="card-header" id="headingTwo">
-                                                <h5 class="accordion-title mb-0">
-                                                    <button
-                                                        class="btn btn-link d-flex ms-auto align-items-center collapsed"
-                                                        data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-                                                        aria-expanded="false" aria-controls="collapseTwo">
-                                                        Second Floor <i class="fas fa-chevron-down fa-xs"></i>
-                                                    </button>
-                                                </h5>
-                                            </div>
-                                            <div id="collapseTwo" class="collapse accordion-content"
-                                                aria-labelledby="headingTwo" data-bs-parent="#accordion">
-                                                <div class="card-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit rem
-                                                        esse qui voluptatem
-                                                        tempore nobis nihil, ex, odit vel exercitationem aperiam
-                                                        provident consectetur. Ea, eos,
-                                                        blanditiis! Rem quia, doloremque numquam.</p>
-                                                    <img class="img-fluid" src="{{asset('front/images/property/floor-plans-01.jpg')}}"
-                                                        alt="">
-                                                </div>
-                                            </div>
-                                        </div>
+
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <hr class="mt-4 mb-4 mb-sm-5 mt-sm-5"> -->
+                        <hr class="mt-4 mb-4 mb-sm-5 mt-sm-5">
                         <!-- <div class="property-video">
                             <div class="row">
                                 <div class="col-sm-3 mb-3 mb-sm-0">

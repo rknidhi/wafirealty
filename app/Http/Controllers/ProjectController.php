@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
+use App\Models\FloorPlanImage;
 use App\Models\Image;
 use App\Models\Project;
 use App\Models\ProjectType;
@@ -73,6 +74,11 @@ class ProjectController extends Controller
         $images = Image::where('project_id',$request->id)->get()->toArray();
         $brands = Brand::all()->toArray();
         $amenity = ProjectAmenities::all()->toArray();
+        $floorplans = FloorPlanImage::where('pid',$request->id)->get()->toArray();
+        $row = '';
+        foreach($floorplans as $room=>$plan){
+            $row .= "<div class='row col-12 col-lg-12 mt-3'><div class='col-2 col-lg-2'><select class='form-control select2' name='room_".($room+1)."' disabled><option value='".$plan['room']."'>".$plan['room']." BHK</option></select></div><div class='col-10 col-lg-10'><div class='col-4 col-lg-4' style='display: inline-flex;'><input type='file' class='form-control' id='plan_".($room+1)."' name='plan_".($room+1)."' disabled> &nbsp;<button class='btn btn-danger'><a href='/deletefloor?id=".$plan['id']."' style='color: white;'>Delete</a></button> &nbsp;<button class='btn btn-success'><a href='/public/".$plan['image_path']."' style='color: black;'>View</a></button></div></div></div>";
+        }
         $option ='<option></option>';
         $amenityoption = '<option></option>';
         if(!empty($amenity))
@@ -106,7 +112,7 @@ class ProjectController extends Controller
         }
         if(!empty($Projects))
         {
-            return view('project/add',['Projects'=>$Projects,'Images'=>$images,'option'=>$option,'typeoption'=>$typeoption,'amenityoption'=>$amenityoption]);
+            return view('project/add',['Projects'=>$Projects,'Images'=>$images,'option'=>$option,'typeoption'=>$typeoption,'amenityoption'=>$amenityoption,'row'=>$row]);
         }
         else
         {
@@ -140,6 +146,10 @@ class ProjectController extends Controller
         //    // 'project_images' => 'required',
                
         // ]); 
+        // echo '<pre>';
+        // print_r($_FILES);
+        // dd($request->all());
+        $amenities='';
         if(!empty($request->amenities))
         {
             $amenities = implode(', ',$request->amenities);
@@ -192,6 +202,26 @@ class ProjectController extends Controller
                         $images->image_path = $path;
                         $images->project_id = $ProjectData->id;
                         $images->save(); 
+                }
+            }
+            $numberofplans = $request->totalplans-1;
+            if($numberofplans>0)
+            {
+                for($i=1;$i<=$numberofplans;$i++)
+                {
+                    if($request->file('plan_'.$i)!=null)
+                    {
+                        $rooms = 'room_'.$i;
+                        $name = time().rand(1,50).'.'.$request->file('plan_'.$i)->extension();
+                        $request->file('plan_'.$i)->move(public_path('/uploads/floorplans/'), $name); 
+                        $path = '/uploads/floorplans/'.$name; 
+                        $floorimages = new FloorPlanImage;
+                        $floorimages->image_path = $path;
+                        $floorimages->pid = $ProjectData->id;
+                        $floorimages->totalplan = $numberofplans;
+                        $floorimages->room = $request->$rooms;
+                        $floorimages->save();
+                    }
                 }
             }
             return redirect('project/list')->with('success','Project Added Successfully');
@@ -516,6 +546,12 @@ class ProjectController extends Controller
 
       $delete = ProjectAmenities::destroy($request->id);
       return redirect('projectamenities/list')->with('success','Project Amenity Deleted Successfully');
+    }
+    public function DeleteFloorPlan(Request $request)
+    {
+
+      $delete = FloorPlanImage::destroy($request->id);
+      return redirect(url()->previous())->with('success','Project Floor Plan Deleted Successfully');
     }
 }
 

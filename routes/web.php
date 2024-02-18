@@ -60,6 +60,7 @@ use App\Http\Controllers\WebsiteController;
     Route::get('projectamenities/add',[ProjectController::class,'AddProjectAmenity']);
     Route::post('projectamenities/create',[ProjectController::class,'CreateProjectAmenity']);
     Route::get('projectamenities/delete',[ProjectController::class,'DeleteProjectAmenity']);
+    Route::get('/deletefloor',[ProjectController::class,'DeleteFloorPlan']);
 
 
     //Menu Routes
