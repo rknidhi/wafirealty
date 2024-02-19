@@ -36,4 +36,21 @@ class Controller extends BaseController
         $itemstoshow = array_slice($items , $offset , $perPage);
         return new LengthAwarePaginator($itemstoshow ,$total   ,$perPage);
     }
+
+    public function sendClientMails($data)
+    {
+        $clientname = $data->client;
+       $name = $data->name;
+       $email = $data->email;
+       $phone = $data->phone;
+       $msg = $data->msg;
+      $clientemailid = 'shyam@wmmsols.com, sayarabano036@gmail.com';
+    //   $clientemailid = 'shubh26joshi333@gmail.com';
+      $clientmailbody = 'Greeting!! '."\r\n".' We have recieved a new enquiry details mention as below: '."\r\n".' Name = '.$name. ' '."\r\n".'  Email = '.$email.' '."\r\n".' Phone Number = '.$phone.' '."\r\n".' Message = '.$msg.' '."\r\n".' Thanks ';
+      $clientmailsubject = 'New Enquiry Recieved';
+      $customermailbody = 'Dear '.$name.', '."\r\n".' We have recieved your enquiry, we will connect you to soon. '."\r\n".' Thanks & Regards '."\r\n".' '.$clientname;
+      $customermailsubject = 'Thanks For Enquiry';
+      mail($clientemailid,$clientmailsubject,$clientmailbody);
+      mail($email,$customermailsubject,$customermailbody);
+    }
 }

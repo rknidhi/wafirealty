@@ -147,7 +147,13 @@ class FrontController extends Controller
         $enquiry->created_at = date("Y-m-d H:i:s");
         if($enquiry->save())
         {
-            return redirect(url()->previous())->with('success','We will call you for fixed the fixed your schedule');
+            $this->sendClientMails($enquiry);
+            $url = url()->previous();
+            if(isset($request->thanks) && $request->thanks!='')
+            {
+                $url = $request->thanks;
+            }
+            return redirect($url)->with('success','We will call you for fixed the fixed your schedule');
         }
         else
         {
