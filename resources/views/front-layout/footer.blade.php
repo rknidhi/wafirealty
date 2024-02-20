@@ -141,8 +141,8 @@ Javascript -->
   <script src="{{asset('front/js/jarallax/jarallax.min.js')}}"></script>
   <script src="{{asset('front/js/jarallax/jarallax-video.min.js')}}"></script>
   <script src="{{asset('front/js/magnific-popup/jquery.magnific-popup.min.js')}}"></script>
-  
-  
+  <!-- reCapthca script -->
+  <script async src="https://www.google.com/recaptcha/api.js"></script>
 
   <!-- Template Scripts (Do not remove)-->
   <script src="{{asset('front/js/custom.js')}}"></script>

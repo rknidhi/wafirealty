@@ -14,6 +14,8 @@ use App\Models\Schedule;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
+use Symfony\Component\HttpFoundation\IpUtils;
 
 class FrontController extends Controller
 {
@@ -137,27 +139,63 @@ class FrontController extends Controller
 
     public function ClientEnquiry(Request $request)
     {
-        date_default_timezone_set('Asia/Kolkata');
-        $enquiry = new ClientEnquiry;
-        $enquiry->name = $request->name;
-        $enquiry->email = $request->email;
-        $enquiry->phone = $request->phone;
-        $enquiry->msg = $request->msg;
-        $enquiry->client = $request->client;
-        $enquiry->created_at = date("Y-m-d H:i:s");
-        if($enquiry->save())
-        {
-            $this->sendClientMails($enquiry);
+        $recaptcha_response = $request->input('g-recaptcha-response');
+
+        if (is_null($recaptcha_response)) {
             $url = url()->previous();
-            if(isset($request->thanks) && $request->thanks!='')
+            if(isset($request->error) && $request->error!='')
             {
-                $url = $request->thanks;
+                $url = $request->error.'&error=Please fill captcha';
             }
-            return redirect($url)->with('success','We will call you for fixed the fixed your schedule');
+            return redirect($url)->with('error', 'Please Complete the Recaptcha Again to proceed');
         }
-        else
-        {
-            return redirect(url()->previous())->with('error','Some thing went wrong');
+
+        $url = "https://www.google.com/recaptcha/api/siteverify";
+
+        $body = [
+            'secret' => config('services.recaptcha.secret'),
+            'response' => $recaptcha_response,
+            'remoteip' => IpUtils::anonymize($request->ip()) //anonymize the ip to be GDPR compliant. Otherwise just pass the default ip address
+        ];
+
+        $response = Http::asForm()->post($url, $body);
+
+        $result = json_decode($response);
+        if ($response->successful() && $result->success == true) {
+            date_default_timezone_set('Asia/Kolkata');
+            $enquiry = new ClientEnquiry;
+            $enquiry->name = $request->name;
+            $enquiry->email = $request->email;
+            $enquiry->phone = $request->phone;
+            $enquiry->msg = $request->msg;
+            $enquiry->client = $request->client;
+            $enquiry->created_at = date("Y-m-d H:i:s");
+            if($enquiry->save())
+            {
+                $this->sendClientMails($enquiry);
+                $url = url()->previous();
+                if(isset($request->thanks) && $request->thanks!='')
+                {
+                    $url = $request->thanks;
+                }
+                return redirect($url)->with('success','We will call you for fixed the fixed your schedule');
+            }
+            else
+            {
+                $url = url()->previous();
+                if(isset($request->error) && $request->error!='')
+                {
+                    $url = $request->error;
+                }
+                return redirect($url)->with('error','Some thing went wrong');
+            }
+        } else {
+            $url = url()->previous();
+            if(isset($request->error) && $request->error!='')
+            {
+                $url = $request->error.'&error=Please Complete the Recaptcha Again to proceed';
+            }
+            return redirect($url)->with('error', 'Please Complete the Recaptcha Again to proceed');
         }
     }
 }
