@@ -143,6 +143,13 @@ use App\Http\Controllers\WebsiteController;
             Route::get('blog','FrontBlog');
             Route::get('detail-blog','FrontBlogDetails');
             Route::post('/clientenquiry','ClientEnquiry');
+            Route::post('/createownlist','SendForCreateList');
+            Route::post('/submitcontact','SendContactUs');
+            Route::get('/contactus',function(){return view('front.ContactUs.contact-us');});
+            Route::get('/listyourown',function(){return view('front.list-your-properties');});
+            Route::get('/termscondition',function(){return view('front.terms-and-conditions');});
+            Route::get('/privacy',function(){return view('front.privacy-policy');});
+            Route::get('/about',function(){return view('front.about-us');});
     });
 
 

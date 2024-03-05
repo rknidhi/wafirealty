@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\Category;
 use App\Models\ClientEnquiry;
+use App\Models\ContactUs;
+use App\Models\CreateOwnProperty;
 use App\Models\FloorPlanImage;
 use App\Models\Image;
 use App\Models\Project;
@@ -155,7 +157,7 @@ class FrontController extends Controller
         $body = [
             'secret' => config('services.recaptcha.secret'),
             'response' => $recaptcha_response,
-            'remoteip' => IpUtils::anonymize($request->ip()) //anonymize the ip to be GDPR compliant. Otherwise just pass the default ip address
+            'remoteip' => IpUtils::anonymize($request->ip())
         ];
 
         $response = Http::asForm()->post($url, $body);
@@ -196,6 +198,46 @@ class FrontController extends Controller
                 $url = $request->error.'&error=Please Complete the Recaptcha Again to proceed';
             }
             return redirect($url)->with('error', 'Please Complete the Recaptcha Again to proceed');
+        }
+    }
+
+    public function SendForCreateList(Request $request)
+    {
+        $ownPropery = new CreateOwnProperty;
+        $ownPropery->name = $request->name;
+        $ownPropery->email = $request->email;
+        $ownPropery->phone = $request->phone;
+        $ownPropery->location = $request->location;
+        $ownPropery->type = $request->type;
+        $ownPropery->msg = $request->msg;
+        $ownPropery->status = $request->status;
+        $ownPropery->created_at = date('Y-m-d H:i:s');
+        if($ownPropery->save())
+        {
+            return redirect(url()->previous())->with('success','Message sent admin, we will connect you soon!');
+        }
+        else
+        {
+            return redirect(url()->previous())->with('error','Something went wrong');
+        }
+    }
+
+    public function SendContactUs(Request $request)
+    {
+        $contact = new ContactUs;
+        $contact->name = $request->name;
+        $contact->email = $request->email;
+        $contact->phone = $request->phone;
+        $contact->subject = $request->subject;
+        $contact->msg = $request->msg;
+        $contact->created_at = date('Y-m-d H:i:s');
+        if($contact->save())
+        {
+            return redirect(url()->previous())->with('success','Message sent admin, we will connect you soon!');
+        }
+        else
+        {
+            return redirect(url()->previous())->with('error','Something went wrong');
         }
     }
 }

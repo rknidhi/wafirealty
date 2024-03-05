@@ -85,7 +85,7 @@ header -->
 
             </li>
             <li class="dropdown nav-item">
-              <a href="#" class="nav-link" data-bs-toggle="dropdown">About us</a>
+              <a href="/about" class="nav-link" data-bs-toggle="dropdown">About us</a>
 
             </li>
             <li class="nav-item dropdown">
@@ -131,7 +131,7 @@ header -->
 
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-haspopup="true"
+              <a class="nav-link dropdown-toggle" href="/contactus" data-bs-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
                 Contact Us
               </a>

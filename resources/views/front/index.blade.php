@@ -168,7 +168,9 @@ Browse properties -->
             <div class="col-sm-6 col-md-4">
               <div class="property-item">
                 <div class="property-image bg-overlay-gradient-04">
+                  @if(isset($project['images']) && !empty($project['images']))
                   <img class="img-fluid" src="/public/{{end($project['images'])['image_path']}}" alt="">
+                  @endif
                   <div class="property-lable">
                     <span class="badge badge-md bg-primary">{{$project['type']}}</span>
                     <span class="badge badge-md bg-info">Sale</span>

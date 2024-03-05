@@ -1,8 +1,8 @@
 <x-mail::layout>
 {{-- Header --}}
 <x-slot:header>
-<x-mail::header :url="config('app.url')">
-{{ config('app.name') }}
+<x-mail::header :url="https://www.ithumproperties.com/">
+{{ config('app.ithum') }}
 </x-mail::header>
 </x-slot:header>
 
@@ -21,7 +21,7 @@
 {{-- Footer --}}
 <x-slot:footer>
 <x-mail::footer>
-© {{ date('Y') }} {{ config('app.name') }}. @lang('All rights reserved.')
+© {{ date('Y') }} {{ config('app.ithum') }}. @lang('All rights reserved.')
 </x-mail::footer>
 </x-slot:footer>
 </x-mail::layout>
