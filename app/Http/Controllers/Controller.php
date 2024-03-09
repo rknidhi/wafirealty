@@ -58,4 +58,14 @@ class Controller extends BaseController
         return Mail::to($email)->send(new SendMessageToEndUser($name,$customermailbody));
     //   mail($email,$customermailsubject,$customermailbody);
     }
+    public function createUrlEntity($data)
+    {
+        $location = str_replace(' ','-',$data->location);
+        $config =  str_replace(' ','-',$data->configurations);
+        $type = str_replace(' ','-',$data->type);
+        $area = str_replace(' ','-',$data->area);
+        $project_name = str_replace(' ','-',$data->project_name);
+        $url = 'property-for-sale-in'.$location.'-'.$project_name.'-'.$type.'-'.$config.'-'.$area;
+        return strtolower($url);
+    }
 }

@@ -40,6 +40,7 @@ return new class extends Migration
             $table->string('fourbhk')->nullable();
             $table->string('fivebhk')->nullable();
             $table->string('villabhk')->nullable();
+            $table->string('slug')->nullable();
         });
     }
 

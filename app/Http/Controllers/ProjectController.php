@@ -189,6 +189,8 @@ class ProjectController extends Controller
         $ProjectData->map_location = $request->map_location;
         $ProjectData->home_project = $request->home_project;
         $ProjectData->near_by = $request->near_by;
+        $urlEntity = $this->createUrlEntity($ProjectData);
+        $ProjectData->slug = $urlEntity;
         if($ProjectData->save())
         {
             if($request->file('project_images')!=null)
