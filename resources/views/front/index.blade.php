@@ -207,7 +207,7 @@ Browse properties -->
                     </ul>
                   </div>
                   <div class="property-btn">
-                    <a class="property-link" href="/project-details?id={{$project['id']}}">See Details</a>
+                    <a class="property-link" href="/project-details/{{$project['slug']}}?id={{$project['id']}}">See Details</a>
                     <ul class="property-listing-actions list-unstyled mb-0">
                       <li class="property-compare">
                         <a data-bs-toggle="tooltip" data-bs-placement="top" title="Compare" href="#"><i
@@ -275,7 +275,7 @@ Featured properties-->
                                     </ul>
                                   </div>
                                   <div class="property-btn">
-                                    <a class="property-link" href="/project-details?id={{$best['id']}}">See Details</a>
+                                    <a class="property-link" href="/project-details/{{$best['slug']}}?id={{$best['id']}}">See Details</a>
                                     <ul class="property-listing-actions list-unstyled mb-0">
                                       <li class="property-compare"><a data-bs-toggle="tooltip" data-bs-placement="top"
                                           title="Compare" href="#"><i class="fas fa-exchange-alt"></i></a></li>

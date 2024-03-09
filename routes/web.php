@@ -136,7 +136,7 @@ use App\Http\Controllers\WebsiteController;
     ///Front End Routs//////
     Route::controller(FrontController::class)->group(function(){
             Route::get('/','Index');
-            Route::any('/project-details','ProjectDetails');
+            Route::any('/project-details/{slug}','ProjectDetails');
             Route::any('/project-list','FrontProjectList');
             Route::post('/schedule','setScheduleForClient');
             Route::any('/search-propert','FilterPropert');

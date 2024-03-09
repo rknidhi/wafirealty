@@ -288,7 +288,7 @@ Listing – grid view -->
                     <p class="mb-0 mt-3">{!!substr($pro['about_project'],0,150)!!}</p>
                   </div>
                   <div class="property-btn">
-                    <a class="property-link" href="/project-details?id={{$pro['id']}}">See Details</a>
+                    <a class="property-link" href="/project-details/{{$project['slug']}}?id={{$pro['id']}}">See Details</a>
                     <!-- <ul class="property-listing-actions list-unstyled mb-0">
                       <li class="property-compare"><a data-bs-toggle="tooltip" data-bs-placement="top" title="Compare"
                           href="#"><i class="fas fa-exchange-alt"></i></a></li>
