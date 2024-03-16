@@ -66,13 +66,21 @@
           
                 </div> -->
                 <div class="col-12 col-lg-6">
-                  <label for="InputLanguage" class="form-label">User Type</label>
-                  <select class="form-select" id="InputLanguage" aria-label="Default select example" name="usertype">
+                  <label for="usertype" class="form-label">User Type</label>
+                  <select class="form-select" id="usertype" aria-label="Default select example" name="usertype" onchange="getSiteOption(this.value)">
                     <option selected>--Select Type--</option>
                     <option value="admin" <?php if(isset($users) && $users['type']=='admin'){echo 'selected';}?>>Admin</option>
                     <option value="super admin" <?php if(isset($users) && $users['type']=='super admin'){echo 'selected';}?>>Super Admin</option>
                     <option value="user" <?php if(isset($users) && $users['type']=='user'){echo 'selected';}?>>User</option>
                     <option value="agent" <?php if(isset($users) && $users['type']=='agent'){echo 'selected';}?>>Agent</option>
+                    <option value="site manager" <?php if(isset($users) && $users['type']=='site manager'){echo 'selected';}?>>Site Manager</option>
+                  </select>
+                </div>
+                <div class="col-12 col-lg-6" id="sites" style="display: none;">
+                  <label for="siteid" class="form-label">Sites</label>
+                  <select class="form-select select2" id="siteid" aria-label="Default select example" name="siteid">
+                    <option selected>--Select Site--</option>
+                    {!!$siteoption!!}
                   </select>
                 </div>
                 <div class="col-12 col-lg-6">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Sites;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -25,19 +26,20 @@ class UserController extends Controller
                $user['id'] = $items->id;
                $user['email'] = $items->email;
                $user['type'] = $items->type;
+               $user['siteid'] = $items->siteid;
             }
             
-               if(!empty($user) && $user['id']!='')
-               {
-                   Log::info('Login Data Fetched',array('userdata'=>$user));
-                   session()->put(['user_status'=>'logedin','name'=>$user['name'],'id'=>$user['id'],'email'=>$user['email'],'type'=>$user['type']]);
-                   return redirect('/dashboard',302,['users'=>$UserData])->with('success','Login Successfull');
-               }
-               else
-               {
-                   Log::alert('Login Invalid',array('data'=>''));
-                   return redirect('/Login')->with('error','Invalid UserId or Password');
-               }
+            if(!empty($user) && $user['id']!='')
+            {
+                Log::info('Login Data Fetched',array('userdata'=>$user));
+                session()->put(['user_status'=>'logedin','name'=>$user['name'],'id'=>$user['id'],'email'=>$user['email'],'type'=>$user['type'],'siteid'=>$user['siteid']]);
+                return redirect('/dashboard',302,['users'=>$UserData])->with('success','Login Successfull');
+            }
+            else
+            {
+                Log::alert('Login Invalid',array('data'=>''));
+                return redirect('/Login')->with('error','Invalid UserId or Password');
+            }
         }
     }
     function LogoutUser()
@@ -74,16 +76,17 @@ class UserController extends Controller
         $instagram = $UserUpdateData->instagram;
         $facebook = $UserUpdateData->facebook;
         $about = $UserUpdateData->about;
+        $siteid = $UserUpdateData->siteid;
         if(!empty($_FILES) && $_FILES['profile_photo']['name']!='')
         {
             $imageName = time().'.'.$UserUpdateData->profile_photo->extension();  
             $UserUpdateData->profile_photo->move(public_path('uploads/userprofile'), $imageName);
             $path = 'uploads/userprofile/'.$imageName;
-            $UpdateUser = DB::table('users')->where('id','=',$id)->update(['about'=>$about,'name'=>$name,'email'=>$email,'designation'=>$designation,'mobile'=>$mobile,'address'=>$address,'profile_photo_path'=>$path,'github'=>$github,'twitter'=>$twitter,'instagram'=>$instagram,'facebook'=>$facebook]);
+            $UpdateUser = DB::table('users')->where('id','=',$id)->update(['about'=>$about,'name'=>$name,'email'=>$email,'designation'=>$designation,'mobile'=>$mobile,'address'=>$address,'profile_photo_path'=>$path,'github'=>$github,'twitter'=>$twitter,'instagram'=>$instagram,'facebook'=>$facebook,'siteid'=>$siteid]);
         }
         else
         {
-            $UpdateUser = DB::table('users')->where('id','=',$id)->update(['about'=>$about,'name'=>$name,'email'=>$email,'designation'=>$designation,'mobile'=>$mobile,'address'=>$address,'github'=>$github,'twitter'=>$twitter,'instagram'=>$instagram,'facebook'=>$facebook]);
+            $UpdateUser = DB::table('users')->where('id','=',$id)->update(['about'=>$about,'name'=>$name,'email'=>$email,'designation'=>$designation,'mobile'=>$mobile,'address'=>$address,'github'=>$github,'twitter'=>$twitter,'instagram'=>$instagram,'facebook'=>$facebook,'siteid'=>$siteid]);
         }
         if($UpdateUser==1)
         {
@@ -268,7 +271,16 @@ class UserController extends Controller
     }
     public function AddUser()
     {
-        return view('user/add');
+        $sites = Sites::all()->toArray();
+        $siteoption = '<option></option>';
+        if(!empty($sites))
+        {
+            foreach($sites as $site)
+            {
+                $siteoption .= "<option value='".$site['id']."'>".$site['name']."</option>";
+            }
+        }
+        return view('user/add',compact('siteoption'));
     }
 
     public function EditUser(Request $request)
@@ -320,6 +332,7 @@ class UserController extends Controller
         $UserData->type = $request->usertype;
         $UserData->status = $request->status;
         $UserData->about = $request->about;
+        $UserData->siteid = $request->siteid;
         $UserData->password = md5($request->password);
         if(!empty($_FILES) && $_FILES['profile_photo']['name']!='')
         {

@@ -406,13 +406,22 @@ $type = Session()->get('type');
 									<li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Trash Media</a></li>
 								</ul>
 							</li> -->
+							<li> <a class="has-arrow" href="#">Manege Sites</a>
+								<ul>
+									<li> <a href="/site/list"><i class="bx bx-right-arrow-alt"></i>All Sites</a></li>
+									<li> <a href="/site/add"><i class="bx bx-right-arrow-alt"></i>Add Sites</a></li>
+									<!-- <li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Edit Blogs</a></li> -->
+									<!-- <li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Delete Blogs</a></li> -->
+									<!-- <li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Trash Blogs</a></li> -->
+								</ul>
+							</li>
 							<li> <a class="has-arrow" href="#">Manege Blogs</a>
 								<ul>
 									<li> <a href="/blog/list"><i class="bx bx-right-arrow-alt"></i>All Blogs</a></li>
 									<li> <a href="/blog/add"><i class="bx bx-right-arrow-alt"></i>Add Blogs</a></li>
 									<!-- <li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Edit Blogs</a></li> -->
 									<!-- <li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Delete Blogs</a></li> -->
-									<li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Trash Blogs</a></li>
+									<!-- <li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Trash Blogs</a></li> -->
 								</ul>
 							</li>
 							<li> <a class="has-arrow" href="#">Manege Category</a>
@@ -471,6 +480,7 @@ $type = Session()->get('type');
 						</ul>
 					</li>
 					@endif
+					@if($type!='site manager')
 					<li>
 						<a href="javascript:();" class="has-arrow">
 							<div class="parent-icon"><i class="fa fa fa-cogs"></i>
@@ -486,6 +496,18 @@ $type = Session()->get('type');
 									<!-- <li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Trash User</a></li> -->
 							</ul>
 					</li>
+					@endif
+					@if($type=='site manager' || $type=='super admin')
+							<li> <a class="has-arrow" href="#">Manege Site Blogs</a>
+								<ul>
+									<li> <a href="/siteblog/list"><i class="bx bx-right-arrow-alt"></i>All Site Blogs</a></li>
+									<li> <a href="/siteblog/add"><i class="bx bx-right-arrow-alt"></i>Add Site Blog</a></li>
+									<!-- <li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Edit Blogs</a></li> -->
+									<!-- <li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Delete Blogs</a></li> -->
+									<!-- <li> <a href="javascript:();"><i class="bx bx-right-arrow-alt"></i>Trash Blogs</a></li> -->
+								</ul>
+							</li>
+							@endif
 					<!-- <li>
 						<a href="#">
 							<div class="parent-icon"><i class="fa fa-stop-circle"></i>

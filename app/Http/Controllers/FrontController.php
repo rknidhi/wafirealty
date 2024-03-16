@@ -41,7 +41,7 @@ class FrontController extends Controller
         return view('front.index',compact('category','projects','news','categoryoption','experts'));
     }
 
-    public function ProjectDetails(Request $req){
+    public function ProjectDetails($slug){
         $recentprojects = Project::latest()->take(10)->get()->toArray();
         foreach($recentprojects as $key=> $recentproject)
         {
@@ -50,6 +50,7 @@ class FrontController extends Controller
             $diff = strtotime(date('Y-m-d H:i:s')) - strtotime($recentproject['created_at']);
             $recentprojects[$key]['days'] = abs(round($diff / 86400));
         }
+        print_r($slug);die("ds");
         $id = $req->id;
         $floorplans = FloorPlanImage::where('pid',$id)->get()->toArray();
         $project = Project::find($id)->toArray();

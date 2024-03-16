@@ -220,3 +220,15 @@ function getPlans()
     $('.planarea').append(row);
     $('#totalplans').val(num+1);
 }
+
+function getSiteOption(val)
+{
+    if(val=='site manager')
+    {
+        $('#sites').show();
+    }
+    else{
+        $('#sites').hide();
+        $('#siteid').val('');
+    }
+}

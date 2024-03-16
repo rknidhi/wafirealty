@@ -13,6 +13,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ModuleController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\SiteController;
 use App\Http\Controllers\TaskReportController;
 use App\Http\Controllers\WebsiteController;
 /*
@@ -37,6 +38,21 @@ use App\Http\Controllers\WebsiteController;
     Route::get('blog/add',[BlogController::class,'AddBlog']);
     Route::post('blog/create',[BlogController::class,'CreateBlog']);
     Route::get('blog/delete',[BlogController::class,'DeleteBlog']);
+    
+    //Outer Site Blogs
+    Route::get('siteblog/list',[SiteController::class,'SiteBlogList']);
+    Route::get('siteblog/edit',[SiteController::class,'EditSiteBlog']);
+    Route::get('siteblog/add',[SiteController::class,'AddSiteBlog']);
+    Route::post('siteblog/create',[SiteController::class,'CreateSiteBlog']);
+    Route::get('siteblog/delete',[SiteController::class,'DeleteSiteBlog']);
+
+
+    //Sites Routs
+    Route::get('site/list',[SiteController::class,'SiteList']);
+    Route::get('site/edit',[SiteController::class,'EditSite']);
+    Route::get('site/add',[SiteController::class,'AddSite']);
+    Route::post('site/create',[SiteController::class,'CreateSite']);
+    Route::get('site/delete',[SiteController::class,'DeleteSite']);
 
 
     // Project Routs

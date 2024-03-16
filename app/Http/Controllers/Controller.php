@@ -9,6 +9,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Routing\Controller as BaseController;
 use App\Mail\SendMail;
 use App\Mail\SendMessageToEndUser;
+use Illuminate\Support\Facades\Http;
 use Mail;
 
 class Controller extends BaseController
@@ -54,18 +55,36 @@ class Controller extends BaseController
         $customermailbody = 'Dear '.$name.', '."\r\n".' We have recieved your enquiry, we will connect you to soon. '."\r\n".' Thanks & Regards '."\r\n".' '.$clientname;
         $customermailsubject = 'Thanks For Enquiry';
         Mail::to($clientemailid)->send(new SendMail($name,$email,$clientmailsubject,$clientmailbody));
-    //   mail($clientemailid,$clientmailsubject,$clientmailbody);
         return Mail::to($email)->send(new SendMessageToEndUser($name,$customermailbody));
-    //   mail($email,$customermailsubject,$customermailbody);
     }
     public function createUrlEntity($data)
     {
         $location = str_replace(' ','-',$data->location);
-        $config =  str_replace(' ','-',$data->configurations);
+        $config =  str_replace(' - ',' ',$data->configurations);
+        $config =  str_replace(' ','-',$config);
         $type = str_replace(' ','-',$data->type);
         $area = str_replace(' ','-',$data->area);
         $project_name = str_replace(' ','-',$data->project_name);
-        $url = 'property-for-sale-in'.$location.'-'.$project_name.'-'.$type.'-'.$config.'-'.$area;
+        $url = 'property-for-sale-in-'.$location.'-'.$project_name.'-'.$type.'-'.$config.'-'.$area;
         return strtolower($url);
+    }
+
+    public function manageOuterBlogs($data,$url,$method,$path)
+    {
+        // $url = $data['url'];
+        $url = $url['domain'].'/process.php';
+        $data['request'] = $method;
+        $data['filepath'] = $path;
+        $ch=curl_init($url);
+        curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,0);
+        curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,0);
+        curl_setopt($ch,CURLOPT_POST,1);
+        curl_setopt($ch,CURLOPT_POSTFIELDS,$data);
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+        curl_setopt($ch,CURLOPT_FOLLOWLOCATION,1);
+        curl_setopt($ch,CURLOPT_HTTPHEADER,array('content-Type','application/json'));
+        $result=curl_exec($ch);
+        curl_close($ch);
+        return $result;
     }
 }
