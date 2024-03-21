@@ -31,16 +31,28 @@ class BlogController extends Controller
     }
     public function AddBlog()
     {
-
+        $session = session()->all();
         $category = Category::all()->toArray();
         $option ='<option></option>';
         if(!empty($category))
         {
-           
+           if(isset($session['siteid']) && $session['siteid']!='')
+           {
             foreach($category as $cat)
             {
-                $option .= '<option value="'.$cat['category'].'">'.$cat['category'].'</option>';
+                if($cat['siteid']==$session['siteid'])
+                {
+                    $option .= '<option value="'.$cat['category'].'">'.$cat['category'].'</option>';
+                }
             }
+           }
+           else
+           {
+                foreach($category as $cat)
+                {
+                    $option .= '<option value="'.$cat['category'].'">'.$cat['category'].'</option>';
+                }
+           }
         }
         return view('event/blog/add',['option'=>$option]);
     }

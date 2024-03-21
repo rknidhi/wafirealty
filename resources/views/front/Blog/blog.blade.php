@@ -104,11 +104,13 @@
                                 <h6>Category</h6>
                             </div>
                             @foreach($blogcategory as $category)
+                            @if($category['siteid']==null || $category['siteid']=='')
                             <div class="d-flex mb-3 align-items-top">
                                 <div class="ms-3">
                                     <a class="text-dark" href="/blog?category={{$category['category']}}"><b>{{$category['category']}}</b></a>
                                 </div>
                             </div>
+                            @endif
                             @endforeach
                         </div>
                     </div>

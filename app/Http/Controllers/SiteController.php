@@ -91,6 +91,7 @@ class SiteController extends Controller
                 $url['domain'] = $getSiteUrl[0]['domain'];
                 $returndata = $this->manageOuterBlogs(array(),$url,'fetch','');
                 $bloglist = json_decode($returndata,true);
+                $bloglist = json_decode($bloglist,true);
                 $data = collect($bloglist['data']);
             }
             return DataTables::of($data)
@@ -106,13 +107,18 @@ class SiteController extends Controller
     }
     public function AddSiteBlog()
     {
+        $session = session()->all();
         $sites = Sites::all()->toArray();
         $category = Category::all()->toArray();
         $option = '<option></option>';
         $siteoption = '<option></option>';
-        if (!empty($category)) {
-            foreach ($category as $cat) {
-                $option .= '<option value="' . $cat['category'] . '">' . $cat['category'] . '</option>';
+        $category = Category::where('siteid',$session['siteid'])->get()->toArray();
+        $option ='<option></option>';
+        if(!empty($category))
+        {
+            foreach($category as $cat)
+            {
+                $option .= '<option value="'.$cat['category'].'">'.$cat['category'].'</option>';
             }
         }
         if (!empty($sites)) {
@@ -133,6 +139,7 @@ class SiteController extends Controller
             $url['domain'] = $getSiteUrl[0]['domain'];
             $returndata = $this->manageOuterBlogs(array('id'=>$request->id),$url,'fetch','');
             $bloglist = json_decode($returndata,true);
+            $bloglist = json_decode($bloglist,true);
             $blogs = $bloglist['data'][0];
         }
         
@@ -148,8 +155,20 @@ class SiteController extends Controller
                 $siteoption .= '<option value="' . $site['id'] . '" ' . $selectsite . '>' . $site['name'] . '</option>';
             }
         }
+        $category = Category::where('siteid',$session['siteid'])->get()->toArray();
+        $option ='<option></option>';
+        if(!empty($category))
+        {
+            
+            foreach($category as $cat)
+            {
+                $select = '';
+                if($cat['category']==$blogs['category']){$select = "selected";}
+                $option .= '<option value="'.$cat['category'].'" '.$select.'>'.$cat['category'].'</option>';
+            }
+        }
         if (!empty($blogs)) {
-            return view('siteblog/add', ['blogs' => $blogs,'siteoption' => $siteoption]);
+            return view('siteblog/add', ['blogs' => $blogs,'siteoption' => $siteoption,'option'=>$option]);
         } else {
             return redirect('siteblog/list')->with('error', 'Blog Not Found');
         }
@@ -172,10 +191,11 @@ class SiteController extends Controller
             if ($request->file('blog_image') != null) {
                 $name = time() . rand(1, 50) . '.' . $request->file('blog_image')->extension();
                 $request->file('blog_image')->move(public_path('uploads/blogimages/' . $request->siteid), $name);
-                $path = base_path() . '/public/uploads/blogimages/' . $request->siteid . '/' . $name;
+                $path = 'https://wafirealty.com//public/uploads/blogimages/' . $request->siteid . '/' . $name;
             }
             $outerBlogsend = $this->manageOuterBlogs($request->all(), $siteurl, $method, $path);
-            $result = json_decode($outerBlogsend, true);
+            $result = json_decode($outerBlogsend,true);
+            $result = json_decode($result,true);
             if ($result['status'] == 'success') {
                 return redirect('/siteblog/list')->with('success', 'Blog Added Successfully');
             } else {
@@ -192,6 +212,7 @@ class SiteController extends Controller
             $url['domain'] = $getSiteUrl[0]['domain'];
             $returndata = $this->manageOuterBlogs(array('id'=>$request->id),$url,'delete','');
             $bloglist = json_decode($returndata,true);
+            $bloglist = json_decode($bloglist,true);
             $blogs = $bloglist['data'];
         }
         return redirect('/siteblog/list')->with('success', 'Blog Deleted Successfully');

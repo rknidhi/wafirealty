@@ -12,7 +12,15 @@ class CategoryController extends Controller
     public function CategoryList()
     {
         if(\request()->ajax()){
-            $data = Category::latest()->get();
+            $session = session()->all();
+            if(isset($session['siteid']) && $session['siteid']!='')
+            {
+                $data = Category::where('siteid',$session['siteid'])->latest()->get();
+            }
+            else
+            {
+                $data = Category::latest()->get();
+            }
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row){
@@ -59,8 +67,10 @@ class CategoryController extends Controller
         {
             $CategoryData->created_at = date("Y-m-d H:i:s");
         }
+        $session = $session = session()->all();
         $CategoryData->category = $request->category;
         $CategoryData->status = $request->status;
+        $CategoryData->siteid = $session['siteid']??'';
         if($CategoryData->save())
         {
             return redirect('/category/list')->with('success','Category Added Successfully');
