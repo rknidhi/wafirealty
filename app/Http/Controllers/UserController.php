@@ -286,9 +286,23 @@ class UserController extends Controller
     public function EditUser(Request $request)
     {
         $users = User::find($request->id)->toArray();
+        $sites = Sites::all()->toArray();
+        $session = session()->all();
+        $siteoption = '<option></option>';
         if(!empty($users))
         {
-            return view('user/add',['users'=>$users]);
+            if (!empty($sites)) {
+
+                foreach ($sites as $site) {
+                    $selectedsite = '';
+                    if($site['id']==$users['siteid'])
+                    {
+                        $selectedsite = 'selected';
+                    }
+                    $siteoption .= '<option value="' . $site['id'] . '" "'.$selectedsite.'">' . $site['name'] . '</option>';
+                }
+            }
+            return view('user/add',['users'=>$users,'siteoption'=>$siteoption]);
         }
         else
         {

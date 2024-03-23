@@ -120,8 +120,13 @@
   </div>
 </div>
 
-
-
-
-
 @include('event.layout.footer')
+
+<script>
+$(document).ready(function(){
+    var type = '<?php echo $users['type']?>';
+   
+      getSiteOption(type);
+    
+})
+</script>

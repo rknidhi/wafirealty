@@ -124,7 +124,12 @@ class SiteController extends Controller
         if (!empty($sites)) {
 
             foreach ($sites as $site) {
-                $siteoption .= '<option value="' . $site['id'] . '">' . $site['name'] . '</option>';
+                $selectedsite = '';
+                if($site['id']==$session['siteid'])
+                {
+                    $selectedsite = 'selected';
+                }
+                $siteoption .= '<option value="' . $site['id'] . '" "'.$selectedsite.'">' . $site['name'] . '</option>';
             }
         }
         return view('siteblog/add', ['option' => $option, 'siteoption' => $siteoption]);
